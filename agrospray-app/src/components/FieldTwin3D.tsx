@@ -102,7 +102,7 @@ export function FieldTwin3D() {
 
     // crops
     const g = frame.grid;
-    const crop = new THREE.InstancedMesh(new THREE.ConeGeometry(0.6, 2.4, 5), new THREE.MeshLambertMaterial(), g.n);
+    const crop = new THREE.InstancedMesh(new THREE.ConeGeometry(0.6, 2.4, 5), new THREE.MeshLambertMaterial({ vertexColors: true }), g.n);
     const m4 = new THREE.Matrix4(),
       cu = new THREE.Color(COL_UNTREATED);
     for (let i = 0; i < g.n; i++) {

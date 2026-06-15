@@ -1,409 +1,409 @@
-fix,active_nozzles,shut_nozzles,min_clearance_m,buffer_m,reason
-0,6,,133.17,1.5,All 6 nozzles spray. Nearest nozzle is 133.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-1,6,,133.09,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-2,6,,133.01,1.5,All 6 nozzles spray. Nearest nozzle is 133.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-3,6,,133.1,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-4,6,,132.97,1.5,All 6 nozzles spray. Nearest nozzle is 133.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-5,6,,132.98,1.5,All 6 nozzles spray. Nearest nozzle is 133.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-6,6,,133.18,1.5,All 6 nozzles spray. Nearest nozzle is 133.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-7,6,,133.03,1.5,All 6 nozzles spray. Nearest nozzle is 133.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-8,6,,133.09,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-9,6,,133.1,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-10,6,,133.09,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-11,6,,133.01,1.5,All 6 nozzles spray. Nearest nozzle is 133.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-12,6,,133.09,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-13,6,,133.06,1.5,All 6 nozzles spray. Nearest nozzle is 133.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-14,6,,132.74,1.5,All 6 nozzles spray. Nearest nozzle is 132.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-15,6,,132.64,1.5,All 6 nozzles spray. Nearest nozzle is 132.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-16,6,,132.55,1.5,All 6 nozzles spray. Nearest nozzle is 132.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-17,6,,132.67,1.5,All 6 nozzles spray. Nearest nozzle is 132.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-18,6,,132.38,1.5,All 6 nozzles spray. Nearest nozzle is 132.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-19,6,,132.48,1.5,All 6 nozzles spray. Nearest nozzle is 132.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-20,6,,132.36,1.5,All 6 nozzles spray. Nearest nozzle is 132.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-21,6,,132.69,1.5,All 6 nozzles spray. Nearest nozzle is 132.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-22,6,,132.71,1.5,All 6 nozzles spray. Nearest nozzle is 132.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-23,6,,132.81,1.5,All 6 nozzles spray. Nearest nozzle is 132.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-24,6,,132.57,1.5,All 6 nozzles spray. Nearest nozzle is 132.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-25,6,,132.18,1.5,All 6 nozzles spray. Nearest nozzle is 132.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-26,6,,132.49,1.5,All 6 nozzles spray. Nearest nozzle is 132.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-27,6,,132.45,1.5,All 6 nozzles spray. Nearest nozzle is 132.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-28,6,,132.54,1.5,All 6 nozzles spray. Nearest nozzle is 132.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-29,6,,132.55,1.5,All 6 nozzles spray. Nearest nozzle is 132.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-30,6,,132.68,1.5,All 6 nozzles spray. Nearest nozzle is 132.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-31,6,,132.6,1.5,All 6 nozzles spray. Nearest nozzle is 132.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-32,6,,132.6,1.5,All 6 nozzles spray. Nearest nozzle is 132.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-33,6,,132.42,1.5,All 6 nozzles spray. Nearest nozzle is 132.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-34,6,,120.34,1.5,All 6 nozzles spray. Nearest nozzle is 120.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-35,6,,120.31,1.5,All 6 nozzles spray. Nearest nozzle is 120.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-36,6,,120.57,1.5,All 6 nozzles spray. Nearest nozzle is 120.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-37,6,,120.74,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-38,6,,120.8,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-39,6,,120.91,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-40,6,,120.85,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-41,6,,120.85,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-42,6,,120.78,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-43,6,,120.7,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-44,6,,120.81,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-45,6,,120.7,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-46,6,,120.67,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-47,6,,120.67,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-48,6,,120.8,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-49,6,,120.86,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-50,6,,120.9,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-51,6,,120.77,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-52,6,,120.95,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-53,6,,120.89,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-54,6,,120.8,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-55,6,,120.99,1.5,All 6 nozzles spray. Nearest nozzle is 121.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-56,6,,121.05,1.5,All 6 nozzles spray. Nearest nozzle is 121.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-57,6,,121.09,1.5,All 6 nozzles spray. Nearest nozzle is 121.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-58,6,,120.98,1.5,All 6 nozzles spray. Nearest nozzle is 121.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-59,6,,120.9,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-60,6,,120.72,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-61,6,,120.75,1.5,All 6 nozzles spray. Nearest nozzle is 120.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-62,6,,120.8,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-63,6,,120.76,1.5,All 6 nozzles spray. Nearest nozzle is 120.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-64,6,,120.88,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-65,6,,120.97,1.5,All 6 nozzles spray. Nearest nozzle is 121.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-66,6,,120.94,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-67,6,,120.93,1.5,All 6 nozzles spray. Nearest nozzle is 120.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-68,6,,108.98,1.5,All 6 nozzles spray. Nearest nozzle is 109.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-69,6,,109.24,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-70,6,,109.31,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-71,6,,109.31,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-72,6,,109.24,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-73,6,,109.28,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-74,6,,109.16,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-75,6,,109.2,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-76,6,,109.35,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-77,6,,109.21,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-78,6,,109.1,1.5,All 6 nozzles spray. Nearest nozzle is 109.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-79,6,,109.26,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-80,6,,109.43,1.5,All 6 nozzles spray. Nearest nozzle is 109.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-81,6,,109.41,1.5,All 6 nozzles spray. Nearest nozzle is 109.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-82,6,,109.59,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-83,6,,109.56,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-84,6,,109.57,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-85,6,,109.55,1.5,All 6 nozzles spray. Nearest nozzle is 109.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-86,6,,109.56,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-87,6,,109.48,1.5,All 6 nozzles spray. Nearest nozzle is 109.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-88,6,,109.57,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-89,6,,109.49,1.5,All 6 nozzles spray. Nearest nozzle is 109.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-90,6,,109.24,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-91,6,,109.4,1.5,All 6 nozzles spray. Nearest nozzle is 109.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-92,6,,109.53,1.5,All 6 nozzles spray. Nearest nozzle is 109.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-93,6,,109.65,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-94,6,,109.65,1.5,All 6 nozzles spray. Nearest nozzle is 109.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-95,6,,109.41,1.5,All 6 nozzles spray. Nearest nozzle is 109.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-96,6,,109.21,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-97,6,,109.25,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-98,6,,109.23,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-99,6,,109.18,1.5,All 6 nozzles spray. Nearest nozzle is 109.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-100,6,,109.35,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-101,6,,109.31,1.5,All 6 nozzles spray. Nearest nozzle is 109.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-102,6,,97.35,1.5,All 6 nozzles spray. Nearest nozzle is 97.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-103,6,,97.58,1.5,All 6 nozzles spray. Nearest nozzle is 97.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-104,6,,97.76,1.5,All 6 nozzles spray. Nearest nozzle is 97.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-105,6,,97.55,1.5,All 6 nozzles spray. Nearest nozzle is 97.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-106,6,,97.51,1.5,All 6 nozzles spray. Nearest nozzle is 97.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-107,6,,97.31,1.5,All 6 nozzles spray. Nearest nozzle is 97.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-108,6,,97.34,1.5,All 6 nozzles spray. Nearest nozzle is 97.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-109,6,,97.41,1.5,All 6 nozzles spray. Nearest nozzle is 97.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-110,6,,97.54,1.5,All 6 nozzles spray. Nearest nozzle is 97.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-111,6,,97.47,1.5,All 6 nozzles spray. Nearest nozzle is 97.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-112,6,,97.54,1.5,All 6 nozzles spray. Nearest nozzle is 97.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-113,6,,97.47,1.5,All 6 nozzles spray. Nearest nozzle is 97.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-114,6,,97.65,1.5,All 6 nozzles spray. Nearest nozzle is 97.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-115,6,,97.63,1.5,All 6 nozzles spray. Nearest nozzle is 97.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-116,6,,97.88,1.5,All 6 nozzles spray. Nearest nozzle is 97.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-117,6,,97.8,1.5,All 6 nozzles spray. Nearest nozzle is 97.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-118,6,,97.82,1.5,All 6 nozzles spray. Nearest nozzle is 97.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-119,6,,98.0,1.5,All 6 nozzles spray. Nearest nozzle is 98.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-120,6,,98.16,1.5,All 6 nozzles spray. Nearest nozzle is 98.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-121,6,,98.14,1.5,All 6 nozzles spray. Nearest nozzle is 98.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-122,6,,97.94,1.5,All 6 nozzles spray. Nearest nozzle is 97.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-123,6,,97.9,1.5,All 6 nozzles spray. Nearest nozzle is 97.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-124,6,,98.14,1.5,All 6 nozzles spray. Nearest nozzle is 98.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-125,6,,97.85,1.5,All 6 nozzles spray. Nearest nozzle is 97.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-126,6,,97.99,1.5,All 6 nozzles spray. Nearest nozzle is 98.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-127,6,,97.92,1.5,All 6 nozzles spray. Nearest nozzle is 97.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-128,6,,98.09,1.5,All 6 nozzles spray. Nearest nozzle is 98.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-129,6,,98.12,1.5,All 6 nozzles spray. Nearest nozzle is 98.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-130,6,,97.94,1.5,All 6 nozzles spray. Nearest nozzle is 97.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-131,6,,98.06,1.5,All 6 nozzles spray. Nearest nozzle is 98.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-132,6,,97.99,1.5,All 6 nozzles spray. Nearest nozzle is 98.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-133,6,,98.07,1.5,All 6 nozzles spray. Nearest nozzle is 98.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-134,6,,98.39,1.5,All 6 nozzles spray. Nearest nozzle is 98.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-135,6,,98.31,1.5,All 6 nozzles spray. Nearest nozzle is 98.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-136,6,,86.29,1.5,All 6 nozzles spray. Nearest nozzle is 86.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-137,6,,86.13,1.5,All 6 nozzles spray. Nearest nozzle is 86.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-138,6,,85.7,1.5,All 6 nozzles spray. Nearest nozzle is 85.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-139,6,,85.84,1.5,All 6 nozzles spray. Nearest nozzle is 85.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-140,6,,85.77,1.5,All 6 nozzles spray. Nearest nozzle is 85.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-141,6,,85.97,1.5,All 6 nozzles spray. Nearest nozzle is 86.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-142,6,,86.0,1.5,All 6 nozzles spray. Nearest nozzle is 86.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-143,6,,86.13,1.5,All 6 nozzles spray. Nearest nozzle is 86.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-144,6,,86.27,1.5,All 6 nozzles spray. Nearest nozzle is 86.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-145,6,,86.2,1.5,All 6 nozzles spray. Nearest nozzle is 86.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-146,6,,85.96,1.5,All 6 nozzles spray. Nearest nozzle is 86.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-147,6,,86.02,1.5,All 6 nozzles spray. Nearest nozzle is 86.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-148,6,,86.03,1.5,All 6 nozzles spray. Nearest nozzle is 86.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-149,6,,85.81,1.5,All 6 nozzles spray. Nearest nozzle is 85.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-150,6,,86.08,1.5,All 6 nozzles spray. Nearest nozzle is 86.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-151,6,,86.13,1.5,All 6 nozzles spray. Nearest nozzle is 86.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-152,6,,86.19,1.5,All 6 nozzles spray. Nearest nozzle is 86.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-153,6,,86.07,1.5,All 6 nozzles spray. Nearest nozzle is 86.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-154,6,,86.03,1.5,All 6 nozzles spray. Nearest nozzle is 86.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-155,6,,86.07,1.5,All 6 nozzles spray. Nearest nozzle is 86.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-156,6,,85.69,1.5,All 6 nozzles spray. Nearest nozzle is 85.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-157,6,,85.57,1.5,All 6 nozzles spray. Nearest nozzle is 85.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-158,6,,85.27,1.5,All 6 nozzles spray. Nearest nozzle is 85.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-159,6,,85.1,1.5,All 6 nozzles spray. Nearest nozzle is 85.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-160,6,,85.24,1.5,All 6 nozzles spray. Nearest nozzle is 85.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-161,6,,85.43,1.5,All 6 nozzles spray. Nearest nozzle is 85.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-162,6,,85.35,1.5,All 6 nozzles spray. Nearest nozzle is 85.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-163,6,,85.08,1.5,All 6 nozzles spray. Nearest nozzle is 85.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-164,6,,85.1,1.5,All 6 nozzles spray. Nearest nozzle is 85.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-165,6,,84.91,1.5,All 6 nozzles spray. Nearest nozzle is 84.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-166,6,,84.92,1.5,All 6 nozzles spray. Nearest nozzle is 84.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-167,6,,84.86,1.5,All 6 nozzles spray. Nearest nozzle is 84.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-168,6,,84.87,1.5,All 6 nozzles spray. Nearest nozzle is 84.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-169,6,,84.98,1.5,All 6 nozzles spray. Nearest nozzle is 85.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-170,6,,72.68,1.5,All 6 nozzles spray. Nearest nozzle is 72.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-171,6,,72.6,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-172,6,,72.59,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-173,6,,72.5,1.5,All 6 nozzles spray. Nearest nozzle is 72.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-174,6,,72.41,1.5,All 6 nozzles spray. Nearest nozzle is 72.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-175,6,,72.36,1.5,All 6 nozzles spray. Nearest nozzle is 72.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-176,6,,72.59,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-177,6,,72.57,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-178,6,,72.35,1.5,All 6 nozzles spray. Nearest nozzle is 72.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-179,6,,72.08,1.5,All 6 nozzles spray. Nearest nozzle is 72.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-180,6,,72.03,1.5,All 6 nozzles spray. Nearest nozzle is 72.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-181,6,,72.07,1.5,All 6 nozzles spray. Nearest nozzle is 72.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-182,6,,72.27,1.5,All 6 nozzles spray. Nearest nozzle is 72.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-183,6,,72.53,1.5,All 6 nozzles spray. Nearest nozzle is 72.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-184,6,,72.76,1.5,All 6 nozzles spray. Nearest nozzle is 72.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-185,6,,72.73,1.5,All 6 nozzles spray. Nearest nozzle is 72.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-186,6,,72.73,1.5,All 6 nozzles spray. Nearest nozzle is 72.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-187,6,,72.87,1.5,All 6 nozzles spray. Nearest nozzle is 72.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-188,6,,72.88,1.5,All 6 nozzles spray. Nearest nozzle is 72.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-189,6,,72.83,1.5,All 6 nozzles spray. Nearest nozzle is 72.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-190,6,,72.81,1.5,All 6 nozzles spray. Nearest nozzle is 72.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-191,6,,73.04,1.5,All 6 nozzles spray. Nearest nozzle is 73.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-192,6,,73.0,1.5,All 6 nozzles spray. Nearest nozzle is 73.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-193,6,,72.77,1.5,All 6 nozzles spray. Nearest nozzle is 72.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-194,6,,72.76,1.5,All 6 nozzles spray. Nearest nozzle is 72.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-195,6,,72.79,1.5,All 6 nozzles spray. Nearest nozzle is 72.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-196,6,,72.67,1.5,All 6 nozzles spray. Nearest nozzle is 72.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-197,6,,72.75,1.5,All 6 nozzles spray. Nearest nozzle is 72.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-198,6,,72.58,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-199,6,,72.88,1.5,All 6 nozzles spray. Nearest nozzle is 72.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-200,6,,72.62,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-201,6,,72.57,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-202,6,,72.57,1.5,All 6 nozzles spray. Nearest nozzle is 72.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-203,6,,72.67,1.5,All 6 nozzles spray. Nearest nozzle is 72.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-204,6,,60.68,1.5,All 6 nozzles spray. Nearest nozzle is 60.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-205,6,,60.98,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-206,6,,60.99,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-207,6,,60.96,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-208,6,,61.01,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-209,6,,60.82,1.5,All 6 nozzles spray. Nearest nozzle is 60.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-210,6,,60.71,1.5,All 6 nozzles spray. Nearest nozzle is 60.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-211,6,,60.78,1.5,All 6 nozzles spray. Nearest nozzle is 60.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-212,6,,60.99,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-213,6,,60.92,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-214,6,,61.22,1.5,All 6 nozzles spray. Nearest nozzle is 61.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-215,6,,61.27,1.5,All 6 nozzles spray. Nearest nozzle is 61.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-216,6,,61.15,1.5,All 6 nozzles spray. Nearest nozzle is 61.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-217,6,,61.01,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-218,6,,61.05,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-219,6,,60.79,1.5,All 6 nozzles spray. Nearest nozzle is 60.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-220,6,,60.91,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-221,6,,60.71,1.5,All 6 nozzles spray. Nearest nozzle is 60.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-222,6,,60.86,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-223,6,,61.05,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-224,6,,60.91,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-225,6,,60.9,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-226,6,,60.97,1.5,All 6 nozzles spray. Nearest nozzle is 61.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-227,6,,60.76,1.5,All 6 nozzles spray. Nearest nozzle is 60.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-228,6,,60.7,1.5,All 6 nozzles spray. Nearest nozzle is 60.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-229,6,,60.52,1.5,All 6 nozzles spray. Nearest nozzle is 60.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-230,6,,60.63,1.5,All 6 nozzles spray. Nearest nozzle is 60.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-231,6,,60.76,1.5,All 6 nozzles spray. Nearest nozzle is 60.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-232,6,,60.88,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-233,6,,60.83,1.5,All 6 nozzles spray. Nearest nozzle is 60.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-234,6,,60.89,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-235,6,,60.86,1.5,All 6 nozzles spray. Nearest nozzle is 60.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-236,6,,60.7,1.5,All 6 nozzles spray. Nearest nozzle is 60.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-237,6,,60.72,1.5,All 6 nozzles spray. Nearest nozzle is 60.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-238,6,,48.72,1.5,All 6 nozzles spray. Nearest nozzle is 48.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-239,6,,48.73,1.5,All 6 nozzles spray. Nearest nozzle is 48.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-240,6,,48.86,1.5,All 6 nozzles spray. Nearest nozzle is 48.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-241,6,,48.76,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-242,6,,48.78,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-243,6,,48.66,1.5,All 6 nozzles spray. Nearest nozzle is 48.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-244,6,,48.83,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-245,6,,48.93,1.5,All 6 nozzles spray. Nearest nozzle is 48.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-246,6,,48.95,1.5,All 6 nozzles spray. Nearest nozzle is 48.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-247,6,,48.81,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-248,6,,48.8,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-249,6,,48.59,1.5,All 6 nozzles spray. Nearest nozzle is 48.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-250,6,,48.69,1.5,All 6 nozzles spray. Nearest nozzle is 48.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-251,6,,48.68,1.5,All 6 nozzles spray. Nearest nozzle is 48.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-252,6,,48.82,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-253,6,,49.12,1.5,All 6 nozzles spray. Nearest nozzle is 49.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-254,6,,48.93,1.5,All 6 nozzles spray. Nearest nozzle is 48.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-255,6,,49.09,1.5,All 6 nozzles spray. Nearest nozzle is 49.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-256,6,,49.17,1.5,All 6 nozzles spray. Nearest nozzle is 49.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-257,6,,49.35,1.5,All 6 nozzles spray. Nearest nozzle is 49.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-258,6,,49.21,1.5,All 6 nozzles spray. Nearest nozzle is 49.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-259,6,,49.26,1.5,All 6 nozzles spray. Nearest nozzle is 49.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-260,6,,49.18,1.5,All 6 nozzles spray. Nearest nozzle is 49.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-261,6,,48.82,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-262,6,,48.98,1.5,All 6 nozzles spray. Nearest nozzle is 49.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-263,6,,48.96,1.5,All 6 nozzles spray. Nearest nozzle is 49.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-264,6,,48.82,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-265,6,,48.85,1.5,All 6 nozzles spray. Nearest nozzle is 48.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-266,6,,48.93,1.5,All 6 nozzles spray. Nearest nozzle is 48.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-267,6,,49.25,1.5,All 6 nozzles spray. Nearest nozzle is 49.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-268,6,,49.22,1.5,All 6 nozzles spray. Nearest nozzle is 49.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-269,6,,49.48,1.5,All 6 nozzles spray. Nearest nozzle is 49.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-270,6,,49.35,1.5,All 6 nozzles spray. Nearest nozzle is 49.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-271,6,,49.56,1.5,All 6 nozzles spray. Nearest nozzle is 49.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-272,6,,37.61,1.5,All 6 nozzles spray. Nearest nozzle is 37.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-273,6,,37.77,1.5,All 6 nozzles spray. Nearest nozzle is 37.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-274,6,,37.7,1.5,All 6 nozzles spray. Nearest nozzle is 37.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-275,6,,37.86,1.5,All 6 nozzles spray. Nearest nozzle is 37.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-276,6,,37.96,1.5,All 6 nozzles spray. Nearest nozzle is 38.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-277,6,,37.95,1.5,All 6 nozzles spray. Nearest nozzle is 37.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-278,6,,37.86,1.5,All 6 nozzles spray. Nearest nozzle is 37.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-279,6,,37.87,1.5,All 6 nozzles spray. Nearest nozzle is 37.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-280,6,,37.69,1.5,All 6 nozzles spray. Nearest nozzle is 37.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-281,6,,37.94,1.5,All 6 nozzles spray. Nearest nozzle is 37.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-282,6,,37.86,1.5,All 6 nozzles spray. Nearest nozzle is 37.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-283,6,,37.66,1.5,All 6 nozzles spray. Nearest nozzle is 37.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-284,6,,37.49,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-285,6,,37.23,1.5,All 6 nozzles spray. Nearest nozzle is 37.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-286,6,,37.44,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-287,6,,37.33,1.5,All 6 nozzles spray. Nearest nozzle is 37.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-288,6,,37.36,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-289,6,,37.51,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-290,6,,37.37,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-291,6,,37.45,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-292,6,,37.37,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-293,6,,37.32,1.5,All 6 nozzles spray. Nearest nozzle is 37.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-294,6,,37.48,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-295,6,,37.37,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-296,6,,37.56,1.5,All 6 nozzles spray. Nearest nozzle is 37.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-297,6,,37.61,1.5,All 6 nozzles spray. Nearest nozzle is 37.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-298,6,,37.6,1.5,All 6 nozzles spray. Nearest nozzle is 37.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-299,6,,37.56,1.5,All 6 nozzles spray. Nearest nozzle is 37.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-300,6,,37.54,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-301,6,,37.51,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-302,6,,37.48,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-303,6,,37.41,1.5,All 6 nozzles spray. Nearest nozzle is 37.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-304,6,,37.59,1.5,All 6 nozzles spray. Nearest nozzle is 37.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-305,6,,37.47,1.5,All 6 nozzles spray. Nearest nozzle is 37.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-306,6,,25.5,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-307,6,,25.5,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-308,6,,25.16,1.5,All 6 nozzles spray. Nearest nozzle is 25.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-309,6,,25.41,1.5,All 6 nozzles spray. Nearest nozzle is 25.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-310,6,,25.51,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-311,6,,25.48,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-312,6,,25.42,1.5,All 6 nozzles spray. Nearest nozzle is 25.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-313,6,,25.35,1.5,All 6 nozzles spray. Nearest nozzle is 25.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-314,6,,25.48,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-315,6,,25.65,1.5,All 6 nozzles spray. Nearest nozzle is 25.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-316,6,,25.49,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-317,6,,25.5,1.5,All 6 nozzles spray. Nearest nozzle is 25.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-318,6,,25.37,1.5,All 6 nozzles spray. Nearest nozzle is 25.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-319,6,,25.45,1.5,All 6 nozzles spray. Nearest nozzle is 25.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-320,6,,25.31,1.5,All 6 nozzles spray. Nearest nozzle is 25.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-321,6,,25.37,1.5,All 6 nozzles spray. Nearest nozzle is 25.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-322,6,,25.03,1.5,All 6 nozzles spray. Nearest nozzle is 25.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-323,6,,24.86,1.5,All 6 nozzles spray. Nearest nozzle is 24.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-324,6,,24.81,1.5,All 6 nozzles spray. Nearest nozzle is 24.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-325,6,,24.87,1.5,All 6 nozzles spray. Nearest nozzle is 24.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-326,6,,24.82,1.5,All 6 nozzles spray. Nearest nozzle is 24.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-327,6,,24.89,1.5,All 6 nozzles spray. Nearest nozzle is 24.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-328,6,,24.74,1.5,All 6 nozzles spray. Nearest nozzle is 24.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-329,6,,24.77,1.5,All 6 nozzles spray. Nearest nozzle is 24.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-330,6,,24.49,1.5,All 6 nozzles spray. Nearest nozzle is 24.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-331,6,,24.22,1.5,All 6 nozzles spray. Nearest nozzle is 24.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-332,6,,24.12,1.5,All 6 nozzles spray. Nearest nozzle is 24.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-333,6,,24.37,1.5,All 6 nozzles spray. Nearest nozzle is 24.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-334,6,,24.22,1.5,All 6 nozzles spray. Nearest nozzle is 24.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-335,6,,24.27,1.5,All 6 nozzles spray. Nearest nozzle is 24.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-336,6,,24.32,1.5,All 6 nozzles spray. Nearest nozzle is 24.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-337,6,,24.5,1.5,All 6 nozzles spray. Nearest nozzle is 24.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-338,6,,24.59,1.5,All 6 nozzles spray. Nearest nozzle is 24.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-339,6,,24.53,1.5,All 6 nozzles spray. Nearest nozzle is 24.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-340,6,,12.62,1.5,All 6 nozzles spray. Nearest nozzle is 12.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-341,6,,12.62,1.5,All 6 nozzles spray. Nearest nozzle is 12.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-342,6,,12.52,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-343,6,,12.27,1.5,All 6 nozzles spray. Nearest nozzle is 12.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-344,6,,12.29,1.5,All 6 nozzles spray. Nearest nozzle is 12.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-345,6,,12.34,1.5,All 6 nozzles spray. Nearest nozzle is 12.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-346,6,,12.47,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-347,6,,12.66,1.5,All 6 nozzles spray. Nearest nozzle is 12.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-348,6,,12.39,1.5,All 6 nozzles spray. Nearest nozzle is 12.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-349,6,,12.53,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-350,6,,12.54,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-351,6,,12.5,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-352,6,,12.64,1.5,All 6 nozzles spray. Nearest nozzle is 12.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-353,6,,12.74,1.5,All 6 nozzles spray. Nearest nozzle is 12.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-354,6,,12.89,1.5,All 6 nozzles spray. Nearest nozzle is 12.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-355,6,,13.16,1.5,All 6 nozzles spray. Nearest nozzle is 13.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-356,6,,13.15,1.5,All 6 nozzles spray. Nearest nozzle is 13.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-357,6,,13.1,1.5,All 6 nozzles spray. Nearest nozzle is 13.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-358,6,,13.26,1.5,All 6 nozzles spray. Nearest nozzle is 13.3 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-359,6,,13.19,1.5,All 6 nozzles spray. Nearest nozzle is 13.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-360,6,,13.17,1.5,All 6 nozzles spray. Nearest nozzle is 13.2 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-361,6,,13.41,1.5,All 6 nozzles spray. Nearest nozzle is 13.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-362,6,,13.11,1.5,All 6 nozzles spray. Nearest nozzle is 13.1 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-363,6,,12.76,1.5,All 6 nozzles spray. Nearest nozzle is 12.8 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-364,6,,12.73,1.5,All 6 nozzles spray. Nearest nozzle is 12.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-365,6,,12.42,1.5,All 6 nozzles spray. Nearest nozzle is 12.4 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-366,6,,12.61,1.5,All 6 nozzles spray. Nearest nozzle is 12.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-367,6,,12.71,1.5,All 6 nozzles spray. Nearest nozzle is 12.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-368,6,,12.68,1.5,All 6 nozzles spray. Nearest nozzle is 12.7 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-369,6,,12.96,1.5,All 6 nozzles spray. Nearest nozzle is 13.0 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-370,6,,12.93,1.5,All 6 nozzles spray. Nearest nozzle is 12.9 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-371,6,,12.64,1.5,All 6 nozzles spray. Nearest nozzle is 12.6 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-372,6,,12.48,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-373,6,,12.52,1.5,All 6 nozzles spray. Nearest nozzle is 12.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-374,5,1,0.72,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-375,5,1,0.58,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-376,5,1,0.78,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-377,5,1,0.84,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-378,5,1,0.86,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-379,5,1,0.96,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-380,5,1,1.03,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-381,5,1,1.2,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-382,5,1,1.07,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-383,5,1,1.02,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-384,5,1,1.11,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-385,5,1,1.22,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-386,5,1,1.43,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-387,5,1,1.45,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-388,6,,1.53,1.5,All 6 nozzles spray. Nearest nozzle is 1.5 m from the organic line; safety buffer is 1.5 m (error 1.0 m + drift 0.5 m). Margin OK.
-389,5,1,1.46,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-390,5,1,1.37,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-391,5,1,1.19,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-392,5,1,1.18,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-393,5,1,1.07,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-394,5,1,1.02,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-395,5,1,1.08,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-396,5,1,1.12,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-397,5,1,1.11,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-398,5,1,1.23,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-399,5,1,1.14,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-400,5,1,1.28,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-401,5,1,1.3,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-402,5,1,1.3,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-403,5,1,1.16,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-404,5,1,1.01,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-405,5,1,0.93,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-406,5,1,1.07,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
-407,5,1,0.93,1.5,PARTIAL CUT — nozzles [1] off. Their footprint is within the 1.5 m buffer of the organic line; southern nozzles still spray (5/6 active).
+fix,active_nozzles,shut,min_clear_m,gnss_err_m,buffer_m,litres,crop_ambiguous,reason
+0,6,,6.63,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+1,4,5|6,0.39,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+2,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+3,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+4,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+5,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+6,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+7,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+8,4,5|6,0.0,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [5, 6] off (buffer breach near a restricted zone). 4/6 active."
+9,6,,4.43,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 4.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+10,6,,10.22,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 10.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+11,6,,15.96,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 16.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+12,6,,21.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 21.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+13,6,,28.28,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 28.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+14,6,,34.29,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 34.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+15,6,,40.5,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 40.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+16,6,,46.36,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 46.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+17,6,,52.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 52.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+18,6,,58.6,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 58.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+19,6,,64.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 64.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+20,6,,70.52,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 70.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+21,6,,76.64,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 76.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+22,6,,82.67,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 82.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+23,6,,88.75,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 88.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+24,6,,94.75,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 94.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+25,6,,100.9,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 100.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+26,6,,106.73,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 106.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+27,6,,112.5,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 112.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+28,6,,118.75,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 118.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+29,6,,124.93,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 124.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+30,6,,130.86,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 130.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+31,6,,132.6,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 132.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+32,6,,132.6,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 132.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+33,6,,132.42,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 132.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+34,6,,120.34,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 120.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+35,6,,120.31,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 120.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+36,6,,120.57,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 120.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+37,6,,120.74,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 120.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+38,6,,120.8,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 120.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+39,6,,119.13,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 119.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+40,6,,113.23,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 113.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+41,6,,107.13,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 107.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+42,6,,101.18,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 101.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+43,6,,94.87,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 94.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+44,6,,88.88,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 88.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+45,6,,82.83,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 82.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+46,6,,76.75,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 76.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+47,6,,70.67,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 70.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+48,6,,64.5,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 64.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+49,6,,58.03,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 58.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+50,6,,51.8,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 51.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+51,6,,45.75,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 45.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+52,6,,39.51,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 39.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+53,6,,33.73,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 33.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+54,6,,27.51,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 27.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+55,6,,21.65,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 21.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+56,6,,15.6,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 15.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+57,6,,9.52,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 9.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+58,0,1|2|3|4|5|6,3.4,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 3.4 m < buffer 3.6 m. All nozzles off.
+59,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+60,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+61,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+62,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+63,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+64,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+65,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+66,0,1|2|3|4|5|6,1.97,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 2.0 m < buffer 3.6 m. All nozzles off.
+67,0,1|2|3|4|5|6,8.06,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 8.1 m < buffer 3.6 m. All nozzles off.
+68,0,1|2|3|4|5|6,7.84,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 7.8 m < buffer 3.6 m. All nozzles off.
+69,0,1|2|3|4|5|6,1.66,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 1.7 m < buffer 3.6 m. All nozzles off.
+70,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+71,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+72,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+73,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+74,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+75,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+76,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+77,6,,4.21,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 4.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+78,6,,10.2,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 10.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+79,6,,16.16,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 16.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+80,6,,22.38,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 22.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+81,6,,28.61,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 28.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+82,6,,35.13,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 35.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+83,6,,41.0,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 41.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+84,6,,47.11,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 47.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+85,6,,53.12,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 53.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+86,6,,59.09,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 59.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+87,6,,64.99,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 65.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+88,6,,71.17,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 71.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+89,6,,77.23,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 77.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+90,6,,83.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 83.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+91,6,,89.42,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 89.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+92,6,,95.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 95.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+93,6,,101.43,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 101.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+94,6,,107.57,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 107.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+95,6,,109.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 109.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+96,6,,109.21,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 109.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+97,6,,109.25,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 109.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+98,6,,109.23,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 109.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+99,6,,109.18,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 109.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+100,6,,109.35,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 109.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+101,0,1|2|3|4|5|6,109.31,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 109.3 m < buffer 3.6 m. All nozzles off.
+102,6,,97.35,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+103,6,,97.58,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+104,6,,97.76,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+105,6,,97.55,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+106,6,,97.51,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+107,6,,97.31,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+108,6,,97.34,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+109,6,,97.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+110,6,,97.54,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 97.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+111,6,,94.58,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 94.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+112,6,,88.67,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 88.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+113,6,,82.67,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 82.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+114,6,,76.55,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 76.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+115,6,,70.13,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 70.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+116,6,,63.92,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 63.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+117,6,,57.74,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 57.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+118,6,,51.74,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 51.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+119,6,,45.61,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 45.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+120,6,,39.61,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 39.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+121,6,,33.96,1.49,4.09,0.0108,0,All 6 nozzles spray. Nearest nozzle 34.0 m from a restricted zone; buffer 4.1 m (gnss 1.5 + drift 0.8 + react 1.8). OK.
+122,5,2,27.99,2.05,4.65,0.009,0,PARTIAL CUT â€” nozzles [2] off (tree/zone avoidance). 5/6 active.
+123,6,,21.65,2.01,4.61,0.0108,0,All 6 nozzles spray. Nearest nozzle 21.6 m from a restricted zone; buffer 4.6 m (gnss 2.0 + drift 0.8 + react 1.8). OK.
+124,6,,15.68,1.43,4.03,0.0108,0,All 6 nozzles spray. Nearest nozzle 15.7 m from a restricted zone; buffer 4.0 m (gnss 1.4 + drift 0.8 + react 1.8). OK.
+125,6,,9.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 9.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+126,6,,3.67,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 3.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+127,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+128,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+129,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+130,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+131,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+132,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+133,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+134,0,1|2|3|4|5|6,2.07,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 2.1 m < buffer 3.6 m. All nozzles off.
+135,0,1|2|3|4|5|6,8.28,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 8.3 m < buffer 3.6 m. All nozzles off.
+136,0,1|2|3|4|5|6,8.09,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 8.1 m < buffer 3.6 m. All nozzles off.
+137,0,1|2|3|4|5|6,1.94,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 1.9 m < buffer 3.6 m. All nozzles off.
+138,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+139,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+140,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+141,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+142,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+143,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+144,0,1|2|3|4|5|6,0.0,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.0 m < buffer 3.6 m. All nozzles off.
+145,6,,3.8,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 3.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+146,6,,9.6,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 9.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+147,6,,15.66,1.11,3.71,0.0108,0,All 6 nozzles spray. Nearest nozzle 15.7 m from a restricted zone; buffer 3.7 m (gnss 1.1 + drift 0.8 + react 1.8). OK.
+148,6,,22.01,1.49,4.09,0.0108,0,All 6 nozzles spray. Nearest nozzle 22.0 m from a restricted zone; buffer 4.1 m (gnss 1.5 + drift 0.8 + react 1.8). OK.
+149,6,,28.25,1.47,4.07,0.0108,0,All 6 nozzles spray. Nearest nozzle 28.3 m from a restricted zone; buffer 4.1 m (gnss 1.5 + drift 0.8 + react 1.8). OK.
+150,6,,34.45,1.12,3.72,0.0108,0,All 6 nozzles spray. Nearest nozzle 34.4 m from a restricted zone; buffer 3.7 m (gnss 1.1 + drift 0.8 + react 1.8). OK.
+151,6,,40.24,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 40.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+152,6,,46.44,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 46.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+153,6,,52.45,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 52.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+154,6,,58.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 58.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+155,6,,64.57,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 64.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+156,6,,70.59,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 70.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+157,6,,76.7,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 76.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+158,6,,82.79,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 82.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+159,6,,85.1,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 85.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+160,6,,85.24,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 85.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+161,6,,85.43,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 85.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+162,6,,85.35,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 85.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+163,6,,85.08,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 85.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+164,6,,85.1,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 85.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+165,6,,84.91,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 84.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+166,6,,84.92,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 84.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+167,6,,84.86,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 84.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+168,6,,84.87,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 84.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+169,0,1|2|3|4|5|6,84.98,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 85.0 m < buffer 3.6 m. All nozzles off.
+170,6,,72.68,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+171,6,,72.6,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+172,6,,72.59,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+173,6,,72.5,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+174,6,,72.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+175,6,,72.36,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+176,6,,72.59,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+177,6,,72.57,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+178,6,,72.35,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+179,6,,72.08,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+180,6,,72.03,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+181,6,,72.07,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+182,6,,72.27,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 72.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+183,6,,71.07,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 71.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+184,6,,65.28,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 65.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+185,6,,59.35,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 59.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+186,6,,53.14,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 53.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+187,6,,47.11,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 47.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+188,6,,40.98,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 41.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+189,6,,34.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 34.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+190,6,,28.91,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 28.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+191,6,,22.85,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 22.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+192,6,,17.2,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 17.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+193,6,,11.8,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 11.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+194,6,,7.24,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 7.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+195,6,,5.99,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+196,6,,6.11,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+197,6,,6.03,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+198,6,,6.2,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+199,6,,5.9,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 5.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+200,6,,6.15,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+201,6,,6.21,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+202,6,,6.48,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 6.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+203,0,1|2|3|4|5|6,9.97,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 10.0 m < buffer 3.6 m. All nozzles off.
+204,0,1|2|3|4|5|6,19.72,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 19.7 m < buffer 3.6 m. All nozzles off.
+205,6,,17.89,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 17.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+206,6,,17.79,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 17.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+207,6,,17.82,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 17.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+208,6,,17.76,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 17.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+209,6,,17.95,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 18.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+210,6,,18.07,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 18.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+211,6,,18.0,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 18.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+212,6,,17.79,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 17.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+213,6,,18.24,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 18.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+214,6,,20.0,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 20.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+215,6,,23.41,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 23.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+216,6,,27.97,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 28.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+217,6,,33.08,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 33.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+218,6,,38.23,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 38.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+219,6,,43.98,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 44.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+220,6,,49.64,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 49.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+221,6,,55.23,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 55.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+222,6,,60.86,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+223,6,,61.05,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 61.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+224,6,,60.91,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+225,6,,60.9,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+226,6,,60.97,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 61.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+227,6,,60.76,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+228,6,,60.7,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+229,6,,60.52,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+230,6,,60.63,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+231,6,,60.76,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+232,6,,60.88,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+233,6,,60.83,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+234,6,,60.89,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+235,6,,60.86,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+236,6,,60.7,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+237,6,,60.72,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 60.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+238,6,,48.72,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+239,6,,48.73,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+240,6,,48.86,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+241,6,,48.76,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+242,6,,48.78,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+243,6,,48.66,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+244,6,,48.83,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+245,6,,48.93,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+246,6,,48.95,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+247,6,,48.81,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+248,6,,48.8,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+249,6,,48.59,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+250,6,,48.69,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+251,6,,48.68,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+252,6,,48.82,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+253,6,,49.12,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 49.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+254,6,,48.93,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 48.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+255,6,,49.09,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 49.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+256,6,,49.17,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 49.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+257,6,,45.21,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 45.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+258,6,,40.97,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 41.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+259,6,,37.0,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+260,6,,33.76,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 33.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+261,6,,31.66,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 31.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+262,6,,30.08,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 30.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+263,6,,29.82,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+264,6,,29.95,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 30.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+265,6,,29.93,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+266,6,,29.84,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+267,6,,29.53,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+268,6,,29.55,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+269,6,,29.3,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+270,6,,29.45,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 29.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+271,0,1|2|3|4|5|6,30.1,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 30.1 m < buffer 3.6 m. All nozzles off.
+272,0,1|2|3|4|5|6,37.61,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 37.6 m < buffer 3.6 m. All nozzles off.
+273,6,,37.77,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+274,6,,37.7,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+275,6,,37.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+276,6,,37.96,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 38.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+277,6,,37.95,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+278,6,,37.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+279,6,,37.87,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+280,6,,37.69,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+281,6,,37.94,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+282,6,,37.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+283,6,,37.66,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+284,6,,37.49,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+285,6,,37.23,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+286,6,,37.44,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+287,6,,37.33,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+288,6,,37.36,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+289,6,,37.51,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+290,6,,37.37,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+291,6,,37.45,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+292,6,,37.37,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+293,6,,37.32,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+294,6,,37.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+295,6,,37.37,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+296,6,,37.56,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+297,6,,37.61,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+298,6,,37.6,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+299,6,,37.56,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+300,6,,37.54,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+301,6,,37.51,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+302,6,,37.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+303,6,,37.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+304,6,,37.59,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 37.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+305,0,1|2|3|4|5|6,37.47,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 37.5 m < buffer 3.6 m. All nozzles off.
+306,0,1|2|3|4|5|6,25.5,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 25.5 m < buffer 3.6 m. All nozzles off.
+307,6,,25.5,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+308,6,,25.16,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+309,6,,25.41,1.28,3.88,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.4 m from a restricted zone; buffer 3.9 m (gnss 1.3 + drift 0.8 + react 1.8). OK.
+310,6,,25.51,1.63,4.23,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.5 m from a restricted zone; buffer 4.2 m (gnss 1.6 + drift 0.8 + react 1.8). OK.
+311,6,,25.48,1.66,4.26,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.5 m from a restricted zone; buffer 4.3 m (gnss 1.7 + drift 0.8 + react 1.8). OK.
+312,6,,25.42,1.35,3.95,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.4 m from a restricted zone; buffer 3.9 m (gnss 1.3 + drift 0.8 + react 1.8). OK.
+313,6,,25.35,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+314,6,,25.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+315,6,,25.65,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+316,6,,25.49,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+317,6,,25.5,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+318,6,,25.37,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+319,6,,25.45,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+320,6,,25.31,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+321,6,,25.37,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+322,6,,25.03,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 25.0 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+323,6,,24.86,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+324,6,,24.81,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+325,6,,24.87,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+326,6,,24.82,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+327,6,,24.89,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+328,6,,24.74,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+329,6,,24.77,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+330,6,,24.49,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+331,6,,24.22,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+332,6,,24.12,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+333,6,,24.37,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+334,6,,24.22,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+335,6,,24.27,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+336,6,,24.32,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+337,6,,24.5,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+338,6,,24.59,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 24.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+339,0,1|2|3|4|5|6,24.53,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 24.5 m < buffer 3.6 m. All nozzles off.
+340,6,,12.62,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+341,6,,12.62,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+342,6,,12.52,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+343,6,,12.27,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+344,6,,12.29,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+345,6,,12.34,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+346,6,,12.47,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+347,6,,12.66,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+348,6,,12.39,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+349,6,,12.53,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+350,6,,12.54,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+351,6,,12.5,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+352,6,,12.64,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+353,6,,12.74,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+354,6,,12.89,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 12.9 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+355,6,,13.16,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 13.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+356,6,,13.15,1.0,3.6,0.0108,0,All 6 nozzles spray. Nearest nozzle 13.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+357,6,,13.1,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+358,6,,13.26,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.3 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+359,6,,13.19,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+360,6,,13.17,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.2 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+361,6,,13.41,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+362,6,,13.11,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.1 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+363,6,,12.76,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.8 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+364,6,,12.73,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.7 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+365,6,,12.42,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.4 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+366,6,,12.61,1.05,3.65,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+367,6,,12.71,1.58,4.18,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.7 m from a restricted zone; buffer 4.2 m (gnss 1.6 + drift 0.8 + react 1.8). OK.
+368,4,1|2,12.68,2.03,4.63,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (tree/zone avoidance). 4/6 active."
+369,6,,12.96,2.01,4.61,0.0144,0,All 6 nozzles spray. Nearest nozzle 13.0 m from a restricted zone; buffer 4.6 m (gnss 2.0 + drift 0.8 + react 1.8). OK.
+370,6,,12.93,1.54,4.14,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.9 m from a restricted zone; buffer 4.1 m (gnss 1.5 + drift 0.8 + react 1.8). OK.
+371,6,,12.64,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.6 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+372,6,,12.48,1.0,3.6,0.0144,0,All 6 nozzles spray. Nearest nozzle 12.5 m from a restricted zone; buffer 3.6 m (gnss 1.0 + drift 0.8 + react 1.8). OK.
+373,0,1|2|3|4|5|6,12.52,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 12.5 m < buffer 3.6 m. All nozzles off.
+374,0,1|2|3|4|5|6,0.72,1.0,3.6,0.0,0,FULL BOOM CUT. Nearest nozzle 0.7 m < buffer 3.6 m. All nozzles off.
+375,4,1|2,0.58,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+376,4,1|2,0.78,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+377,4,1|2,0.84,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+378,4,1|2,0.86,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+379,4,1|2,0.96,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+380,4,1|2,1.03,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+381,4,1|2,1.2,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+382,4,1|2,1.07,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+383,4,1|2,1.02,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+384,4,1|2,1.11,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+385,4,1|2,1.22,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+386,4,1|2,1.43,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+387,4,1|2,1.45,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+388,4,1|2,1.53,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+389,4,1|2,1.46,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+390,4,1|2,1.37,1.0,3.6,0.0096,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+391,4,1|2,1.19,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+392,4,1|2,1.18,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+393,4,1|2,1.07,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+394,4,1|2,1.02,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+395,4,1|2,1.08,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+396,4,1|2,1.12,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+397,4,1|2,1.11,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+398,4,1|2,1.23,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+399,4,1|2,1.14,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+400,4,1|2,1.28,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+401,4,1|2,1.3,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+402,4,1|2,1.3,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+403,4,1|2,1.16,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+404,4,1|2,1.01,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+405,4,1|2,0.93,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+406,4,1|2,1.07,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."
+407,4,1|2,0.93,1.0,3.6,0.0072,0,"PARTIAL CUT â€” nozzles [1, 2] off (buffer breach near a restricted zone). 4/6 active."

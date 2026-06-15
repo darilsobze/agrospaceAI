@@ -74,6 +74,32 @@ browser. Press **Play** to fly the route; flip the **5 m / 1 m** toggle to watch
 switch red↔green along the organic line; drag the **wind** slider to inflate the buffer
 and see the boom cut earlier (graceful degradation).
 
+## Modelled variables (the safety buffer is the product)
+
+The decision is `spray a nozzle only if dist(nozzle → nearest restricted zone) ≥ buffer`,
+and the **buffer is built from real operating conditions** — all live-adjustable in the
+**Fleet & Airspace** tab:
+
+```
+buffer = gnss_error + drift_margin + reaction + downwind
+  gnss_error   receiver class (5 m / 1 m), inflated near trees (GNSS multipath)
+  drift_margin base + k · boom HEIGHT          (higher boom → more drift)
+  reaction     SPEED · valve_delay             (can't shut a nozzle instantly)
+  downwind     WIND speed · alignment toward a restricted zone (asymmetric)
+```
+
+Plus, modelled across the world geometry:
+
+- **Multiple crops** (A wheat / B oilseed rape) with different chemicals & doses. At 5 m
+  the error radius spans the A|B seam → the tool flags **crop-ambiguous** nozzles
+  (wrong-dose risk); at 1 m this drops to zero — a *second* flip on the meter.
+- **Multiple restricted zones**: the organic parcel **and** a water-buffer pond.
+- **Tree obstacles**: both avoided (no spray) **and** a GNSS-multipath source that grows
+  the error radius nearby — graceful degradation exactly where precision matters most.
+- **Chemical tank & cost**: litres applied / remaining and € per crop, live.
+- **Spray master** (AUTO / OFF) operator override, and a **compliance audit CSV export**
+  (per-fix decision → inputs → reason) for the regulator-facing "no black box" trail.
+
 ## No black box (transparency)
 
 Every cut traces to data and stated assumptions. The AI-briefing panel prints the

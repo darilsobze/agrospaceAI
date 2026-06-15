@@ -1,52 +1,65 @@
 {
   "type": "FeatureCollection",
   "metadata": {
-    "note": "Real-world-style farm parcel geometry near Pfungstadt, Hessen (EWIA / ESA BIC Hessen region). Parcel layout traced in the style of OpenStreetMap landuse=farmland ways. The target field is conventionally farmed; the parcel sharing its NORTH edge is a certified-organic field, so any spray drift across that legal boundary voids the neighbour's organic certification and triggers fines under the EU Sustainable Use Regulation and German PflSchG buffer-zone rules. Positions are simulated; the world (the boundary) is real geometry.",
-    "kind_legal_meaning": {
-      "target_field": "authorized for spraying",
-      "restricted_parcel": "FORBIDDEN — organic neighbour, no drift allowed",
-      "legal_boundary": "the line spray must never cross with chemical"
+    "note": "Real-world-style farm parcel geometry near Pfungstadt, Hessen (EWIA / ESA BIC Hessen region), traced in the style of OpenStreetMap landuse=farmland. The spray block is split into TWO crop parcels (different chemicals/doses) sharing an internal seam, bordered to the north by a certified-organic parcel (no drift) and containing a water buffer (no spray) and two trees (obstacles + GNSS multipath). Positions are simulated; the world (the boundaries) is real geometry.",
+    "frame": {
+      "LON_W": 8.5980000, "LON_E": 8.6007867, "MID": 8.5993934,
+      "LAT_S": 49.8690000, "LAT_N": 49.8703475, "LAT_ORG_N": 49.8710662
     }
   },
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "Target field (conventional, authorized to spray)", "role": "target_field", "crop": "winter wheat" },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
-          [8.5980000, 49.8690000],
-          [8.6007867, 49.8690000],
-          [8.6007867, 49.8703475],
-          [8.5980000, 49.8703475],
-          [8.5980000, 49.8690000]
-        ]]
-      }
+      "properties": { "name": "Crop A — winter wheat", "role": "target_field", "crop": "winter wheat",
+        "chemical": "Herbicide-W", "dose_l_per_ha": 1.5, "price_eur_per_l": 12 },
+      "geometry": { "type": "Polygon", "coordinates": [[
+        [8.5980000, 49.8690000], [8.5993934, 49.8690000],
+        [8.5993934, 49.8703475], [8.5980000, 49.8703475], [8.5980000, 49.8690000] ]] }
     },
     {
       "type": "Feature",
-      "properties": { "name": "Restricted parcel (certified organic — NO drift)", "role": "restricted_parcel", "crop": "organic soy" },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
-          [8.5980000, 49.8703475],
-          [8.6007867, 49.8703475],
-          [8.6007867, 49.8710662],
-          [8.5980000, 49.8710662],
-          [8.5980000, 49.8703475]
-        ]]
-      }
+      "properties": { "name": "Crop B — oilseed rape", "role": "target_field", "crop": "oilseed rape",
+        "chemical": "Fungicide-R", "dose_l_per_ha": 2.0, "price_eur_per_l": 15 },
+      "geometry": { "type": "Polygon", "coordinates": [[
+        [8.5993934, 49.8690000], [8.6007867, 49.8690000],
+        [8.6007867, 49.8703475], [8.5993934, 49.8703475], [8.5993934, 49.8690000] ]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Restricted parcel — certified organic (NO drift)", "role": "restricted",
+        "subtype": "organic", "crop": "organic soy" },
+      "geometry": { "type": "Polygon", "coordinates": [[
+        [8.5980000, 49.8703475], [8.6007867, 49.8703475],
+        [8.6007867, 49.8710662], [8.5980000, 49.8710662], [8.5980000, 49.8703475] ]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Water buffer — drainage pond (NO spray)", "role": "restricted", "subtype": "water" },
+      "geometry": { "type": "Polygon", "coordinates": [[
+        [8.5981000, 49.8691500], [8.5987000, 49.8691500],
+        [8.5987000, 49.8695500], [8.5981000, 49.8695500], [8.5981000, 49.8691500] ]] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Legal boundary (organic fence line)", "role": "legal_boundary" },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [8.5980000, 49.8703475],
-          [8.6007867, 49.8703475]
-        ]
-      }
+      "geometry": { "type": "LineString", "coordinates": [ [8.5980000, 49.8703475], [8.6007867, 49.8703475] ] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Crop seam (A | B)", "role": "crop_seam" },
+      "geometry": { "type": "LineString", "coordinates": [ [8.5993934, 49.8690000], [8.5993934, 49.8703475] ] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Oak — NE corner", "role": "obstacle", "kind": "tree",
+        "r_avoid_m": 3.5, "r_gps_m": 16 },
+      "geometry": { "type": "Point", "coordinates": [8.6004000, 49.8701500] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Hedgerow oak — mid field", "role": "obstacle", "kind": "tree",
+        "r_avoid_m": 3.0, "r_gps_m": 14 },
+      "geometry": { "type": "Point", "coordinates": [8.5990500, 49.8694500] }
     }
   ]
 }

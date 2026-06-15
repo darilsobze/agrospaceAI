@@ -2,173 +2,229 @@
 """
 engine.py — AgroSpray AI spatial decision engine.
 
-This is the heart of the tool: it does NOT just draw a map. For every GPS fix on
-the drone's path it computes the operator's real decision — which boom nozzles may
-spray and which must shut off — by treating each fix as a POINT PLUS AN ERROR
-RADIUS and testing each nozzle's drift footprint against the real organic boundary.
+For every GPS fix it computes the operator's real decision — which of the 6 boom
+nozzles may spray — by treating each fix as a POINT PLUS AN ERROR RADIUS and
+testing each nozzle against the real field geometry. The safety buffer is a
+VARIABLE built from the things that actually change drift risk:
 
-The whole challenge in one line:
-    shut a nozzle if   distance(nozzle -> restricted parcel) < error_radius + drift_margin
-i.e. spray only when we are CONFIDENT, even at the worst case of our uncertainty,
-that no chemical crosses the legal line. The error_radius is ~5 m for a standard
-receiver and ~1 m for a corrected one — so the same flight, same geometry, yields a
-different decision. That is the meter.
+    buffer = gnss_error + drift_margin + reaction + downwind
+      gnss_error  = receiver class, inflated near trees (multipath)         [meter!]
+      drift_margin= base + k * boom height                                  (feature 2)
+      reaction    = speed * valve_delay  (cannot shut a nozzle instantly)   (feature 1)
+      downwind    = wind speed * alignment toward the restricted zone       (feature 8/9)
 
-Reuses the starter floor geometry (geo_core.py): point_in_polygon,
-dist_to_polygon_edge, could_be_inside. No third-party dependencies.
+A nozzle sprays only if, even at the worst case of that buffer, it stays clear of
+every restricted zone (organic parcel, water buffer) and every tree, and is
+confidently over a crop. It also reports WHICH crop (and flags when 5 m cannot
+tell crop A from crop B across the seam — a second flip), tracks the tank, and
+prices the chemical. Reuses the starter geo_core.py. Stdlib only.
 
-    python engine.py            # 5 m vs 1 m comparison + writes decisions_*.csv
+    python engine.py
 """
 
 import csv, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# geo_core.py is vendored alongside this file (a copy of the starter floor), so the
-# repo is self-contained; fall back to the starter kit location if present.
 sys.path.insert(0, HERE)
 sys.path.append(os.path.join(HERE, "..", "..", "starter_kit_down_to_the_meter", "starter"))
 import geo_core as g   # noqa: E402
 
 DATA = os.path.join(HERE, "data")
 
-# --- boom / agronomic model ---
-BOOM_WIDTH_M   = 12.0
-N_NOZZLES      = 6
-DRIFT_MARGIN_M = 0.5     # agronomic safety: fine-droplet drift beyond the nozzle
-# cross-track offsets of each nozzle from drone centre (m); + is to the LEFT of heading
-NOZZLE_OFFSETS = [(-BOOM_WIDTH_M / 2) + BOOM_WIDTH_M * (i + 0.5) / N_NOZZLES
-                  for i in range(N_NOZZLES)]
-
-# receiver -> base 1-sigma-ish error radius we carry as the safety buffer (m)
+# ---- boom / receiver ----
+BOOM_WIDTH_M, N_NOZZLES = 12.0, 6
+NOZZLE_OFFSETS = [(-BOOM_WIDTH_M / 2) + BOOM_WIDTH_M * (i + 0.5) / N_NOZZLES for i in range(N_NOZZLES)]
 ERROR_RADIUS = {"5m": 5.0, "1m": 1.0}
 
-# economics (conservative, sourced in README)
-VALUE_PER_M2   = 0.18    # € gross margin per m2 of treated winter wheat / season
-DRIFT_FINE_EUR = 5000.0  # one organic-decertification / drift incident
+# ---- operator settings (the new controls) ----
+OP = {
+    "height_m": 3.0,        # feature 2 — boom height
+    "speed_ms": 6.0,        # feature 1 — flight speed
+    "valve_delay_s": 0.3,   # feature 1 — nozzle shut latency
+    "wind_ms": 0.0,         # feature 8 — wind speed
+    "wind_bearing": 0.0,    # feature 9 — direction wind blows TOWARD (deg, 0=N,90=E)
+}
+DRIFT_BASE_M = 0.5
+K_HEIGHT = 0.30             # extra drift margin per metre of height above 2 m
+K_WIND_DRIFT = 0.18        # extra downwind margin per m/s, scaled by alignment
+TANK_L = 8.0                # feature 7 — chemical tank capacity
 
 
+# ---- load geometry ----
 def load_field():
     fc = json.load(open(os.path.join(DATA, "field.geojson")))
-    field = restricted = None
+    crops, restricted, obstacles = [], [], []
     for f in fc["features"]:
-        role = f["properties"].get("role")
+        p, role, geo = f["properties"], f["properties"].get("role"), f["geometry"]
         if role == "target_field":
-            field = [(c[0], c[1]) for c in f["geometry"]["coordinates"][0]]
-        elif role == "restricted_parcel":
-            restricted = [(c[0], c[1]) for c in f["geometry"]["coordinates"][0]]
-    return field, restricted
+            crops.append({"name": p["name"], "crop": p.get("crop", "?"),
+                          "dose_l_per_m2": p.get("dose_l_per_ha", 1.5) / 10000.0,
+                          "price": p.get("price_eur_per_l", 12),
+                          "ring": [(c[0], c[1]) for c in geo["coordinates"][0]]})
+        elif role == "restricted":
+            restricted.append({"name": p["name"], "subtype": p.get("subtype", ""),
+                               "ring": [(c[0], c[1]) for c in geo["coordinates"][0]]})
+        elif role == "obstacle":
+            lon, lat = geo["coordinates"]
+            obstacles.append({"name": p["name"], "lon": lon, "lat": lat,
+                              "r_avoid": p.get("r_avoid_m", 3.0), "r_gps": p.get("r_gps_m", 15)})
+    return crops, restricted, obstacles
 
 
 def load_track(receiver):
     fc = json.load(open(os.path.join(DATA, f"drone_{receiver}.geojson")))
     feat = fc["features"][0]
     coords = [(c[0], c[1]) for c in feat["geometry"]["coordinates"]]
-    headings = feat["properties"]["headings_deg"]
-    return coords, headings
+    return coords, feat["properties"]["headings_deg"]
+
+
+# ---- geometry helpers ----
+def _dist_m(alon, alat, blon, blat):
+    return math.hypot((alon - blon) * g.m_per_deg_lon(alat), (alat - blat) * g.M_PER_DEG_LAT)
+
+
+def _centroid(ring):
+    xs = [p[0] for p in ring]; ys = [p[1] for p in ring]
+    return sum(xs) / len(xs), sum(ys) / len(ys)
 
 
 def nozzle_positions(lon, lat, heading_deg):
-    """World positions of each nozzle. Cross-track (perpendicular to heading) in m,
-    converted to lon/lat. + offset is to the LEFT of travel."""
-    th = math.radians(heading_deg)            # bearing: 0=N, 90=E
-    # left-perpendicular unit vector in (east, north): rotate heading +90 deg
-    pe, pn = -math.cos(th), math.sin(th)      # (east, north) of left-normal
-    out = []
-    for off in NOZZLE_OFFSETS:
-        de, dn = pe * off, pn * off
-        out.append((lon + de / g.m_per_deg_lon(lat), lat + dn / g.M_PER_DEG_LAT))
-    return out
+    th = math.radians(heading_deg)
+    pe, pn = -math.cos(th), math.sin(th)        # left-normal (east, north)
+    return [(lon + pe * off / g.m_per_deg_lon(lat), lat + pn * off / g.M_PER_DEG_LAT)
+            for off in NOZZLE_OFFSETS]
 
 
-def decide_fix(lon, lat, heading, field, restricted, error_radius):
-    """The decision for one fix. Returns dict with per-nozzle spray/shut and the
-    plain-text reasoning (no black box)."""
-    buffer_m = error_radius + DRIFT_MARGIN_M
-    noz = nozzle_positions(lon, lat, heading)
-    states, min_clear = [], float("inf")
-    for (nlon, nlat) in noz:
-        d_restricted = (0.0 if g.point_in_polygon(nlon, nlat, restricted)
-                        else g.dist_to_polygon_edge(nlon, nlat, restricted))
-        in_field = g.point_in_polygon(nlon, nlat, field) or \
-                   g.dist_to_polygon_edge(nlon, nlat, field) < buffer_m
-        # spray only if confident: worst-case footprint stays out of restricted AND in field
-        spray = (d_restricted >= buffer_m) and in_field
-        states.append({"spray": spray, "clear_m": d_restricted})
-        min_clear = min(min_clear, d_restricted)
-    n_spray = sum(s["spray"] for s in states)
-    shut = [i + 1 for i, s in enumerate(states) if not s["spray"]]
+def gnss_error(lon, lat, receiver, obstacles):
+    """Receiver class inflated by tree multipath: near a tree the radius grows."""
+    err = ERROR_RADIUS[receiver]
+    for o in obstacles:
+        d = _dist_m(lon, lat, o["lon"], o["lat"])
+        if d < o["r_gps"]:
+            err += ERROR_RADIUS[receiver] * 1.5 * (1 - d / o["r_gps"])
+    return err
+
+
+def dist_to_restricted(lon, lat, restricted):
+    """(min distance to any restricted zone, that zone) — 0 if inside one."""
+    best, who = float("inf"), None
+    for z in restricted:
+        d = 0.0 if g.point_in_polygon(lon, lat, z["ring"]) else g.dist_to_polygon_edge(lon, lat, z["ring"])
+        if d < best:
+            best, who = d, z
+    return best, who
+
+
+def decide_fix(lon, lat, heading, crops, restricted, obstacles, receiver, op=OP):
+    err = gnss_error(lon, lat, receiver, obstacles)
+    drift = DRIFT_BASE_M + K_HEIGHT * max(0.0, op["height_m"] - 2.0)
+    reaction = op["speed_ms"] * op["valve_delay_s"]
+    wth = math.radians(op["wind_bearing"])
+    wind_e, wind_n = math.sin(wth), math.cos(wth)        # unit dir wind blows toward
+
+    states, min_clear, n_spray, ambiguous = [], float("inf"), 0, 0
+    litres = 0.0
+    nozzle_area = (BOOM_WIDTH_M / N_NOZZLES) * op["speed_ms"]
+    shut = []
+    for idx, (nlon, nlat) in enumerate(nozzle_positions(lon, lat, heading)):
+        dR, zone = dist_to_restricted(nlon, nlat, restricted)
+        # downwind extra toward the nearest restricted zone
+        downwind = 0.0
+        if zone and op["wind_ms"] > 0:
+            cx, cy = _centroid(zone["ring"])
+            de, dn = (cx - nlon) * g.m_per_deg_lon(nlat), (cy - nlat) * g.M_PER_DEG_LAT
+            n = math.hypot(de, dn) or 1.0
+            align = max(0.0, (wind_e * de + wind_n * dn) / n)
+            downwind = op["wind_ms"] * K_WIND_DRIFT * align
+        buffer_m = err + drift + reaction + downwind
+        # tree avoidance
+        over_tree = any(_dist_m(nlon, nlat, o["lon"], o["lat"]) < o["r_avoid"] for o in obstacles)
+        # crop membership
+        inside = [c for c in crops if g.point_in_polygon(nlon, nlat, c["ring"])]
+        in_field = len(inside) > 0
+        crop = inside[0] if inside else None
+        # crop-ambiguous: confidently in one crop, but the error radius could reach a DIFFERENT crop
+        amb = bool(crop) and any(o is not crop and g.dist_to_polygon_edge(nlon, nlat, o["ring"]) < err
+                                 for o in crops)
+        spray = (dR >= buffer_m) and in_field and not over_tree
+        if spray:
+            n_spray += 1
+            litres += crop["dose_l_per_m2"] * nozzle_area
+            if amb:
+                ambiguous += 1
+        else:
+            shut.append(idx + 1)
+        min_clear = min(min_clear, dR)
+        states.append({"spray": spray, "clear": dR, "crop": crop["crop"] if crop else None,
+                       "amb": amb, "tree": over_tree, "buffer": buffer_m})
+    buf0 = states[0]["buffer"]
     if n_spray == N_NOZZLES:
-        reason = (f"All {N_NOZZLES} nozzles spray. Nearest nozzle is {min_clear:.1f} m "
-                  f"from the organic line; safety buffer is {buffer_m:.1f} m "
-                  f"(error {error_radius:.1f} m + drift {DRIFT_MARGIN_M:.1f} m). Margin OK.")
+        reason = (f"All {N_NOZZLES} nozzles spray. Nearest nozzle {min_clear:.1f} m from a restricted "
+                  f"zone; buffer {buf0:.1f} m (gnss {err:.1f} + drift {drift:.1f} + react {reaction:.1f}). OK.")
     elif n_spray == 0:
-        reason = (f"FULL BOOM CUT. Nearest nozzle {min_clear:.1f} m from line < buffer "
-                  f"{buffer_m:.1f} m. Cannot prove no drift; all nozzles off.")
+        reason = f"FULL BOOM CUT. Nearest nozzle {min_clear:.1f} m < buffer {buf0:.1f} m. All nozzles off."
     else:
-        reason = (f"PARTIAL CUT — nozzles {shut} off. Their footprint is within the "
-                  f"{buffer_m:.1f} m buffer of the organic line; southern nozzles still "
-                  f"spray ({n_spray}/{N_NOZZLES} active).")
-    return {"n_spray": n_spray, "shut": shut, "min_clear": min_clear,
-            "buffer_m": buffer_m, "states": states, "reason": reason}
+        why = "tree/zone avoidance" if any(s["tree"] for s in states) else "buffer breach near a restricted zone"
+        reason = f"PARTIAL CUT — nozzles {shut} off ({why}). {n_spray}/{N_NOZZLES} active."
+    if ambiguous:
+        reason += f" [{ambiguous} nozzle(s) crop-ambiguous: error radius spans the A|B seam -> wrong-dose risk]"
+    return {"n_spray": n_spray, "shut": shut, "min_clear": min_clear, "err": err, "buffer": buf0,
+            "litres": litres, "ambiguous": ambiguous, "states": states, "reason": reason}
 
 
-def run(receiver, field, restricted, error_radius=None):
-    error_radius = ERROR_RADIUS[receiver] if error_radius is None else error_radius
+def run(receiver, crops, restricted, obstacles, op=OP):
     coords, headings = load_track(receiver)
-    nozzle_area = (BOOM_WIDTH_M / N_NOZZLES) * (run.speed_ms)  # m2 sprayed per nozzle per fix
-    decisions, treated_area = [], 0.0
-    for (lon, lat), hdg in zip(coords, headings):
-        d = decide_fix(lon, lat, hdg, field, restricted, error_radius)
-        treated_area += d["n_spray"] * nozzle_area
-        decisions.append(d)
-    return decisions, treated_area
-run.speed_ms = 6.0   # matches generator DT*SPEED
+    decs, area, litres, tank = [], 0.0, 0.0, TANK_L
+    nozzle_area = (BOOM_WIDTH_M / N_NOZZLES) * op["speed_ms"]
+    for (lon, lat), h in zip(coords, headings):
+        d = decide_fix(lon, lat, h, crops, restricted, obstacles, receiver, op)
+        area += d["n_spray"] * nozzle_area
+        litres += d["litres"]
+        decs.append(d)
+    return decs, area, litres
 
 
-def summarize(receiver, decisions, treated_area):
-    full_cut = sum(1 for d in decisions if d["n_spray"] == 0)
-    partial  = sum(1 for d in decisions if 0 < d["n_spray"] < N_NOZZLES)
-    return {"receiver": receiver, "fixes": len(decisions),
-            "treated_m2": treated_area, "full_cut_fixes": full_cut,
-            "partial_cut_fixes": partial}
-
-
-def write_csv(receiver, decisions):
+def write_csv(receiver, decs):
     path = os.path.join(DATA, f"decisions_{receiver}.csv")
-    with open(path, "w", newline="") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["fix", "active_nozzles", "shut_nozzles", "min_clearance_m",
-                    "buffer_m", "reason"])
-        for i, d in enumerate(decisions):
-            w.writerow([i, d["n_spray"], "|".join(map(str, d["shut"])),
-                        round(d["min_clear"], 2), d["buffer_m"], d["reason"]])
+        w.writerow(["fix", "active_nozzles", "shut", "min_clear_m", "gnss_err_m",
+                    "buffer_m", "litres", "crop_ambiguous", "reason"])
+        for i, d in enumerate(decs):
+            w.writerow([i, d["n_spray"], "|".join(map(str, d["shut"])), round(d["min_clear"], 2),
+                        round(d["err"], 2), round(d["buffer"], 2), round(d["litres"], 4),
+                        d["ambiguous"], d["reason"]])
     return path
 
 
 def main():
-    field, restricted = load_field()
-    print("AgroSpray AI - spatial decision engine\n" + "=" * 52)
-    results = {}
+    crops, restricted, obstacles = load_field()
+    print("AgroSpray AI - spatial decision engine\n" + "=" * 56)
+    print(f"settings: height {OP['height_m']} m · speed {OP['speed_ms']} m/s · "
+          f"wind {OP['wind_ms']} m/s @ {OP['wind_bearing']:.0f}° · tank {TANK_L} L")
+    print(f"world: {len(crops)} crops, {len(restricted)} restricted zones, {len(obstacles)} trees")
+    res = {}
     for r in ("5m", "1m"):
-        decisions, area = run(r, field, restricted)
-        s = summarize(r, decisions, area)
-        results[r] = s
-        path = write_csv(r, decisions)
-        print(f"\n[{r} receiver]  buffer = {ERROR_RADIUS[r] + DRIFT_MARGIN_M:.1f} m")
-        print(f"  fixes:            {s['fixes']}")
-        print(f"  full-boom cuts:   {s['full_cut_fixes']}")
-        print(f"  partial cuts:     {s['partial_cut_fixes']}")
-        print(f"  treated area:     {s['treated_m2']:.0f} m2")
-        print(f"  decision log ->   {os.path.relpath(path, HERE)}")
+        decs, area, litres = run(r, crops, restricted, obstacles)
+        res[r] = {"area": area, "litres": litres,
+                  "full": sum(1 for d in decs if d["n_spray"] == 0),
+                  "partial": sum(1 for d in decs if 0 < d["n_spray"] < N_NOZZLES),
+                  "amb": sum(d["ambiguous"] for d in decs)}
+        write_csv(r, decs)
+        avg_price = sum(c["price"] for c in crops) / len(crops)
+        print(f"\n[{r}]  treated {area:7.0f} m2 | chemical {litres:4.2f} L (~EUR {litres*avg_price:5.2f}) | "
+              f"full cuts {res[r]['full']:3d} | partial {res[r]['partial']:3d} | crop-ambiguous fixes {res[r]['amb']:3d}")
 
-    # the flip, in numbers
-    reclaimed = results["1m"]["treated_m2"] - results["5m"]["treated_m2"]
-    print("\n" + "=" * 52 + "\nTHE FLIP (1 m vs 5 m), same flight, same field:")
-    print(f"  extra crop treated at 1 m:  {reclaimed:.0f} m2 of legal border reclaimed")
-    print(f"  value of that border:       EUR {reclaimed * VALUE_PER_M2:,.0f} / season")
-    print(f"  drift-fine exposure removed: EUR {DRIFT_FINE_EUR:,.0f} per avoided incident")
-    print("\nNecessity test: at 5 m the boom must cut metres early (border left")
-    print("untreated) to stay provably clear; at 1 m it sprays to the fence line.")
+    avg_price = sum(c["price"] for c in crops) / len(crops)
+    rec = res["1m"]["area"] - res["5m"]["area"]
+    chem = (res["1m"]["litres"] - res["5m"]["litres"])
+    print("\n" + "=" * 56 + "\nTHE FLIP (1 m vs 5 m), same flight, same world:")
+    print(f"  border reclaimed:        {rec:6.0f} m2  (EUR {rec*0.18:,.0f}/season crop value)")
+    print(f"  chemical placed on-target:{chem:+5.2f} L  (correct dose to the correct crop)")
+    print(f"  crop-ambiguous fixes:     {res['5m']['amb']} at 5 m  ->  {res['1m']['amb']} at 1 m")
+    print(f"  drift-fine exposure removed: EUR 5,000 per avoided organic-decert incident")
+    print("\nNecessity test: at 5 m the boom cuts metres early, mis-doses across the crop")
+    print("seam, and over-buffers near trees; at 1 m it sprays the right chemical to the line.")
 
 
 if __name__ == "__main__":

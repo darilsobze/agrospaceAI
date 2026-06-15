@@ -135,6 +135,16 @@
   /* wind */
   input[type=range]{accent-color:var(--green);width:100%}
   .row{display:flex;align-items:center;gap:12px}
+  .ctl label{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:5px}
+  .ctl label b{color:var(--ink)}
+  .seg{display:inline-flex;gap:2px;background:#f3f5f1;border:1px solid var(--line);border-radius:999px;padding:3px}
+  .seg button{border:none;background:transparent;color:var(--mut);font-weight:600;font-size:11.5px;padding:4px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+  .seg button.on{background:var(--orange);color:#fff}
+  .gauge{height:9px;background:#eef0ec;border-radius:999px;overflow:hidden;margin-top:10px}
+  .gauge>div{height:100%;width:100%;background:linear-gradient(90deg,var(--green),#7fd0a0);border-radius:999px}
+  .nozzle .cr{font-size:9px;color:var(--mut);margin-top:1px;text-transform:uppercase;letter-spacing:.3px}
+  .nozzle.amb{box-shadow:inset 0 0 0 2px var(--orange)}
+  .exportbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-weight:600;cursor:pointer;font-size:12.5px}
 
   /* playback transport */
   .transport{position:sticky;bottom:14px;margin-top:22px;background:var(--card);border:1px solid var(--line);
@@ -216,8 +226,10 @@
     </div>
 
     <div class="card" style="margin-top:14px">
-      <div class="lbl" style="display:flex;justify-content:space-between"><span class="upper">Boom — 6 nozzles · field side → organic line</span>
-        <span class="pill grey" id="boomTag">—</span></div>
+      <div class="lbl" style="display:flex;justify-content:space-between;align-items:center"><span class="upper">Boom — 6 nozzles · field side → organic line</span>
+        <span style="display:flex;gap:8px;align-items:center">
+          <span class="seg" id="master"><button data-m="auto" class="on">AUTO</button><button data-m="off">MASTER OFF</button></span>
+          <span class="pill grey" id="boomTag">—</span></span></div>
       <div class="boom" id="boom"></div>
       <div class="boomends"><span>south · safe (field interior)</span><span>north · organic boundary →</span></div>
     </div>
@@ -268,6 +280,10 @@
         <div class="mono" style="color:var(--mut);font-size:12px;margin-top:6px">point-in-polygon + edge dist</div></div>
     </div>
     <div class="logic" id="logic">—</div>
+    <div class="row" style="margin-top:14px;justify-content:space-between">
+      <span class="foot">Compliance audit · per-fix decision log traceable to inputs (no black box).</span>
+      <button class="exportbtn" id="exportBtn">⤓ Export audit CSV</button>
+    </div>
   </section>
 
   <!-- ===== FOLLOW VS IGNORE ===== -->
@@ -288,7 +304,12 @@
         <ul><li id="fa1">—</li><li>Zero chemical waste on bare soil</li><li>Full compliance for automated profiles</li></ul></div>
       <div class="choice b"><div class="pill coral" style="float:right">OPERATIONAL RISK</div>
         <h4>Ignore · 5 m coarse</h4><div style="color:var(--mut);font-size:13px">Forced manual setbacks or drift.</div>
-        <ul><li id="fb1">—</li><li>Field borders left untreated (weed/pest reservoir)</li><li>Organic decertification + drift fines</li></ul></div>
+        <ul><li id="fb1">—</li><li id="fb2">—</li><li>Organic decertification + drift fines</li></ul></div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card kpi"><span class="upper">Crop-ambiguous fixes</span><div class="num coral" id="bAmb">—</div><div class="foot">5 m can't tell crop A from B at the seam → 0 at 1 m</div></div>
+      <div class="card kpi"><span class="upper">Chemical placed on-target</span><div class="num green" id="bChem">—</div><div class="foot">correct dose, correct crop</div></div>
+      <div class="card kpi"><span class="upper">Drift-fine exposure removed</span><div class="num green">€5,000</div><div class="foot">per avoided organic-decert incident</div></div>
     </div>
   </section>
 
@@ -300,21 +321,41 @@
       <div class="sub">Mission queue and the environmental drift strategy that flexes the safety buffer.</div>
     </div>
     <div class="grid g2">
-      <div class="card"><div class="upper">Incoming flight queue</div>
-        <table style="margin-top:8px"><thead><tr><th>Mission</th><th>Field</th><th>Tank</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td class="mono">AGZ-01</td><td>Wheat / organic edge</td><td>78%</td><td><span class="badge" style="background:var(--green-bg);color:var(--green-d)">ACTIVE</span></td></tr>
-          <tr><td class="mono">AGZ-02</td><td>Vineyard / water buffer</td><td>100%</td><td><span class="badge" style="background:#eef0ec;color:var(--mut)">QUEUED</span></td></tr>
-          <tr><td class="mono">AGZ-03</td><td>Orchard / residential</td><td>100%</td><td><span class="badge" style="background:#eef0ec;color:var(--mut)">QUEUED</span></td></tr>
-        </tbody></table></div>
-      <div class="card"><div class="lbl" style="display:flex;justify-content:space-between"><span class="upper">Environmental drift strategy</span><svg class="spark" id="spWind"></svg></div>
-        <div class="num mono" id="kWind" style="font-size:27px;font-weight:700;margin-top:10px">0.0 m/s</div>
-        <div class="foot" style="color:var(--mut)">downwind drift inflates the buffer → earlier nozzle cut-offs</div>
-        <div class="row" style="margin-top:14px"><span style="font-size:12px;color:var(--mut)">calm</span>
-          <input id="wind" type="range" min="0" max="8" step="0.5" value="0"><span style="font-size:12px;color:var(--mut)">gusty</span></div>
-        <div class="foot" style="margin-top:10px">Active buffer: <b class="mono" id="kBuf">1.5 m</b> · if the fix degrades to 2 m the circle grows on the fly and outer nozzles shut — graceful degradation, not blind spraying.</div>
+      <div class="card"><div class="upper">Flight &amp; spray controls</div>
+        <div class="ctl"><label>Boom height <b class="mono" id="hgtV">3.0 m</b></label>
+          <input id="hgt" type="range" min="1" max="8" step="0.5" value="3"></div>
+        <div class="foot">Higher boom → more drift → wider safety margin.</div>
+        <div class="ctl" style="margin-top:12px"><label>Flight speed <b class="mono" id="spdV">6.0 m/s</b></label>
+          <input id="spd" type="range" min="2" max="12" step="0.5" value="6"></div>
+        <div class="foot">Faster → longer valve-shut reaction distance added to the buffer.</div>
+        <div class="ctl" style="margin-top:12px"><label>Wind speed <b class="mono" id="windV">0.0 m/s</b></label>
+          <input id="wind" type="range" min="0" max="8" step="0.5" value="0"></div>
+        <div class="row" style="margin-top:10px"><span class="foot" style="white-space:nowrap">Wind toward</span>
+          <span class="seg" id="wdir">
+            <button data-deg="0" class="on">N · organic</button><button data-deg="90">E</button>
+            <button data-deg="180">S</button><button data-deg="270">W</button>
+          </span></div>
+        <div class="foot" style="margin-top:8px">Only nozzles <i>downwind toward a restricted zone</i> get the extra margin — asymmetric, graceful degradation.</div>
+      </div>
+      <div class="card"><div class="lbl" style="display:flex;justify-content:space-between"><span class="upper">Tank &amp; chemical</span><svg class="spark" id="spWind"></svg></div>
+        <div class="num mono" id="kTank" style="font-size:27px;font-weight:700;margin-top:10px">8.00 L</div>
+        <div class="foot" style="color:var(--mut)">chemical remaining · two crops, two doses</div>
+        <div class="gauge"><div id="tankFill"></div></div>
+        <div class="row" style="margin-top:14px;justify-content:space-between">
+          <div><div class="upper">Applied</div><div class="mono" id="kApplied" style="font-size:16px;font-weight:700">0.00 L</div></div>
+          <div><div class="upper">Cost</div><div class="mono" id="kCost" style="font-size:16px;font-weight:700">€0.00</div></div>
+          <div><div class="upper">Active buffer</div><div class="mono" id="kBuf" style="font-size:16px;font-weight:700">—</div></div>
+        </div>
+        <div class="foot" style="margin-top:12px">Precise dosing puts the right chemical on the right crop — at 5 m the A|B seam is ambiguous, risking wrong-dose application.</div>
       </div>
     </div>
+    <div class="card" style="margin-top:14px"><div class="upper">Incoming flight queue</div>
+      <table style="margin-top:8px"><thead><tr><th>Mission</th><th>Field</th><th>Restricted</th><th>Tank</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">AGZ-01</td><td>Wheat + rape / organic edge</td><td>organic, water, 2 trees</td><td id="qTank">100%</td><td><span class="badge" style="background:var(--green-bg);color:var(--green-d)">ACTIVE</span></td></tr>
+        <tr><td class="mono">AGZ-02</td><td>Vineyard / water buffer</td><td>watercourse</td><td>100%</td><td><span class="badge" style="background:#eef0ec;color:var(--mut)">QUEUED</span></td></tr>
+        <tr><td class="mono">AGZ-03</td><td>Orchard / residential</td><td>residential edge</td><td>100%</td><td><span class="badge" style="background:#eef0ec;color:var(--mut)">QUEUED</span></td></tr>
+      </tbody></table></div>
   </section>
 
   <!-- ===== PLAYBACK ===== -->
@@ -356,39 +397,74 @@ function sd(px,py,ax,ay,bx,by){const dx=bx-ax,dy=by-ay,de=dx*dx+dy*dy;
 function ded(lon,lat,r){if(pip(lon,lat,r))return 0;const k=mlon(lat),px=lon*k,py=lat*M_LAT;let b=Infinity,n=r.length;
   for(let i=0;i<n;i++){const a=r[i],c=r[(i+1)%n];b=Math.min(b,sd(px,py,a[0]*k,a[1]*M_LAT,c[0]*k,c[1]*M_LAT));}return b;}
 
-const BOOM=12,NN=6,DRIFT=0.5,VALUE_M2=0.18,FINE=5000,SPEED=6.0;
+const BOOM=12,NN=6,VALUE_M2=0.18,FINE=5000;
 const OFFS=[...Array(NN)].map((_,i)=>-BOOM/2+BOOM*(i+0.5)/NN);
 const BASE={'5m':5.0,'1m':1.0};
-const nozzleArea=(BOOM/NN)*SPEED;
+const DRIFT_BASE=0.5, K_HEIGHT=0.30, K_WIND=0.18, TANK=8.0;
+const OP={height:3.0,speed:6.0,valve:0.3,wind:0,wbear:0};   // operator settings
+let master='auto';                                          // feature 12: spray master
+const naFix=()=>(BOOM/NN)*OP.speed;                         // m² sprayed per nozzle per fix
 function npos(lon,lat,h){const th=h*Math.PI/180,pe=-Math.cos(th),pn=Math.sin(th);
   return OFFS.map(o=>[lon+(pe*o)/mlon(lat),lat+(pn*o)/M_LAT]);}
-function decide(lon,lat,h,F,R,er){const buf=er+DRIFT,noz=npos(lon,lat,h);let st=[],mc=Infinity;
-  for(const[nl,na]of noz){const dR=pip(nl,na,R)?0:ded(nl,na,R);const inF=pip(nl,na,F)||ded(nl,na,F)<buf;
-    const sp=(dR>=buf)&&inF;st.push({spray:sp,clear:dR});mc=Math.min(mc,dR);}
-  const ns=st.filter(s=>s.spray).length,shut=st.map((s,i)=>s.spray?null:i+1).filter(x=>x);
-  let reason,kind;
-  if(ns===NN){kind='ok';reason=`All ${NN} nozzles SPRAY.\nNearest nozzle <b>${mc.toFixed(1)} m</b> from the organic line.\nBuffer ${buf.toFixed(1)} m = error ${er.toFixed(1)} m + drift ${DRIFT} m.\nMargin verified → spray authorised.`;}
-  else if(ns===0){kind='crit';reason=`FULL BOOM CUT.\nNearest nozzle <b>${mc.toFixed(1)} m</b> < buffer ${buf.toFixed(1)} m.\nCannot prove zero drift → all nozzles OFF.`;}
-  else{kind='warn';reason=`PARTIAL CUT — nozzles ${shut.join(', ')} OFF.\nTheir footprint is within the ${buf.toFixed(1)} m buffer of the organic line.\n${ns}/${NN} southern nozzles still spraying.`;}
-  return{ns,shut,mc,buf,st,reason,kind};
+const distM=(al,aa,bl,ba)=>Math.hypot((al-bl)*mlon(aa),(aa-ba)*M_LAT);
+const centroid=r=>{let x=0,y=0;for(const p of r){x+=p[0];y+=p[1];}return[x/r.length,y/r.length];};
+function gnssErr(lon,lat,rec){let e=BASE[rec];                // feature 11: trees inflate GNSS
+  for(const o of OBST){const d=distM(lon,lat,o.lon,o.lat);if(d<o.rGps)e+=BASE[rec]*1.5*(1-d/o.rGps);}return e;}
+function distRestr(lon,lat){let b=Infinity,z=null;            // features 3+4: any no-spray zone
+  for(const r of RESTR){const d=pip(lon,lat,r.ring)?0:ded(lon,lat,r.ring);if(d<b){b=d;z=r;}}return{d:b,z};}
+function decide(lon,lat,h,rec,live=true){
+  const err=gnssErr(lon,lat,rec);                            // meter: receiver class + tree multipath
+  const drift=DRIFT_BASE+K_HEIGHT*Math.max(0,OP.height-2);   // feature 2: height
+  const react=OP.speed*OP.valve;                            // feature 1: speed -> reaction distance
+  const wth=OP.wbear*Math.PI/180, we=Math.sin(wth), wn=Math.cos(wth);
+  const noz=npos(lon,lat,h), na=naFix();
+  let st=[],mc=Infinity,ns=0,amb=0,litres=0,cost=0,shut=[];
+  for(let i=0;i<NN;i++){const[nl,nb]=noz[i];
+    const{d:dR,z}=distRestr(nl,nb);
+    let dw=0;                                                // features 8/9: downwind only
+    if(z&&OP.wind>0){const[cx,cy]=centroid(z.ring);const de=(cx-nl)*mlon(nb),dn=(cy-nb)*M_LAT;
+      const n=Math.hypot(de,dn)||1;const al=Math.max(0,(we*de+wn*dn)/n);dw=OP.wind*K_WIND*al;}
+    const buf=err+drift+react+dw;
+    const tree=OBST.some(o=>distM(nl,nb,o.lon,o.lat)<o.rAvoid);
+    const inside=CROPS.filter(c=>pip(nl,nb,c.ring));         // feature 5: which crop
+    const crop=inside[0]||null;
+    const ambN=!!crop&&CROPS.some(o=>o!==crop&&ded(nl,nb,o.ring)<err);  // crop-ambiguous (2nd flip)
+    const geom=(dR>=buf)&&!!crop&&!tree;                     // feature 4: only over a crop
+    const spray=(live&&master==='off')?false:geom;
+    if(spray){ns++;litres+=crop.dose*na;cost+=crop.dose*na*crop.price;if(ambN)amb++;}else shut.push(i+1);
+    mc=Math.min(mc,dR);
+    st.push({spray,clear:dR,crop:crop?crop.crop:null,cropId:crop?crop.id:'—',amb:ambN,tree,buf});}
+  const buf0=st[0].buf;let reason,kind;
+  if(master==='off'&&live){kind='warn';reason=`MASTER OFF — operator override. All nozzles held closed regardless of geometry.`;}
+  else if(ns===NN){kind='ok';reason=`All ${NN} nozzles SPRAY.\nNearest nozzle <b>${mc.toFixed(1)} m</b> from the nearest restricted zone.\nBuffer ${buf0.toFixed(1)} m = gnss ${err.toFixed(1)} + drift ${drift.toFixed(1)} (height ${OP.height} m) + react ${react.toFixed(1)} (speed ${OP.speed}).\nMargin verified → spray authorised.`;}
+  else if(ns===0){kind='crit';reason=`FULL BOOM CUT.\nNearest nozzle <b>${mc.toFixed(1)} m</b> < buffer ${buf0.toFixed(1)} m.\nCannot prove zero drift → all nozzles OFF.`;}
+  else{const why=st.some(s=>s.tree)?'tree / zone avoidance':'buffer breach near a restricted zone';
+    kind='warn';reason=`PARTIAL CUT — nozzles ${shut.join(', ')} OFF (${why}).\n${ns}/${NN} nozzles still spraying.`;}
+  if(amb)reason+=`\n[${amb} nozzle(s) crop-ambiguous: error radius spans the A|B seam → wrong-dose risk]`;
+  return{ns,shut,mc,err,buf:buf0,drift,react,litres,cost,amb,st,reason,kind};
 }
 
-let F,R,TRACK={},HEAD={},FIX=0,REC='1m',WIND=0,playing=false,timer=null,CUM={},CLEARS={};
+let CROPS=[],RESTR=[],OBST=[],TRACK={},HEAD={},FIX=0,REC='1m',playing=false,timer=null;
+let CUM={},LIT={},COST={},CLEARS={},AMB={};
 let maps=[];   // one entry per Leaflet instance (Command + Field tab)
 const $=id=>document.getElementById(id);
 const ERR=$('err');
-const effErr=rec=>BASE[rec]+WIND*0.4;
+const A=['A','B','C','D'];
 
 Promise.all([fetch('data/field.geojson'),fetch('data/drone_5m.geojson'),fetch('data/drone_1m.geojson')]
   .map(p=>p.then(r=>{if(!r.ok)throw 0;return r.json();})))
 .then(([fg,t5,t1])=>{
-  for(const ft of fg.features){const role=ft.properties.role;
-    if(role==='target_field')F=ft.geometry.coordinates[0].map(c=>[c[0],c[1]]);
-    if(role==='restricted_parcel')R=ft.geometry.coordinates[0].map(c=>[c[0],c[1]]);
-    if(role==='legal_boundary')window.BOUND=ft.geometry.coordinates;}
+  let ci=0;
+  for(const ft of fg.features){const role=ft.properties.role,p=ft.properties,gm=ft.geometry;
+    if(role==='target_field')CROPS.push({id:A[ci++],crop:p.crop,name:p.name,price:p.price_eur_per_l||12,
+      dose:(p.dose_l_per_ha||1.5)/10000,ring:gm.coordinates[0].map(c=>[c[0],c[1]])});
+    else if(role==='restricted')RESTR.push({name:p.name,subtype:p.subtype||'',ring:gm.coordinates[0].map(c=>[c[0],c[1]])});
+    else if(role==='obstacle')OBST.push({name:p.name,lon:gm.coordinates[0],lat:gm.coordinates[1],
+      rAvoid:p.r_avoid_m||3,rGps:p.r_gps_m||15});
+    else if(role==='legal_boundary')window.BOUND=gm.coordinates;
+    else if(role==='crop_seam')window.SEAM=gm.coordinates;}
   for(const[k,t]of[['5m',t5],['1m',t1]]){TRACK[k]=t.features[0].geometry.coordinates.map(c=>[c[0],c[1]]);
     HEAD[k]=t.features[0].properties.headings_deg;}
-  window.FIELDFC=fg;
   setupGeo();
   $('scrub').max=TRACK['1m'].length-1;
   buildMap('mapCmd');                 // Command page is visible at load
@@ -396,32 +472,40 @@ Promise.all([fetch('data/field.geojson'),fetch('data/drone_5m.geojson'),fetch('d
 }).catch(()=>{ERR.style.display='block';
   ERR.innerHTML="Couldn't load data — serve the folder first: <code>python -m http.server</code> in <b>agrospray/</b>, then open <code>http://localhost:8000/agrospray.html</code>.";});
 
-function precompute(){for(const rec of['5m','1m']){const tr=TRACK[rec],hd=HEAD[rec],er=effErr(rec);
-  let cum=0,arr=[],cl=[];for(let i=0;i<tr.length;i++){const d=decide(tr[i][0],tr[i][1],hd[i],F,R,er);
-    cum+=d.ns*nozzleArea;arr.push(cum);cl.push(d.mc);}CUM[rec]=arr;CLEARS[rec]=cl;}
+function precompute(){const na=naFix();
+  for(const rec of['5m','1m']){const tr=TRACK[rec],hd=HEAD[rec];
+    let cA=0,cL=0,cC=0,cAm=0,area=[],lit=[],cost=[],cl=[],amb=[];
+    for(let i=0;i<tr.length;i++){const d=decide(tr[i][0],tr[i][1],hd[i],rec,false);
+      cA+=d.ns*na;cL+=d.litres;cC+=d.cost;cAm+=d.amb;area.push(cA);lit.push(cL);cost.push(cC);cl.push(d.mc);amb.push(cAm);}
+    CUM[rec]=area;LIT[rec]=lit;COST[rec]=cost;CLEARS[rec]=cl;AMB[rec]=amb;}
   computeTreated();}
 
 // ---- local-meter frame for the 3D twin ----
 const GEO={};
 function setupGeo(){
-  const lons=F.map(p=>p[0]),lats=F.map(p=>p[1]);
+  const allF=CROPS.flatMap(c=>c.ring),lons=allF.map(p=>p[0]),lats=allF.map(p=>p[1]);
   GEO.LW=Math.min(...lons);GEO.LE=Math.max(...lons);GEO.LS=Math.min(...lats);GEO.LNf=Math.max(...lats);
-  GEO.LNall=Math.max(...R.map(p=>p[1]));GEO.k=mlon(GEO.LS);
+  GEO.LNall=Math.max(...RESTR.flatMap(r=>r.ring).map(p=>p[1]));GEO.k=mlon(GEO.LS);
   GEO.Wx=(GEO.LE-GEO.LW)*GEO.k;           // field width  (east)
   GEO.Df=(GEO.LNf-GEO.LS)*M_LAT;          // field depth  (north, to organic line)
   GEO.Dall=(GEO.LNall-GEO.LS)*M_LAT;      // to far edge of organic parcel
-  // crop grid inside the field only
-  const xs=[],zs=[],STEP=5;
-  for(let x=STEP/2;x<GEO.Wx;x+=STEP)for(let n=STEP/2;n<GEO.Df;n+=STEP){xs.push(x);zs.push(-n);}
-  window.CROP={n:xs.length,xs,zs,earliest:new Float64Array(xs.length)};
+  GEO.water=(RESTR.find(r=>r.subtype==='water')||{}).ring||null;
+  GEO.seamX=window.SEAM?(window.SEAM[0][0]-GEO.LW)*GEO.k:GEO.Wx/2;
+  // crop grid inside the field, skipping the pond
+  const xs=[],zs=[],crop=[],STEP=5;
+  for(let x=STEP/2;x<GEO.Wx;x+=STEP)for(let n=STEP/2;n<GEO.Df;n+=STEP){
+    const lon=GEO.LW+x/GEO.k, lat=GEO.LS+n/M_LAT;
+    if(GEO.water&&pip(lon,lat,GEO.water))continue;
+    xs.push(x);zs.push(-n);crop.push(x<GEO.seamX?0:1);}
+  window.CROP={n:xs.length,xs,zs,crop,earliest:new Float64Array(xs.length)};
 }
 const loX=lon=>(lon-GEO.LW)*GEO.k, loZ=lat=>-(lat-GEO.LS)*M_LAT;
 function computeTreated(){const g=window.CROP;if(!g)return;
-  const er=effErr(REC),tr=TRACK[REC],hd=HEAD[REC];g.earliest.fill(Infinity);
-  for(let i=0;i<tr.length;i++){const[lo,la]=tr[i],h=hd[i],d=decide(lo,la,h,F,R,er),dx=loX(lo),noz=npos(lo,la,h);
+  const tr=TRACK[REC],hd=HEAD[REC],aH=Math.max(3,OP.speed*0.6);g.earliest.fill(Infinity);
+  for(let i=0;i<tr.length;i++){const[lo,la]=tr[i],h=hd[i],d=decide(lo,la,h,REC,false),dx=loX(lo),noz=npos(lo,la,h);
     for(let k=0;k<NN;k++){if(!d.st[k].spray)continue;const nz=loZ(noz[k][1]);
       for(let c=0;c<g.n;c++){if(g.earliest[c]<=i)continue;
-        if(Math.abs(g.xs[c]-dx)<3.5&&Math.abs(g.zs[c]-nz)<1.0)g.earliest[c]=i;}}}
+        if(Math.abs(g.xs[c]-dx)<aH&&Math.abs(g.zs[c]-nz)<1.0)g.earliest[c]=i;}}}
   if(T)T.treatedShown=-1;}   // force the 3D crops to recolour next frame
 
 const ll=c=>[c[1],c[0]];
@@ -429,15 +513,20 @@ function buildMap(id){
   if(maps.some(m=>m.id===id))return maps.find(m=>m.id===id);
   const map=L.map(id,{zoomControl:true,scrollWheelZoom:false}).setView([49.8700,8.5994],17);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,attribution:'© OpenStreetMap'}).addTo(map);
-  const gf=L.polygon(F.map(ll),{color:'#2f9e63',weight:2,fillColor:'#2f9e63',fillOpacity:.08}).addTo(map).bindPopup('Target field — spray OK');
-  const gr=L.polygon(R.map(ll),{color:'#e8654f',weight:2,fillColor:'#e8654f',fillOpacity:.16}).addTo(map).bindPopup('Restricted organic parcel');
-  L.polyline(window.BOUND.map(ll),{color:'#e8654f',weight:4,dashArray:'3,6'}).addTo(map);
+  const cropCol=['#2f9e63','#3fae9a'];let bounds=null;
+  CROPS.forEach((c,i)=>{const pg=L.polygon(c.ring.map(ll),{color:cropCol[i%2],weight:2,fillColor:cropCol[i%2],fillOpacity:.10}).addTo(map).bindPopup(`${c.name} (crop ${c.id})`);bounds=bounds?bounds.extend(pg.getBounds()):pg.getBounds();});
+  RESTR.forEach(z=>{const col=z.subtype==='water'?'#5b8def':'#e8654f';
+    const pg=L.polygon(z.ring.map(ll),{color:col,weight:2,fillColor:col,fillOpacity:.18}).addTo(map).bindPopup(z.name);bounds=bounds.extend(pg.getBounds());});
+  if(window.BOUND)L.polyline(window.BOUND.map(ll),{color:'#e8654f',weight:4,dashArray:'3,6'}).addTo(map);
+  if(window.SEAM)L.polyline(window.SEAM.map(ll),{color:'#888',weight:1.5,dashArray:'4,5'}).addTo(map);
+  OBST.forEach(o=>{L.circle([o.lat,o.lon],{radius:o.rGps,color:'#9a8c6a',weight:1,fillColor:'#9a8c6a',fillOpacity:.06,dashArray:'2,4'}).addTo(map);
+    L.circleMarker([o.lat,o.lon],{radius:5,color:'#5a4a2a',weight:1,fillColor:'#7a5c2a',fillOpacity:1}).addTo(map).bindPopup(o.name+' (GNSS multipath)');});
   const gErr=L.circle([0,0],{radius:0,color:'#5b8def',weight:1.5,fillColor:'#5b8def',fillOpacity:.10}).addTo(map);
   const gDrone=L.circleMarker([0,0],{radius:5,color:'#fff',weight:2,fillColor:'#1b211b',fillOpacity:1}).addTo(map);
   const gNoz=[];for(let i=0;i<NN;i++)gNoz[i]=L.circleMarker([0,0],{radius:4,weight:1,color:'#fff'}).addTo(map);
-  map.fitBounds(gr.getBounds().extend(gf.getBounds()).pad(.12));
+  map.fitBounds(bounds.pad(.12));
   const lg=L.control({position:'bottomright'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');
-    d.innerHTML='<i style="background:#2f9e63"></i>field (spray OK)<br><i style="background:#e8654f"></i>organic parcel (no drift)<br><i style="background:#5b8def"></i>position + error radius';return d;};lg.addTo(map);
+    d.innerHTML='<i style="background:#2f9e63"></i>crop A &nbsp;<i style="background:#3fae9a"></i>crop B<br><i style="background:#e8654f"></i>no-drift zone &nbsp;<i style="background:#5b8def"></i>water<br><i style="background:#7a5c2a"></i>tree (GNSS hit) &nbsp;<i style="background:#5b8def"></i>position + buffer';return d;};lg.addTo(map);
   const entry={id,map,gErr,gDrone,gNoz};maps.push(entry);
   setTimeout(()=>{map.invalidateSize();if(typeof FIX==='number')render();},60);
   return entry;
@@ -462,9 +551,13 @@ function init3D(){
   scene.add(new THREE.HemisphereLight(0xffffff,0x6b7d5a,0.9));
   const sun=new THREE.DirectionalLight(0xfff4e0,0.8);sun.position.set(-80,140,60);scene.add(sun);
   // ground: field + organic + soil border
-  const fieldMat=new THREE.MeshLambertMaterial({color:0x86a85f});
-  const field=new THREE.Mesh(new THREE.PlaneGeometry(GEO.Wx,GEO.Df),fieldMat);
-  field.rotation.x=-Math.PI/2;field.position.set(GEO.Wx/2,0,-GEO.Df/2);scene.add(field);
+  const sx=GEO.seamX;
+  const cA=new THREE.Mesh(new THREE.PlaneGeometry(sx,GEO.Df),new THREE.MeshLambertMaterial({color:0x86a85f}));
+  cA.rotation.x=-Math.PI/2;cA.position.set(sx/2,0,-GEO.Df/2);scene.add(cA);
+  const cB=new THREE.Mesh(new THREE.PlaneGeometry(GEO.Wx-sx,GEO.Df),new THREE.MeshLambertMaterial({color:0x9bb56f}));
+  cB.rotation.x=-Math.PI/2;cB.position.set(sx+(GEO.Wx-sx)/2,0,-GEO.Df/2);scene.add(cB);
+  const seam=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.3,GEO.Df),new THREE.MeshLambertMaterial({color:0x6f7a55}));
+  seam.position.set(sx,0.15,-GEO.Df/2);scene.add(seam);
   const orgD=GEO.Dall-GEO.Df;
   const org=new THREE.Mesh(new THREE.PlaneGeometry(GEO.Wx,orgD),new THREE.MeshLambertMaterial({color:0xb9c98a}));
   org.rotation.x=-Math.PI/2;org.position.set(GEO.Wx/2,0,-(GEO.Df+orgD/2));scene.add(org);
@@ -473,6 +566,21 @@ function init3D(){
   // organic boundary strip (red, the line spray must not cross)
   const bnd=new THREE.Mesh(new THREE.BoxGeometry(GEO.Wx,1.4,1.2),new THREE.MeshLambertMaterial({color:0xe8654f}));
   bnd.position.set(GEO.Wx/2,0.7,-GEO.Df);scene.add(bnd);
+  // water pond (a no-spray restricted zone)
+  if(GEO.water){const wl=GEO.water.map(p=>[loX(p[0]),loZ(p[1])]);
+    const wx=wl.map(p=>p[0]),wz=wl.map(p=>p[1]);
+    const wW=Math.max(...wx)-Math.min(...wx),wH=Math.max(...wz)-Math.min(...wz);
+    const pond=new THREE.Mesh(new THREE.PlaneGeometry(wW,wH),new THREE.MeshLambertMaterial({color:0x4a78c0}));
+    pond.rotation.x=-Math.PI/2;pond.position.set((Math.min(...wx)+Math.max(...wx))/2,0.05,(Math.min(...wz)+Math.max(...wz))/2);scene.add(pond);}
+  // trees (obstacle + GNSS multipath)
+  for(const o of OBST){const ox=loX(o.lon),oz=loZ(o.lat);
+    const trunk=new THREE.Mesh(new THREE.CylinderGeometry(0.4,0.5,4,6),new THREE.MeshLambertMaterial({color:0x6b4a2a}));
+    trunk.position.set(ox,2,oz);scene.add(trunk);
+    const foliage=new THREE.Mesh(new THREE.SphereGeometry(3,10,8),new THREE.MeshLambertMaterial({color:0x2c5d2c}));
+    foliage.position.set(ox,6,oz);scene.add(foliage);
+    const ring=new THREE.Mesh(new THREE.RingGeometry(o.rGps-0.4,o.rGps,40),
+      new THREE.MeshBasicMaterial({color:0x9a8c6a,transparent:true,opacity:0.4,side:THREE.DoubleSide}));
+    ring.rotation.x=-Math.PI/2;ring.position.set(ox,0.12,oz);scene.add(ring);}
   // crops as one instanced mesh
   const g=window.CROP;
   const crop=new THREE.InstancedMesh(new THREE.ConeGeometry(0.6,2.4,5),
@@ -510,12 +618,12 @@ function init3D(){
 function resize3D(){if(!T)return;const W=T.host.clientWidth,H=T.host.clientHeight;
   T.cam.aspect=W/H;T.cam.updateProjectionMatrix();T.rend.setSize(W,H);}
 const ALT=11;
-function updateScene3D(d,lon,lat,h,er){
+function updateScene3D(d,lon,lat,h,bufR){
   if(!T)return;
   const dx=loX(lon),dz=loZ(lat);
   T.drone.position.set(dx,ALT,dz);
   T.drone.rotation.y=(h===90)?0:Math.PI;
-  T.disc.position.set(dx,0.15,dz);T.disc.scale.set(er+DRIFT,er+DRIFT,1);
+  T.disc.position.set(dx,0.15,dz);T.disc.scale.set(bufR,bufR,1);
   const noz=npos(lon,lat,h);
   for(let i=0;i<NN;i++){const nx=loX(noz[i][0]),nz=loZ(noz[i][1]),on=d.st[i].spray;
     T.dots[i].position.set(nx,ALT-0.6,nz);T.dots[i].material.color.setHex(on?0x2f9e63:0xe8654f);
@@ -535,17 +643,16 @@ function sparkline(el,data,color){if(!data||!data.length)return;const w=78,h=26,
 }
 
 function render(){
-  const tr=TRACK[REC],hd=HEAD[REC],er=effErr(REC),[lon,lat]=tr[FIX],h=hd[FIX];
-  const d=decide(lon,lat,h,F,R,er);
-  const is1=REC==='1m';
+  const tr=TRACK[REC],hd=HEAD[REC],[lon,lat]=tr[FIX],h=hd[FIX];
+  const d=decide(lon,lat,h,REC),er=d.err,is1=REC==='1m';
   // maps (Command mini-map shares the same live state)
   const noz=npos(lon,lat,h);
-  for(const m of maps){m.gErr.setLatLng([lat,lon]).setRadius(er+DRIFT);m.gDrone.setLatLng([lat,lon]);
+  for(const m of maps){m.gErr.setLatLng([lat,lon]).setRadius(d.buf);m.gDrone.setLatLng([lat,lon]);
     noz.forEach((p,i)=>m.gNoz[i].setLatLng([p[1],p[0]]).setStyle({fillColor:d.st[i].spray?'#2f9e63':'#e8654f',fillOpacity:1}));}
   // 3D twin
-  updateScene3D(d,lon,lat,h,er);
-  if(window.CROP){let tr=0;for(let c=0;c<window.CROP.n;c++)if(window.CROP.earliest[c]<=FIX)tr++;
-    const pct=Math.round(tr/window.CROP.n*100);
+  updateScene3D(d,lon,lat,h,d.buf);
+  if(window.CROP){let tre=0;for(let c=0;c<window.CROP.n;c++)if(window.CROP.earliest[c]<=FIX)tre++;
+    const pct=Math.round(tre/window.CROP.n*100);
     $('t3Boom').textContent=`${d.ns}/${NN}`;$('t3Clear').textContent=`${d.mc.toFixed(1)} m`;
     $('t3Clear').className='num '+(d.mc<d.buf?'coral':'green');
     $('t3Treated').textContent=`${pct}%`;
@@ -553,17 +660,16 @@ function render(){
     $('t3ErrF').textContent=is1?'Galileo HAS · corrected':'uncorrected · standard';}
   // scenario
   $('scPill').className='pill '+(is1?'green':'orange');$('scPill').textContent=is1?'1 M CORRECTED':'5 M STANDARD';
-  $('scText').textContent=is1?'Spraying the organic border at Galileo HAS precision — error radius carried into every nozzle.'
-    :'Coarse uncorrected GNSS — the boom must cut metres early to prove no drift.';
+  $('scText').textContent=is1?'Spraying to the line at Galileo HAS precision — error radius carried into every nozzle.'
+    :'Coarse uncorrected GNSS — the boom cuts early, over-buffers near trees, and can’t resolve the crop seam.';
   // action
-  const A=$('action'),A2=$('action2');
-  const cls=d.kind==='ok'?'ok':'';A.className='action '+cls;
+  const cls=d.kind==='ok'?'ok':'';$('action').className='action '+cls;
   const tag=d.kind==='ok'?'● SPRAYING':d.kind==='warn'?'● BORDER APPROACH':'● CRITICAL';
   const big=d.kind==='ok'?`All ${NN} nozzles active — spraying to the line.`
-    :d.kind==='warn'?`Disabling boom nozzle(s) ${d.shut.join(' & ')} to protect the organic parcel.`
+    :d.kind==='warn'?(master==='off'?'Master OFF — operator override, boom held closed.':`Disabling nozzle(s) ${d.shut.join(' & ')} to protect a restricted zone.`)
     :`Full boom cut — position cannot prove zero drift.`;
   $('aTag').textContent=tag;$('aBig').textContent=big;
-  $('aWhy').textContent=`Why: nearest nozzle ${d.mc.toFixed(1)} m from line vs ${d.buf.toFixed(1)} m buffer (error ${er.toFixed(1)} m + drift ${DRIFT} m).`;
+  $('aWhy').textContent=`Why: nearest nozzle ${d.mc.toFixed(1)} m from a restricted zone vs ${d.buf.toFixed(1)} m buffer (gnss ${er.toFixed(1)} + drift ${d.drift.toFixed(1)} + react ${d.react.toFixed(1)})${d.amb?` · ${d.amb} crop-ambiguous`:''}.`;
   $('aTag2').textContent=tag;$('aBig2').textContent=big;
   $('confPill').className='pill '+(d.kind==='ok'?'green':d.kind==='warn'?'orange':'coral');
   $('confPill').textContent=d.kind==='ok'?'GEOMETRY VERIFIED':d.kind==='warn'?'BUFFER BREACH':'POSITION UNSAFE';
@@ -573,29 +679,35 @@ function render(){
   $('aVal').textContent=`€${liab.toFixed(0)}+`;
   $('kPrec').textContent=is1?`${er.toFixed(2)} m`:`${er.toFixed(1)} m`;
   $('kPrec').className='num '+(is1?'green':'orange');
-  $('kPrecF').textContent=is1?'Galileo HAS · corrected':'uncorrected · standard';
+  $('kPrecF').textContent=er>BASE[REC]+0.05?'inflated near tree (multipath)':(is1?'Galileo HAS · corrected':'uncorrected · standard');
   $('kClear').textContent=`${d.mc.toFixed(1)} m`;$('kClear').className='num '+(d.mc<d.buf?'coral':'green');
   $('kBoom').textContent=`${d.ns}/${NN}`;$('kBoom').className='num '+(d.ns===NN?'green':d.ns===0?'coral':'orange');
   $('kArea').textContent=`${reclaimed.toFixed(0)} m²`;
   // boom strip
-  $('boom').innerHTML=d.st.map((s,i)=>`<div class="nozzle ${s.spray?'spray':'shut'}"><div class="n">N${i+1}</div>
-    <div class="s">${s.spray?'SPRAY':'OFF'}</div><div class="c">${s.clear.toFixed(1)} m</div></div>`).join('');
+  $('boom').innerHTML=d.st.map((s,i)=>`<div class="nozzle ${s.spray?'spray':'shut'} ${s.amb?'amb':''}"><div class="n">N${i+1}</div>
+    <div class="s">${s.spray?'SPRAY':(s.tree?'TREE':'OFF')}</div><div class="c">${s.clear.toFixed(1)} m</div><div class="cr">crop ${s.cropId}${s.amb?'?':''}</div></div>`).join('');
   $('boomTag').className='pill '+(d.kind==='ok'?'green':d.kind==='warn'?'orange':'coral');
   $('boomTag').textContent=d.kind==='ok'?'all active':`${d.ns}/${NN} active`;
   // briefing
   $('logic').innerHTML=d.reason;$('inFix').textContent=`${lat.toFixed(6)}, ${lon.toFixed(6)} @ ${h.toFixed(0)}°`;
   // business
   const tot1=CUM['1m'][CUM['1m'].length-1],tot5=CUM['5m'][CUM['5m'].length-1];
+  const amb5=AMB['5m'][AMB['5m'].length-1],lit1=LIT['1m'][LIT['1m'].length-1];
   $('vpNum').textContent=`€${(liab).toFixed(0)} + €${FINE.toLocaleString()} risk`;
   $('vpFoot').textContent=`${reclaimed.toFixed(0)} m² of legal border reclaimed so far · drift-fine exposure removed per avoided incident`;
   $('fa1').textContent=`${(tot1-tot5).toFixed(0)} m² more crop treated than at 5 m`;
   $('fb1').textContent=`${(tot1-tot5).toFixed(0)} m² of border lost to forced setbacks`;
-  // fleet
-  $('kWind').textContent=`${WIND.toFixed(1)} m/s`;$('kBuf').textContent=`${(er+DRIFT).toFixed(1)} m`;
+  $('fb2').textContent=`${amb5} crop-ambiguous fixes → wrong-dose / wrong-chemical risk`;
+  $('bAmb').textContent=`${amb5}`;$('bChem').textContent=`${lit1.toFixed(2)} L`;
+  // fleet · tank + cost
+  const applied=LIT[REC][FIX]||0, remain=Math.max(0,TANK-applied), costNow=COST[REC][FIX]||0;
+  $('kTank').textContent=`${remain.toFixed(2)} L`;$('tankFill').style.width=`${remain/TANK*100}%`;
+  $('kApplied').textContent=`${applied.toFixed(2)} L`;$('kCost').textContent=`€${costNow.toFixed(2)}`;
+  $('kBuf').textContent=`${d.buf.toFixed(1)} m`;$('qTank').textContent=`${Math.round(remain/TANK*100)}%`;
   // sparklines
   const from=Math.max(0,FIX-60),seg=CLEARS[REC].slice(from,FIX+1);
   sparkline($('spClear'),seg,'#2f9e63');sparkline($('spPrec'),seg.map(()=>er),'#5b8def');
-  sparkline($('spWind'),[3,3.2,4,6,8,6.5,5,WIND+.1],'#ef8a3c');
+  sparkline($('spWind'),[3,3.2,4,6,8,6.5,5,OP.wind+.1],'#ef8a3c');
   // playback
   $('pbState').textContent=d.kind==='ok'?'SPRAYING':d.kind==='warn'?'PARTIAL CUT':'BOOM OFF';
   $('pbFix').textContent=`fix ${FIX} / ${tr.length-1}`;updateTimeline();
@@ -619,7 +731,22 @@ function setRec(r){REC=r;$('b1').classList.toggle('on',r==='1m');$('b5').classLi
   $('scrub').max=TRACK[REC].length-1;if(FIX>TRACK[REC].length-1)FIX=TRACK[REC].length-1;computeTreated();render();}
 $('b1').onclick=()=>setRec('1m');$('b5').onclick=()=>setRec('5m');
 $('scrub').oninput=e=>{FIX=+e.target.value;render();};
-$('wind').oninput=e=>{WIND=+e.target.value;precompute();render();};
+// operator controls — each re-runs the precompute so the flip metrics stay honest
+$('hgt').oninput=e=>{OP.height=+e.target.value;$('hgtV').textContent=`${OP.height.toFixed(1)} m`;precompute();render();};
+$('spd').oninput=e=>{OP.speed=+e.target.value;$('spdV').textContent=`${OP.speed.toFixed(1)} m/s`;precompute();render();};
+$('wind').oninput=e=>{OP.wind=+e.target.value;$('windV').textContent=`${OP.wind.toFixed(1)} m/s`;precompute();render();};
+$('wdir').addEventListener('click',e=>{if(!e.target.dataset.deg)return;OP.wbear=+e.target.dataset.deg;
+  $('wdir').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===e.target));precompute();render();});
+$('master').addEventListener('click',e=>{if(!e.target.dataset.m)return;master=e.target.dataset.m;
+  $('master').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===e.target));render();});
+$('exportBtn').onclick=exportCSV;
+function exportCSV(){const rows=[['fix','active_nozzles','shut','min_clear_m','gnss_err_m','buffer_m','litres','crop_ambiguous','reason']];
+  const tr=TRACK[REC],hd=HEAD[REC];
+  for(let i=0;i<tr.length;i++){const d=decide(tr[i][0],tr[i][1],hd[i],REC,false);
+    rows.push([i,d.ns,d.shut.join('|'),d.mc.toFixed(2),d.err.toFixed(2),d.buf.toFixed(2),d.litres.toFixed(4),d.amb,
+      '"'+d.reason.replace(/\n/g,' ').replace(/<[^>]+>/g,'')+'"']);}
+  const blob=new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`agrospray_audit_${REC}.csv`;a.click();}
 const pb=$('play');pb.onclick=()=>{playing=!playing;pb.textContent=playing?'❚❚ Pause':'▶ Play';
   if(playing)timer=setInterval(()=>{FIX=(FIX+1)%TRACK[REC].length;render();},120);else clearInterval(timer);};
 </script>

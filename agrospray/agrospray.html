@@ -98,7 +98,8 @@
   .boomends{display:flex;justify-content:space-between;color:var(--mut);font-size:11px;margin-top:8px}
 
   /* map */
-  #map{height:460px;border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
+  #map,#mapCmd{height:460px;border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
+  #mapCmd{height:320px;margin-top:6px}
   .leaflet-container{background:#eef1ea}
   .legend{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.7}
   .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:middle}
@@ -214,6 +215,11 @@
       <div class="boom" id="boom"></div>
       <div class="boomends"><span>south · safe (field interior)</span><span>north · organic boundary →</span></div>
     </div>
+
+    <div class="phead" style="margin:22px 2px 0">
+      <div class="upper">Field digital twin · live position + error radius</div>
+    </div>
+    <div id="mapCmd"></div>
   </section>
 
   <!-- ===== FIELD TWIN ===== -->
@@ -351,8 +357,8 @@ function decide(lon,lat,h,F,R,er){const buf=er+DRIFT,noz=npos(lon,lat,h);let st=
   return{ns,shut,mc,buf,st,reason,kind};
 }
 
-let F,R,TRACK={},HEAD={},FIX=0,REC='1m',WIND=0,playing=false,timer=null,CUM={},CLEARS={},mapInit=false;
-let map,gErr,gDrone,gNoz=[];
+let F,R,TRACK={},HEAD={},FIX=0,REC='1m',WIND=0,playing=false,timer=null,CUM={},CLEARS={};
+let maps=[];   // one entry per Leaflet instance (Command + Field tab)
 const $=id=>document.getElementById(id);
 const ERR=$('err');
 const effErr=rec=>BASE[rec]+WIND*0.4;
@@ -368,6 +374,7 @@ Promise.all([fetch('data/field.geojson'),fetch('data/drone_5m.geojson'),fetch('d
     HEAD[k]=t.features[0].properties.headings_deg;}
   window.FIELDFC=fg;
   $('scrub').max=TRACK['1m'].length-1;
+  buildMap('mapCmd');                 // Command page is visible at load
   buildTimeline(); precompute(); render();
 }).catch(()=>{ERR.style.display='block';
   ERR.innerHTML="Couldn't load data — serve the folder first: <code>python -m http.server</code> in <b>agrospray/</b>, then open <code>http://localhost:8000/agrospray.html</code>.";});
@@ -377,19 +384,22 @@ function precompute(){for(const rec of['5m','1m']){const tr=TRACK[rec],hd=HEAD[r
     cum+=d.ns*nozzleArea;arr.push(cum);cl.push(d.mc);}CUM[rec]=arr;CLEARS[rec]=cl;}}
 
 const ll=c=>[c[1],c[0]];
-function initMap(){
-  map=L.map('map',{zoomControl:true,scrollWheelZoom:false}).setView([49.8700,8.5994],17);
+function buildMap(id){
+  if(maps.some(m=>m.id===id))return maps.find(m=>m.id===id);
+  const map=L.map(id,{zoomControl:true,scrollWheelZoom:false}).setView([49.8700,8.5994],17);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,attribution:'© OpenStreetMap'}).addTo(map);
   const gf=L.polygon(F.map(ll),{color:'#2f9e63',weight:2,fillColor:'#2f9e63',fillOpacity:.08}).addTo(map).bindPopup('Target field — spray OK');
   const gr=L.polygon(R.map(ll),{color:'#e8654f',weight:2,fillColor:'#e8654f',fillOpacity:.16}).addTo(map).bindPopup('Restricted organic parcel');
   L.polyline(window.BOUND.map(ll),{color:'#e8654f',weight:4,dashArray:'3,6'}).addTo(map);
-  gErr=L.circle([0,0],{radius:0,color:'#5b8def',weight:1.5,fillColor:'#5b8def',fillOpacity:.10}).addTo(map);
-  gDrone=L.circleMarker([0,0],{radius:5,color:'#fff',weight:2,fillColor:'#1b211b',fillOpacity:1}).addTo(map);
-  for(let i=0;i<NN;i++)gNoz[i]=L.circleMarker([0,0],{radius:4,weight:1,color:'#fff'}).addTo(map);
+  const gErr=L.circle([0,0],{radius:0,color:'#5b8def',weight:1.5,fillColor:'#5b8def',fillOpacity:.10}).addTo(map);
+  const gDrone=L.circleMarker([0,0],{radius:5,color:'#fff',weight:2,fillColor:'#1b211b',fillOpacity:1}).addTo(map);
+  const gNoz=[];for(let i=0;i<NN;i++)gNoz[i]=L.circleMarker([0,0],{radius:4,weight:1,color:'#fff'}).addTo(map);
   map.fitBounds(gr.getBounds().extend(gf.getBounds()).pad(.12));
   const lg=L.control({position:'bottomright'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');
     d.innerHTML='<i style="background:#2f9e63"></i>field (spray OK)<br><i style="background:#e8654f"></i>organic parcel (no drift)<br><i style="background:#5b8def"></i>position + error radius';return d;};lg.addTo(map);
-  mapInit=true;
+  const entry={id,map,gErr,gDrone,gNoz};maps.push(entry);
+  setTimeout(()=>{map.invalidateSize();if(typeof FIX==='number')render();},60);
+  return entry;
 }
 
 function sparkline(el,data,color){if(!data||!data.length)return;const w=78,h=26,n=data.length;
@@ -403,9 +413,10 @@ function sparkline(el,data,color){if(!data||!data.length)return;const w=78,h=26,
 function render(){
   const tr=TRACK[REC],hd=HEAD[REC],er=effErr(REC),[lon,lat]=tr[FIX],h=hd[FIX];
   const d=decide(lon,lat,h,F,R,er);
-  // map
-  if(mapInit){gErr.setLatLng([lat,lon]).setRadius(er+DRIFT);gDrone.setLatLng([lat,lon]);
-    npos(lon,lat,h).forEach((p,i)=>gNoz[i].setLatLng([p[1],p[0]]).setStyle({fillColor:d.st[i].spray?'#2f9e63':'#e8654f',fillOpacity:1}));}
+  // maps (Command + Field tab share the same live state)
+  const noz=npos(lon,lat,h);
+  for(const m of maps){m.gErr.setLatLng([lat,lon]).setRadius(er+DRIFT);m.gDrone.setLatLng([lat,lon]);
+    noz.forEach((p,i)=>m.gNoz[i].setLatLng([p[1],p[0]]).setStyle({fillColor:d.st[i].spray?'#2f9e63':'#e8654f',fillOpacity:1}));}
   // scenario
   const is1=REC==='1m';
   $('scPill').className='pill '+(is1?'green':'orange');$('scPill').textContent=is1?'1 M CORRECTED':'5 M STANDARD';
@@ -468,7 +479,7 @@ function updateTimeline(){document.querySelectorAll('.tk').forEach(t=>{const fx=
 // tabs
 function go(p){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.p===p));
   document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+p));
-  if(p==='field'){if(!mapInit)initMap();setTimeout(()=>{map.invalidateSize();render();},60);}}
+  if(p==='field'){const e=buildMap('map');setTimeout(()=>{e.map.invalidateSize();render();},60);}}
 $('tabs').addEventListener('click',e=>{if(e.target.dataset.p)go(e.target.dataset.p);});
 
 function setRec(r){REC=r;$('b1').classList.toggle('on',r==='1m');$('b5').classList.toggle('on',r==='5m');

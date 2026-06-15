@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { useSim } from "@/state/sim";
+import { centroid } from "@/lib/geo";
 import { nozzlePositions, NN } from "@/lib/engine";
 import { TRACKS } from "@/lib/world";
 import { PageHead } from "./PageHead";
@@ -112,6 +113,49 @@ export function FieldTwin3D() {
     crop.instanceMatrix.needsUpdate = true;
     scene.add(crop);
 
+    // GPS beacon on each crop parcel: pole + device + pulsing ground ring + signal beam
+    const beaconRings: THREE.Mesh[] = [];
+    world.crops.forEach((c, i) => {
+      const [clon, clat] = centroid(c.ring);
+      const cx = frame.loX(clon),
+        cz = frame.loZ(clat);
+      const col = i === 0 ? 0x2f9e63 : 0x3fae9a;
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 6, 6), new THREE.MeshLambertMaterial({ color: 0x2a2f2a }));
+      pole.position.set(cx, 3, cz);
+      scene.add(pole);
+      const dev = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1, 1), new THREE.MeshLambertMaterial({ color: 0x1b211b }));
+      dev.position.set(cx, 6.2, cz);
+      scene.add(dev);
+      const top = new THREE.Mesh(new THREE.SphereGeometry(0.45, 10, 10), new THREE.MeshBasicMaterial({ color: col }));
+      top.position.set(cx, 6.9, cz);
+      scene.add(top);
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(1.2, 1.7, 32),
+        new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.6, side: THREE.DoubleSide })
+      );
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.set(cx, 0.18, cz);
+      scene.add(ring);
+      beaconRings.push(ring);
+      const beam = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.05, 0.05, 44, 4),
+        new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.14 })
+      );
+      beam.position.set(cx, 22, cz);
+      scene.add(beam);
+    });
+
+    // direction indicator: ground arrow under the drone + projected path-preview line
+    const arrow = new THREE.Mesh(
+      new THREE.ConeGeometry(2.2, 6, 4),
+      new THREE.MeshBasicMaterial({ color: 0xef8a3c, transparent: true, opacity: 0.9 })
+    );
+    arrow.position.y = 0.4;
+    scene.add(arrow);
+    const pathLine = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xef8a3c }));
+    scene.add(pathLine);
+    const clock = new THREE.Clock();
+
     // drone + cones + dots + disc
     const drone = new THREE.Group();
     drone.add(new THREE.Mesh(new THREE.BoxGeometry(3, 1, 3), new THREE.MeshLambertMaterial({ color: 0x222a22 })));
@@ -145,6 +189,12 @@ export function FieldTwin3D() {
     const loop = () => {
       if (!alive) return;
       requestAnimationFrame(loop);
+      const tt = clock.getElapsedTime();
+      const s = 1 + 0.45 * (0.5 + 0.5 * Math.sin(tt * 3));
+      for (const r of beaconRings) {
+        r.scale.set(s, s, 1);
+        (r.material as THREE.MeshBasicMaterial).opacity = 0.25 + 0.35 * (0.5 + 0.5 * Math.sin(tt * 3));
+      }
       ctr.update();
       rend.render(scene, cam);
     };
@@ -157,7 +207,7 @@ export function FieldTwin3D() {
       rend.setSize(w, h);
     };
     window.addEventListener("resize", onResize);
-    sceneRef.current = { scene, cam, rend, ctr, crop, cones, dots, drone, disc, treatedShown: -1, dispose: () => {
+    sceneRef.current = { scene, cam, rend, ctr, crop, cones, dots, drone, disc, arrow, pathLine, treatedShown: -1, dispose: () => {
       alive = false;
       window.removeEventListener("resize", onResize);
       rend.dispose();
@@ -182,6 +232,18 @@ export function FieldTwin3D() {
     S.drone.rotation.y = h === 90 ? 0 : Math.PI;
     S.disc.position.set(dx, 0.15, dz);
     S.disc.scale.set(d.buf, d.buf, 1);
+    // direction arrow on the ground, ahead of the drone, pointing where it will move
+    const dir = h === 90 ? 1 : -1;
+    S.arrow.position.set(dx + dir * 6, 0.4, dz);
+    S.arrow.rotation.z = -dir * (Math.PI / 2);
+    // projected path preview: the next ~45 fixes drawn on the field surface
+    const pts: THREE.Vector3[] = [];
+    for (let k = 0; k <= 45; k++) {
+      const idx = Math.min(fix + k, t.coords.length - 1);
+      const [plon, plat] = t.coords[idx];
+      pts.push(new THREE.Vector3(frame.loX(plon), 0.5, frame.loZ(plat)));
+    }
+    S.pathLine.geometry.setFromPoints(pts);
     const noz = nozzlePositions(lon, lat, h);
     for (let i = 0; i < NN; i++) {
       const nx = frame.loX(noz[i][0]),
@@ -222,6 +284,8 @@ export function FieldTwin3D() {
           <b className="text-ink">blue cones</b> = active spray · <b className="text-ink">disc</b> = position + buffer
           <br />
           <b className="text-ink">red strip</b> = organic boundary · brown rings = tree GNSS hit
+          <br />
+          <b className="text-ink">poles</b> = per-crop GPS beacons · <b className="text-[#ef8a3c]">orange arrow + line</b> = drone heading / next path
         </div>
       </div>
       <div className="mt-3.5 grid grid-cols-4 gap-3.5">

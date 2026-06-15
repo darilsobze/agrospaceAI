@@ -100,6 +100,12 @@
   /* map */
   #map,#mapCmd{height:460px;border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
   #mapCmd{height:320px;margin-top:6px}
+  #scene{height:540px;border-radius:var(--r);border:1px solid var(--line);overflow:hidden;position:relative;background:#cfe3d6}
+  #scene canvas{display:block}
+  .hint{position:absolute;z-index:5;top:12px;left:12px;background:rgba(255,255,255,.92);border:1px solid var(--line);
+    border-radius:10px;padding:8px 11px;font-size:12px;color:var(--mut);line-height:1.6}
+  .hint b{color:var(--ink)}
+  .scfail{position:absolute;inset:0;display:grid;place-items:center;color:var(--coral-d);font-size:13px;padding:20px;text-align:center}
   .leaflet-container{background:#eef1ea}
   .legend{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.7}
   .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:middle}
@@ -225,11 +231,19 @@
   <!-- ===== FIELD TWIN ===== -->
   <section class="page" id="p-field">
     <div class="phead">
-      <div class="upper">Module 02 · Geospatial digital twin</div>
-      <h2>Field Twin</h2>
-      <div class="sub">Real parcel geometry. The blue circle is the position + its error radius — watch it cross the line at 5 m, clear it at 1 m.</div>
+      <div class="upper">Module 02 · 3D geospatial digital twin</div>
+      <h2>Field Twin · 3D</h2>
+      <div class="sub">The drone flies the real track over a crop field. Spray cones fall from active nozzles; crops turn deep green as they are treated. Near the organic line the boom cuts — leaving a pale untreated border at 5 m that closes at 1 m.</div>
     </div>
-    <div id="map"></div>
+    <div id="scene">
+      <div class="hint">drag to orbit · scroll to zoom<br><b>blue cones</b> = active spray · <b>blue disc</b> = position + error radius<br><b>red strip</b> = organic boundary (no drift)</div>
+    </div>
+    <div class="grid g4" style="margin-top:14px">
+      <div class="card kpi"><span class="upper">Active spray cones</span><div class="num green" id="t3Boom">—</div><div class="foot">nozzles on / 6</div></div>
+      <div class="card kpi"><span class="upper">Boundary clearance</span><div class="num" id="t3Clear">—</div><div class="foot">nearest nozzle → organic line</div></div>
+      <div class="card kpi"><span class="upper">Field treated</span><div class="num green" id="t3Treated">—</div><div class="foot">crops sprayed this run</div></div>
+      <div class="card kpi"><span class="upper">Error radius</span><div class="num" id="t3Err">—</div><div class="foot" id="t3ErrF">carried buffer</div></div>
+    </div>
   </section>
 
   <!-- ===== AI BRIEFING ===== -->
@@ -330,6 +344,8 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 const M_LAT=111320.0, mlon=lat=>M_LAT*Math.cos(lat*Math.PI/180);
 // geometry ported 1:1 from starter geo_core.py
@@ -373,6 +389,7 @@ Promise.all([fetch('data/field.geojson'),fetch('data/drone_5m.geojson'),fetch('d
   for(const[k,t]of[['5m',t5],['1m',t1]]){TRACK[k]=t.features[0].geometry.coordinates.map(c=>[c[0],c[1]]);
     HEAD[k]=t.features[0].properties.headings_deg;}
   window.FIELDFC=fg;
+  setupGeo();
   $('scrub').max=TRACK['1m'].length-1;
   buildMap('mapCmd');                 // Command page is visible at load
   buildTimeline(); precompute(); render();
@@ -381,7 +398,31 @@ Promise.all([fetch('data/field.geojson'),fetch('data/drone_5m.geojson'),fetch('d
 
 function precompute(){for(const rec of['5m','1m']){const tr=TRACK[rec],hd=HEAD[rec],er=effErr(rec);
   let cum=0,arr=[],cl=[];for(let i=0;i<tr.length;i++){const d=decide(tr[i][0],tr[i][1],hd[i],F,R,er);
-    cum+=d.ns*nozzleArea;arr.push(cum);cl.push(d.mc);}CUM[rec]=arr;CLEARS[rec]=cl;}}
+    cum+=d.ns*nozzleArea;arr.push(cum);cl.push(d.mc);}CUM[rec]=arr;CLEARS[rec]=cl;}
+  computeTreated();}
+
+// ---- local-meter frame for the 3D twin ----
+const GEO={};
+function setupGeo(){
+  const lons=F.map(p=>p[0]),lats=F.map(p=>p[1]);
+  GEO.LW=Math.min(...lons);GEO.LE=Math.max(...lons);GEO.LS=Math.min(...lats);GEO.LNf=Math.max(...lats);
+  GEO.LNall=Math.max(...R.map(p=>p[1]));GEO.k=mlon(GEO.LS);
+  GEO.Wx=(GEO.LE-GEO.LW)*GEO.k;           // field width  (east)
+  GEO.Df=(GEO.LNf-GEO.LS)*M_LAT;          // field depth  (north, to organic line)
+  GEO.Dall=(GEO.LNall-GEO.LS)*M_LAT;      // to far edge of organic parcel
+  // crop grid inside the field only
+  const xs=[],zs=[],STEP=5;
+  for(let x=STEP/2;x<GEO.Wx;x+=STEP)for(let n=STEP/2;n<GEO.Df;n+=STEP){xs.push(x);zs.push(-n);}
+  window.CROP={n:xs.length,xs,zs,earliest:new Float64Array(xs.length)};
+}
+const loX=lon=>(lon-GEO.LW)*GEO.k, loZ=lat=>-(lat-GEO.LS)*M_LAT;
+function computeTreated(){const g=window.CROP;if(!g)return;
+  const er=effErr(REC),tr=TRACK[REC],hd=HEAD[REC];g.earliest.fill(Infinity);
+  for(let i=0;i<tr.length;i++){const[lo,la]=tr[i],h=hd[i],d=decide(lo,la,h,F,R,er),dx=loX(lo),noz=npos(lo,la,h);
+    for(let k=0;k<NN;k++){if(!d.st[k].spray)continue;const nz=loZ(noz[k][1]);
+      for(let c=0;c<g.n;c++){if(g.earliest[c]<=i)continue;
+        if(Math.abs(g.xs[c]-dx)<3.5&&Math.abs(g.zs[c]-nz)<1.0)g.earliest[c]=i;}}}
+  if(T)T.treatedShown=-1;}   // force the 3D crops to recolour next frame
 
 const ll=c=>[c[1],c[0]];
 function buildMap(id){
@@ -402,6 +443,89 @@ function buildMap(id){
   return entry;
 }
 
+// ============ 3D FIELD TWIN (Three.js) ============
+let T=null;   // holds scene objects once built
+const COL_UNTREATED=0xcdd98a, COL_TREATED=0x2f9e63;
+function init3D(){
+  const host=$('scene');
+  if(typeof THREE==='undefined'){host.innerHTML+='<div class="scfail">3D engine (three.js CDN) failed to load — check your connection. The 2D twin in Command still works.</div>';return false;}
+  const W=host.clientWidth,H=host.clientHeight;
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0xdcebe0);
+  scene.fog=new THREE.Fog(0xdcebe0,260,520);
+  const cam=new THREE.PerspectiveCamera(45,W/H,0.5,2000);
+  cam.position.set(GEO.Wx/2-70,95,70);
+  const rend=new THREE.WebGLRenderer({antialias:true});rend.setPixelRatio(Math.min(devicePixelRatio,2));
+  rend.setSize(W,H);host.appendChild(rend.domElement);
+  const ctr=new THREE.OrbitControls(cam,rend.domElement);
+  ctr.target.set(GEO.Wx/2,0,-GEO.Df*0.55);ctr.maxPolarAngle=Math.PI/2.05;ctr.minDistance=40;ctr.maxDistance=420;ctr.update();
+  // light
+  scene.add(new THREE.HemisphereLight(0xffffff,0x6b7d5a,0.9));
+  const sun=new THREE.DirectionalLight(0xfff4e0,0.8);sun.position.set(-80,140,60);scene.add(sun);
+  // ground: field + organic + soil border
+  const fieldMat=new THREE.MeshLambertMaterial({color:0x86a85f});
+  const field=new THREE.Mesh(new THREE.PlaneGeometry(GEO.Wx,GEO.Df),fieldMat);
+  field.rotation.x=-Math.PI/2;field.position.set(GEO.Wx/2,0,-GEO.Df/2);scene.add(field);
+  const orgD=GEO.Dall-GEO.Df;
+  const org=new THREE.Mesh(new THREE.PlaneGeometry(GEO.Wx,orgD),new THREE.MeshLambertMaterial({color:0xb9c98a}));
+  org.rotation.x=-Math.PI/2;org.position.set(GEO.Wx/2,0,-(GEO.Df+orgD/2));scene.add(org);
+  const skirt=new THREE.Mesh(new THREE.PlaneGeometry(GEO.Wx+60,GEO.Dall+120),new THREE.MeshLambertMaterial({color:0x9a8c6a}));
+  skirt.rotation.x=-Math.PI/2;skirt.position.set(GEO.Wx/2,-0.3,-GEO.Dall/2);scene.add(skirt);
+  // organic boundary strip (red, the line spray must not cross)
+  const bnd=new THREE.Mesh(new THREE.BoxGeometry(GEO.Wx,1.4,1.2),new THREE.MeshLambertMaterial({color:0xe8654f}));
+  bnd.position.set(GEO.Wx/2,0.7,-GEO.Df);scene.add(bnd);
+  // crops as one instanced mesh
+  const g=window.CROP;
+  const crop=new THREE.InstancedMesh(new THREE.ConeGeometry(0.6,2.4,5),
+    new THREE.MeshLambertMaterial({vertexColors:true}),g.n);
+  const m=new THREE.Matrix4(),cu=new THREE.Color(COL_UNTREATED);
+  for(let i=0;i<g.n;i++){m.makeTranslation(g.xs[i],1.2,g.zs[i]);crop.setMatrixAt(i,m);crop.setColorAt(i,cu);}
+  crop.instanceMatrix.needsUpdate=true;scene.add(crop);
+  // a few organic crops beyond the line (never sprayed) for context
+  const oc=new THREE.InstancedMesh(new THREE.ConeGeometry(0.7,3,5),new THREE.MeshLambertMaterial({color:0x3c7d3a}),120);
+  let oi=0;for(let x=4;x<GEO.Wx&&oi<120;x+=7)for(let n=GEO.Df+5;n<GEO.Dall&&oi<120;n+=10){m.makeTranslation(x,1.5,-n);oc.setMatrixAt(oi++,m);}
+  oc.instanceMatrix.needsUpdate=true;scene.add(oc);
+  // drone
+  const drone=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(3,1,3),new THREE.MeshLambertMaterial({color:0x222a22}));drone.add(body);
+  const boom=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.4,BOOM),new THREE.MeshLambertMaterial({color:0x444}));boom.position.y=-0.6;drone.add(boom);
+  scene.add(drone);
+  // spray cones + nozzle dots
+  const cones=[],dots=[];
+  for(let i=0;i<NN;i++){
+    const cone=new THREE.Mesh(new THREE.ConeGeometry(1.6,8.5,10,1,true),
+      new THREE.MeshBasicMaterial({color:0x5b8def,transparent:true,opacity:0.32,side:THREE.DoubleSide}));
+    cone.visible=false;scene.add(cone);cones.push(cone);
+    const dot=new THREE.Mesh(new THREE.SphereGeometry(0.45,8,8),new THREE.MeshBasicMaterial({color:0x2f9e63}));
+    scene.add(dot);dots.push(dot);
+  }
+  // error disc on the ground
+  const disc=new THREE.Mesh(new THREE.CircleGeometry(1,40),
+    new THREE.MeshBasicMaterial({color:0x5b8def,transparent:true,opacity:0.22,side:THREE.DoubleSide}));
+  disc.rotation.x=-Math.PI/2;disc.position.y=0.15;scene.add(disc);
+  T={scene,cam,rend,ctr,host,crop,cones,dots,drone,disc,treatedShown:-1};
+  window.addEventListener('resize',resize3D);
+  (function loop(){if(!T)return;requestAnimationFrame(loop);T.ctr.update();T.rend.render(T.scene,T.cam);})();
+  return true;
+}
+function resize3D(){if(!T)return;const W=T.host.clientWidth,H=T.host.clientHeight;
+  T.cam.aspect=W/H;T.cam.updateProjectionMatrix();T.rend.setSize(W,H);}
+const ALT=11;
+function updateScene3D(d,lon,lat,h,er){
+  if(!T)return;
+  const dx=loX(lon),dz=loZ(lat);
+  T.drone.position.set(dx,ALT,dz);
+  T.drone.rotation.y=(h===90)?0:Math.PI;
+  T.disc.position.set(dx,0.15,dz);T.disc.scale.set(er+DRIFT,er+DRIFT,1);
+  const noz=npos(lon,lat,h);
+  for(let i=0;i<NN;i++){const nx=loX(noz[i][0]),nz=loZ(noz[i][1]),on=d.st[i].spray;
+    T.dots[i].position.set(nx,ALT-0.6,nz);T.dots[i].material.color.setHex(on?0x2f9e63:0xe8654f);
+    T.cones[i].visible=on;if(on)T.cones[i].position.set(nx,(ALT-0.6)/2+1,nz);}
+  // treated crops (only restamp when the frame index changed)
+  if(T.treatedShown!==FIX){const g=window.CROP,ct=new THREE.Color(COL_TREATED),cu=new THREE.Color(COL_UNTREATED);
+    for(let c=0;c<g.n;c++)T.crop.setColorAt(c,g.earliest[c]<=FIX?ct:cu);
+    T.crop.instanceColor.needsUpdate=true;T.treatedShown=FIX;}
+}
+
 function sparkline(el,data,color){if(!data||!data.length)return;const w=78,h=26,n=data.length;
   const mn=Math.min(...data),mx=Math.max(...data),rg=(mx-mn)||1;
   const pts=data.map((v,i)=>[i/(n-1)*w,h-2-((v-mn)/rg)*(h-4)]);
@@ -413,12 +537,21 @@ function sparkline(el,data,color){if(!data||!data.length)return;const w=78,h=26,
 function render(){
   const tr=TRACK[REC],hd=HEAD[REC],er=effErr(REC),[lon,lat]=tr[FIX],h=hd[FIX];
   const d=decide(lon,lat,h,F,R,er);
-  // maps (Command + Field tab share the same live state)
+  const is1=REC==='1m';
+  // maps (Command mini-map shares the same live state)
   const noz=npos(lon,lat,h);
   for(const m of maps){m.gErr.setLatLng([lat,lon]).setRadius(er+DRIFT);m.gDrone.setLatLng([lat,lon]);
     noz.forEach((p,i)=>m.gNoz[i].setLatLng([p[1],p[0]]).setStyle({fillColor:d.st[i].spray?'#2f9e63':'#e8654f',fillOpacity:1}));}
+  // 3D twin
+  updateScene3D(d,lon,lat,h,er);
+  if(window.CROP){let tr=0;for(let c=0;c<window.CROP.n;c++)if(window.CROP.earliest[c]<=FIX)tr++;
+    const pct=Math.round(tr/window.CROP.n*100);
+    $('t3Boom').textContent=`${d.ns}/${NN}`;$('t3Clear').textContent=`${d.mc.toFixed(1)} m`;
+    $('t3Clear').className='num '+(d.mc<d.buf?'coral':'green');
+    $('t3Treated').textContent=`${pct}%`;
+    $('t3Err').textContent=is1?`${er.toFixed(2)} m`:`${er.toFixed(1)} m`;
+    $('t3ErrF').textContent=is1?'Galileo HAS · corrected':'uncorrected · standard';}
   // scenario
-  const is1=REC==='1m';
   $('scPill').className='pill '+(is1?'green':'orange');$('scPill').textContent=is1?'1 M CORRECTED':'5 M STANDARD';
   $('scText').textContent=is1?'Spraying the organic border at Galileo HAS precision — error radius carried into every nozzle.'
     :'Coarse uncorrected GNSS — the boom must cut metres early to prove no drift.';
@@ -479,11 +612,11 @@ function updateTimeline(){document.querySelectorAll('.tk').forEach(t=>{const fx=
 // tabs
 function go(p){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.p===p));
   document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+p));
-  if(p==='field'){const e=buildMap('map');setTimeout(()=>{e.map.invalidateSize();render();},60);}}
+  if(p==='field'){if(!T)init3D();setTimeout(()=>{resize3D();if(T)T.treatedShown=-1;render();},60);}}
 $('tabs').addEventListener('click',e=>{if(e.target.dataset.p)go(e.target.dataset.p);});
 
 function setRec(r){REC=r;$('b1').classList.toggle('on',r==='1m');$('b5').classList.toggle('on',r==='5m');
-  $('scrub').max=TRACK[REC].length-1;if(FIX>TRACK[REC].length-1)FIX=TRACK[REC].length-1;render();}
+  $('scrub').max=TRACK[REC].length-1;if(FIX>TRACK[REC].length-1)FIX=TRACK[REC].length-1;computeTreated();render();}
 $('b1').onclick=()=>setRec('1m');$('b5').onclick=()=>setRec('5m');
 $('scrub').oninput=e=>{FIX=+e.target.value;render();};
 $('wind').oninput=e=>{WIND=+e.target.value;precompute();render();};

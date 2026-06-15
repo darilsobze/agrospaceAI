@@ -45,11 +45,12 @@ export function FieldTwin3D() {
     scene.add(sun);
 
     const sx = frame.seamX;
-    const cA = new THREE.Mesh(new THREE.PlaneGeometry(sx, frame.Df), new THREE.MeshLambertMaterial({ color: 0x86a85f }));
+    // tilled-soil beds (brown), one per crop parcel
+    const cA = new THREE.Mesh(new THREE.PlaneGeometry(sx, frame.Df), new THREE.MeshLambertMaterial({ color: 0x7a5230 }));
     cA.rotation.x = -Math.PI / 2;
     cA.position.set(sx / 2, 0, -frame.Df / 2);
     scene.add(cA);
-    const cB = new THREE.Mesh(new THREE.PlaneGeometry(frame.Wx - sx, frame.Df), new THREE.MeshLambertMaterial({ color: 0x9bb56f }));
+    const cB = new THREE.Mesh(new THREE.PlaneGeometry(frame.Wx - sx, frame.Df), new THREE.MeshLambertMaterial({ color: 0x6b4a2b }));
     cB.rotation.x = -Math.PI / 2;
     cB.position.set(sx + (frame.Wx - sx) / 2, 0, -frame.Df / 2);
     scene.add(cB);
@@ -100,17 +101,19 @@ export function FieldTwin3D() {
       scene.add(ring);
     }
 
-    // crops
+    // crops — blocky voxel plants in rows: golden wheat (A) and leafy green rape (B)
     const g = frame.grid;
-    const crop = new THREE.InstancedMesh(new THREE.ConeGeometry(0.6, 2.4, 5), new THREE.MeshLambertMaterial({ vertexColors: true }), g.n);
-    const m4 = new THREE.Matrix4(),
-      cu = new THREE.Color(COL_UNTREATED);
+    const crop = new THREE.InstancedMesh(new THREE.BoxGeometry(1.1, 2.4, 1.1), new THREE.MeshLambertMaterial({ vertexColors: true }), g.n);
+    const m4 = new THREE.Matrix4();
+    const wheat = new THREE.Color(0xd9b44a),
+      rape = new THREE.Color(0x57a23a);
     for (let i = 0; i < g.n; i++) {
-      m4.makeTranslation(g.xs[i], 1.2, g.zs[i]);
+      m4.makeTranslation(g.xs[i], 1.25, g.zs[i]);
       crop.setMatrixAt(i, m4);
-      crop.setColorAt(i, cu);
+      crop.setColorAt(i, g.crop[i] === 0 ? wheat : rape);
     }
     crop.instanceMatrix.needsUpdate = true;
+    if (crop.instanceColor) crop.instanceColor.needsUpdate = true;
     scene.add(crop);
 
     // highlighted spray trail laid on the field surface as the boom passes
@@ -272,19 +275,14 @@ export function FieldTwin3D() {
       if (on) S.cones[i].position.set(nx, (ALT - 0.6) / 2 + 1, nz);
     }
     if (S.treatedShown !== fix || S.lastTreated !== treated) {
-      const g = frame.grid,
-        ct = new THREE.Color(COL_TREATED),
-        cu = new THREE.Color(COL_UNTREATED);
+      const g = frame.grid;
       const m = new THREE.Matrix4(),
         zero = new THREE.Vector3(0, 0, 0);
       for (let c = 0; c < g.n; c++) {
-        const sprayed = treated[c] <= fix;
-        S.crop.setColorAt(c, sprayed ? ct : cu);
         m.makeTranslation(g.xs[c], 0.16, g.zs[c]).multiply(S.tileRot);
-        if (!sprayed) m.scale(zero);
+        if (treated[c] > fix) m.scale(zero); // only show the sprayed cells
         S.spray.setMatrixAt(c, m);
       }
-      if (S.crop.instanceColor) S.crop.instanceColor.needsUpdate = true;
       S.spray.instanceMatrix.needsUpdate = true;
       S.treatedShown = fix;
       S.lastTreated = treated;
@@ -306,6 +304,8 @@ export function FieldTwin3D() {
         <div ref={host} style={{ height: 540 }} className="overflow-hidden rounded-xl2 border border-line bg-[#cfe3d6]" />
         <div className="absolute left-3 top-3 rounded-[10px] border border-line bg-white/90 px-2.5 py-2 text-[12px] leading-relaxed text-mut">
           drag to orbit · scroll to zoom
+          <br />
+          <b className="text-[#b58a1f]">gold</b> = wheat (A) · <b className="text-[#3f7a2c]">green</b> = rape (B) on tilled soil
           <br />
           <b className="text-ink">blue cones</b> = active spray · <b className="text-[#15b07e]">teal trail</b> = sprayed area · <b className="text-ink">disc</b> = buffer
           <br />

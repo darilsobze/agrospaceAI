@@ -5,6 +5,7 @@ import { useSim } from "@/state/sim";
 import { centroid } from "@/lib/geo";
 import { nozzlePositions, NN } from "@/lib/engine";
 import { TRACKS } from "@/lib/world";
+import { buildCrops } from "@/lib/cropMesh";
 import { PageHead } from "./PageHead";
 import { KpiCard } from "./ui/card";
 
@@ -101,19 +102,10 @@ export function FieldTwin3D() {
       scene.add(ring);
     }
 
-    // crops — blocky voxel plants in rows: golden wheat (A) and leafy green rape (B)
-    const g = frame.grid;
-    const crop = new THREE.InstancedMesh(new THREE.BoxGeometry(1.1, 2.4, 1.1), new THREE.MeshLambertMaterial({ vertexColors: true }), g.n);
-    const m4 = new THREE.Matrix4();
-    const wheat = new THREE.Color(0xd9b44a),
-      rape = new THREE.Color(0x57a23a);
-    for (let i = 0; i < g.n; i++) {
-      m4.makeTranslation(g.xs[i], 1.25, g.zs[i]);
-      crop.setMatrixAt(i, m4);
-      crop.setColorAt(i, g.crop[i] === 0 ? wheat : rape);
-    }
-    crop.instanceMatrix.needsUpdate = true;
-    if (crop.instanceColor) crop.instanceColor.needsUpdate = true;
+    // crops — Minecraft-style voxel plants (tall gold wheat A, low green rape B)
+    // built in lib/cropMesh; the treatment green-disc overlay below is separate.
+    const g = frame.grid; // still used by the spray overlay
+    const crop = buildCrops(frame);
     scene.add(crop);
 
     // highlighted spray trail laid on the field surface as the boom passes
@@ -230,6 +222,12 @@ export function FieldTwin3D() {
     sceneRef.current = { scene, cam, rend, ctr, crop, spray, tileRot, cones, dots, drone, disc, arrow, pathLine, treatedShown: -1, dispose: () => {
       alive = false;
       window.removeEventListener("resize", onResize);
+      crop.traverse((o) => {
+        if (o instanceof THREE.InstancedMesh) {
+          o.geometry.dispose();
+          (o.material as THREE.Material).dispose();
+        }
+      });
       rend.dispose();
       el.removeChild(rend.domElement);
     }};

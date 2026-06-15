@@ -113,6 +113,23 @@ export function FieldTwin3D() {
     crop.instanceMatrix.needsUpdate = true;
     scene.add(crop);
 
+    // highlighted spray trail laid on the field surface as the boom passes
+    const tileRot = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
+    const spray = new THREE.InstancedMesh(
+      new THREE.CircleGeometry(2.7, 12),
+      new THREE.MeshBasicMaterial({ color: 0x25e0a0, transparent: true, opacity: 0.55, depthWrite: false, side: THREE.DoubleSide }),
+      g.n
+    );
+    spray.renderOrder = 2;
+    const m0 = new THREE.Matrix4(),
+      zero = new THREE.Vector3(0, 0, 0);
+    for (let i = 0; i < g.n; i++) {
+      m0.makeTranslation(g.xs[i], 0.16, g.zs[i]).multiply(tileRot).scale(zero); // hidden until sprayed
+      spray.setMatrixAt(i, m0);
+    }
+    spray.instanceMatrix.needsUpdate = true;
+    scene.add(spray);
+
     // GPS beacon on each crop parcel: pole + device + pulsing ground ring + signal beam
     const beaconRings: THREE.Mesh[] = [];
     world.crops.forEach((c, i) => {
@@ -207,7 +224,7 @@ export function FieldTwin3D() {
       rend.setSize(w, h);
     };
     window.addEventListener("resize", onResize);
-    sceneRef.current = { scene, cam, rend, ctr, crop, cones, dots, drone, disc, arrow, pathLine, treatedShown: -1, dispose: () => {
+    sceneRef.current = { scene, cam, rend, ctr, crop, spray, tileRot, cones, dots, drone, disc, arrow, pathLine, treatedShown: -1, dispose: () => {
       alive = false;
       window.removeEventListener("resize", onResize);
       rend.dispose();
@@ -258,8 +275,17 @@ export function FieldTwin3D() {
       const g = frame.grid,
         ct = new THREE.Color(COL_TREATED),
         cu = new THREE.Color(COL_UNTREATED);
-      for (let c = 0; c < g.n; c++) S.crop.setColorAt(c, treated[c] <= fix ? ct : cu);
+      const m = new THREE.Matrix4(),
+        zero = new THREE.Vector3(0, 0, 0);
+      for (let c = 0; c < g.n; c++) {
+        const sprayed = treated[c] <= fix;
+        S.crop.setColorAt(c, sprayed ? ct : cu);
+        m.makeTranslation(g.xs[c], 0.16, g.zs[c]).multiply(S.tileRot);
+        if (!sprayed) m.scale(zero);
+        S.spray.setMatrixAt(c, m);
+      }
       if (S.crop.instanceColor) S.crop.instanceColor.needsUpdate = true;
+      S.spray.instanceMatrix.needsUpdate = true;
       S.treatedShown = fix;
       S.lastTreated = treated;
     }
@@ -281,7 +307,7 @@ export function FieldTwin3D() {
         <div className="absolute left-3 top-3 rounded-[10px] border border-line bg-white/90 px-2.5 py-2 text-[12px] leading-relaxed text-mut">
           drag to orbit · scroll to zoom
           <br />
-          <b className="text-ink">blue cones</b> = active spray · <b className="text-ink">disc</b> = position + buffer
+          <b className="text-ink">blue cones</b> = active spray · <b className="text-[#15b07e]">teal trail</b> = sprayed area · <b className="text-ink">disc</b> = buffer
           <br />
           <b className="text-ink">red strip</b> = organic boundary · brown rings = tree GNSS hit
           <br />

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AgroSpray AI — Spatial Decision Engine</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{--bg:#0e1116;--panel:#161b22;--line:#283040;--ink:#e6edf3;--mut:#8b97a7;
+        --green:#2ea043;--red:#f85149;--amber:#d29922;--blue:#388bfd;}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);font-size:14px}
+  #app{display:grid;grid-template-columns:380px 1fr 340px;grid-template-rows:auto 1fr auto;height:100%}
+  header{grid-column:1/4;background:var(--panel);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:18px;padding:10px 16px}
+  header h1{font-size:17px;margin:0;letter-spacing:.3px}
+  header h1 b{color:var(--green)}
+  .tag{font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:2px 8px}
+  .spacer{flex:1}
+  .toggle{display:flex;align-items:center;gap:10px;background:#0d1117;border:1px solid var(--line);
+    border-radius:8px;padding:6px 10px}
+  .toggle button{background:transparent;border:none;color:var(--mut);font-weight:600;cursor:pointer;
+    padding:5px 12px;border-radius:6px;font-size:13px}
+  .toggle button.on{background:var(--green);color:#021207}
+  .toggle button.on.coarse{background:var(--amber);color:#1a1200}
+  #left,#right{background:var(--panel);overflow:auto;padding:14px}
+  #left{border-right:1px solid var(--line)}
+  #right{border-left:1px solid var(--line)}
+  #map{position:relative}
+  footer{grid-column:1/4;background:var(--panel);border-top:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;padding:10px 16px}
+  .banner{border-radius:8px;padding:10px 14px;font-weight:600;margin-bottom:14px;line-height:1.35}
+  .banner.ok{background:rgba(46,160,67,.12);border:1px solid var(--green);color:#7ee2a0}
+  .banner.warn{background:rgba(210,153,34,.12);border:1px solid var(--amber);color:#e3c168}
+  .banner.crit{background:rgba(248,81,73,.13);border:1px solid var(--red);color:#ff9d97}
+  h3{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut);margin:18px 0 8px}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+  .kpi .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpi .l{color:var(--mut);font-size:12px;max-width:170px}
+  .kpi .v.green{color:var(--green)} .kpi .v.red{color:var(--red)} .kpi .v.amber{color:var(--amber)}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+  .reason{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:10px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;white-space:pre-wrap}
+  .inputs{list-style:none;padding:0;margin:8px 0;color:var(--mut);font-size:12px}
+  .inputs li{padding:3px 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .inputs b{color:var(--blue)}
+  .matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px;line-height:1.4}
+  .card.a{border-color:var(--green)} .card.b{border-color:var(--red)}
+  .card h4{margin:0 0 6px;font-size:12px} .card.a h4{color:var(--green)} .card.b h4{color:var(--red)}
+  .card .num{font-size:16px;font-weight:700;margin-top:6px}
+  footer button{background:#21262d;border:1px solid var(--line);color:var(--ink);border-radius:6px;
+    padding:7px 14px;cursor:pointer;font-weight:600}
+  footer button:hover{border-color:var(--mut)}
+  input[type=range]{accent-color:var(--green)}
+  #scrub{flex:1}
+  .wind{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:12px}
+  #err{position:absolute;z-index:1000;top:12px;left:50%;transform:translateX(-50%);
+    background:#3a1d1d;border:1px solid var(--red);color:#ffb4ae;padding:12px 16px;max-width:560px;
+    border-radius:8px;display:none;font-size:13px}
+  .legend{position:absolute;z-index:900;bottom:12px;left:12px;background:rgba(13,17,23,.92);
+    border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:12px;line-height:1.6}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1><b>AgroSpray AI</b> · Spatial Decision Engine</h1>
+    <span class="tag">EWIA "Down to the Meter"</span>
+    <span class="tag" id="precTag">precision: —</span>
+    <div class="spacer"></div>
+    <div class="toggle">
+      <span style="color:var(--mut);font-size:12px">RECEIVER</span>
+      <button id="b5" class="coarse">5 m standard</button>
+      <button id="b1" class="on">1 m corrected</button>
+    </div>
+  </header>
+
+  <div id="left">
+    <div id="banner" class="banner ok">Initialising…</div>
+    <h3>Live KPIs</h3>
+    <div class="kpi"><span class="l">Live precision — active error radius carried into the buffer</span><span class="v" id="kPrec">—</span></div>
+    <div class="kpi"><span class="l">Boundary clearance — nearest nozzle to organic line</span><span class="v" id="kClear">—</span></div>
+    <div class="kpi"><span class="l">Boom state — nozzles spraying</span><span class="v" id="kBoom">—</span></div>
+    <div class="kpi"><span class="l">Border reclaimed vs 5 m baseline (this run)</span><span class="v green" id="kArea">—</span></div>
+    <div class="kpi"><span class="l">Drift-liability avoided (organic decert. + crop value)</span><span class="v green" id="kMoney">—</span></div>
+
+    <h3>Module 03 · AI briefing — transparent reasoner</h3>
+    <div class="reason" id="reason">—</div>
+    <ul class="inputs">
+      <li><b>INPUT_01</b> live NMEA fix → <span id="inFix">—</span></li>
+      <li><b>INPUT_02</b> OSM organic-boundary nodes #883921</li>
+      <li><b>INPUT_03</b> geo_core.py point-in-polygon + edge distance</li>
+    </ul>
+  </div>
+
+  <div id="map">
+    <div id="err"></div>
+    <div class="legend">
+      <i style="background:#2ea043"></i>target field (spray OK)<br>
+      <i style="background:#f85149"></i>restricted organic parcel (no drift)<br>
+      <i style="background:#388bfd"></i>error radius (point + uncertainty)<br>
+      <i style="background:#2ea043"></i>nozzle spraying &nbsp;<i style="background:#f85149"></i>nozzle shut
+    </div>
+  </div>
+
+  <div id="right">
+    <h3>Module 04 · Business case — follow vs ignore</h3>
+    <div class="matrix">
+      <div class="card a">
+        <h4>Path A · 1 m precision</h4>
+        Sprays to the legal fence line. Full compliance certification for automated profiles.
+        <div class="num" style="color:var(--green)" id="cA">—</div>
+        <div style="color:var(--mut)">crop treated to border</div>
+      </div>
+      <div class="card b">
+        <h4>Path B · 5 m coarse</h4>
+        Forced manual setbacks leave field borders untreated, or risk drift decertification.
+        <div class="num" style="color:var(--red)" id="cB">—</div>
+        <div style="color:var(--mut)">border left untreated</div>
+      </div>
+    </div>
+
+    <h3>Module 05 · Graceful degradation</h3>
+    <div class="wind" style="margin-bottom:6px">
+      <span>Wind (downwind drift inflates the buffer)</span>
+    </div>
+    <div class="wind"><input id="wind" type="range" min="0" max="8" step="0.5" value="0" style="flex:1">
+      <span id="windV" class="mono">0.0 m/s</span></div>
+    <p style="color:var(--mut);font-size:12px;line-height:1.5">
+      Rising wind inflates the safety buffer, so the engine cuts the boom earlier instead of
+      assuming a perfect position. If the fix quality drops (2 m), the error circle grows on the
+      fly and outer nozzles shut — the tool degrades safely, it does not blindly spray.</p>
+
+    <h3>Necessity test</h3>
+    <p style="color:var(--mut);font-size:12px;line-height:1.5">
+      At <b style="color:var(--amber)">5 m</b> the boom must cut metres early to <i>prove</i> no drift —
+      border lost or fines risked. At <b style="color:var(--green)">1 m</b> it sprays to the line.
+      Same flight, same field, the decision flips. That is the meter.</p>
+  </div>
+
+  <footer>
+    <button id="play">▶ Play</button>
+    <input id="scrub" type="range" min="0" max="100" value="0">
+    <span id="clock" class="mono">fix 0</span>
+    <div class="wind"><span>state:</span> <b id="fState" class="mono">—</b></div>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const M_LAT = 111320.0;
+const mlon = lat => M_LAT * Math.cos(lat*Math.PI/180);
+
+// ---- geometry, ported 1:1 from starter geo_core.py ----
+function pointInPolygon(lon,lat,ring){
+  let c=false,n=ring.length;
+  for(let i=0;i<n;i++){const [x1,y1]=ring[i],[x2,y2]=ring[(i+1)%n];
+    if((y1>lat)!==(y2>lat)){const xint=x1+(lat-y1)*(x2-x1)/(y2-y1); if(xint>lon)c=!c;}}
+  return c;
+}
+function segDist(px,py,ax,ay,bx,by){
+  const dx=bx-ax,dy=by-ay,den=dx*dx+dy*dy;
+  let t=den===0?0:Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/den));
+  return Math.hypot(px-(ax+t*dx),py-(ay+t*dy));
+}
+function distToPolygonEdge(lon,lat,ring){
+  if(pointInPolygon(lon,lat,ring))return 0;
+  const k=mlon(lat),px=lon*k,py=lat*M_LAT;let best=Infinity,n=ring.length;
+  for(let i=0;i<n;i++){const a=ring[i],b=ring[(i+1)%n];
+    best=Math.min(best,segDist(px,py,a[0]*k,a[1]*M_LAT,b[0]*k,b[1]*M_LAT));}
+  return best;
+}
+
+// ---- boom model, matches engine.py ----
+const BOOM=12, NN=6, DRIFT=0.5;
+const OFFS=[...Array(NN)].map((_,i)=>-BOOM/2 + BOOM*(i+0.5)/NN);
+const VALUE_M2=0.18, FINE=5000;
+const BASE_ERR={'5m':5.0,'1m':1.0};
+
+function nozzlePos(lon,lat,hdg){
+  const th=hdg*Math.PI/180, pe=-Math.cos(th), pn=Math.sin(th); // left-normal (east,north)
+  return OFFS.map(off=>[lon+(pe*off)/mlon(lat), lat+(pn*off)/M_LAT]);
+}
+function decide(lon,lat,hdg,field,restr,errR){
+  const buf=errR+DRIFT, noz=nozzlePos(lon,lat,hdg);
+  let states=[],minClear=Infinity;
+  for(const [nl,na] of noz){
+    const dR=pointInPolygon(nl,na,restr)?0:distToPolygonEdge(nl,na,restr);
+    const inF=pointInPolygon(nl,na,field)||distToPolygonEdge(nl,na,field)<buf;
+    const spray=(dR>=buf)&&inF;
+    states.push({spray,clear:dR}); minClear=Math.min(minClear,dR);
+  }
+  const nSpray=states.filter(s=>s.spray).length;
+  const shut=states.map((s,i)=>s.spray?null:i+1).filter(x=>x);
+  let reason,kind;
+  if(nSpray===NN){kind='ok';
+    reason=`All ${NN} nozzles SPRAY.\nNearest nozzle ${minClear.toFixed(1)} m from organic line.\nBuffer ${buf.toFixed(1)} m = error ${errR.toFixed(1)} m + drift ${DRIFT} m.\nMargin verified → spray authorised.`;}
+  else if(nSpray===0){kind='crit';
+    reason=`FULL BOOM CUT.\nNearest nozzle ${minClear.toFixed(1)} m < buffer ${buf.toFixed(1)} m.\nCannot prove zero drift → all nozzles OFF.`;}
+  else{kind='warn';
+    reason=`PARTIAL CUT — nozzles ${shut.join(', ')} OFF.\nFootprint within ${buf.toFixed(1)} m buffer of organic line.\n${nSpray}/${NN} southern nozzles still spraying.`;}
+  return {nSpray,shut,minClear,buf,states,reason,kind};
+}
+
+// ---- load data + run ----
+const ERR=document.getElementById('err');
+function fail(m){ERR.style.display='block';ERR.innerHTML=m;}
+const load=p=>fetch(p).then(r=>{if(!r.ok)throw new Error(p);return r.json();});
+
+let FIELD,RESTR,TRACK={},HEAD={},FIX=0,REC='1m',WIND=0,playing=false,timer=null;
+const map=L.map('map',{zoomControl:true}).setView([49.8700,8.5994],17);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,attribution:'© OpenStreetMap'}).addTo(map);
+let gField,gRestr,gBound,gErr,gNoz=[],gDrone,gPathDone;
+
+Promise.all([
+  load('data/field.geojson'),
+  load('data/drone_5m.geojson'),
+  load('data/drone_1m.geojson')
+]).then(([f,t5,t1])=>{
+  for(const ft of f.features){
+    const r=ft.properties.role;
+    if(r==='target_field')FIELD=ft.geometry.coordinates[0].map(c=>[c[0],c[1]]);
+    if(r==='restricted_parcel')RESTR=ft.geometry.coordinates[0].map(c=>[c[0],c[1]]);
+    if(r==='legal_boundary')window.BOUND=ft.geometry.coordinates;
+  }
+  for(const [k,t] of [['5m',t5],['1m',t1]]){
+    TRACK[k]=t.features[0].geometry.coordinates.map(c=>[c[0],c[1]]);
+    HEAD[k]=t.features[0].properties.headings_deg;
+  }
+  drawStatic(f);
+  document.getElementById('scrub').max=TRACK['1m'].length-1;
+  precompute(); render();
+}).catch(e=>fail("Couldn't load data — browsers block file://. Serve the folder first:<br><code>python -m http.server</code> in the <b>agrospray/</b> directory, then open <code>http://localhost:8000/agrospray.html</code>."));
+
+function ll(c){return [c[1],c[0]];}
+function drawStatic(f){
+  gField=L.polygon(FIELD.map(ll),{color:'#2ea043',weight:2,fillOpacity:.10}).addTo(map).bindPopup('Target field — authorized to spray');
+  gRestr=L.polygon(RESTR.map(ll),{color:'#f85149',weight:2,fillColor:'#f85149',fillOpacity:.18}).addTo(map).bindPopup('Restricted organic parcel — NO drift');
+  gBound=L.polyline(window.BOUND.map(ll),{color:'#f85149',weight:4,dashArray:'2,6'}).addTo(map);
+  gErr=L.circle([0,0],{radius:0,color:'#388bfd',weight:1.5,fillColor:'#388bfd',fillOpacity:.10}).addTo(map);
+  gDrone=L.circleMarker([0,0],{radius:5,color:'#fff',weight:2,fillColor:'#111',fillOpacity:1}).addTo(map);
+  for(let i=0;i<NN;i++)gNoz[i]=L.circleMarker([0,0],{radius:4,weight:1,color:'#0d1117'}).addTo(map);
+  map.fitBounds(gRestr.getBounds().extend(gField.getBounds()).pad(0.12));
+}
+
+// precompute cumulative treated area for both receivers (current wind) -> the flip metric
+let CUM={};
+function effErr(rec){return BASE_ERR[rec]+WIND*0.4;}  // downwind drift grows the buffer
+const SPEED=6.0, nozzleArea=(BOOM/NN)*SPEED;
+function precompute(){
+  for(const rec of ['5m','1m']){
+    const tr=TRACK[rec],hd=HEAD[rec],er=effErr(rec);let cum=0,arr=[];
+    for(let i=0;i<tr.length;i++){const d=decide(tr[i][0],tr[i][1],hd[i],FIELD,RESTR,er);
+      cum+=d.nSpray*nozzleArea; arr.push(cum);}
+    CUM[rec]=arr;
+  }
+}
+
+function render(){
+  const tr=TRACK[REC],hd=HEAD[REC],er=effErr(REC);
+  const [lon,lat]=tr[FIX], h=hd[FIX];
+  const d=decide(lon,lat,h,FIELD,RESTR,er);
+  gErr.setLatLng([lat,lon]).setRadius(er+DRIFT);
+  gDrone.setLatLng([lat,lon]);
+  const noz=nozzlePos(lon,lat,h);
+  noz.forEach((p,i)=>gNoz[i].setLatLng([p[1],p[0]])
+    .setStyle({fillColor:d.states[i].spray?'#2ea043':'#f85149',fillOpacity:1}));
+  // banner
+  const B=document.getElementById('banner');B.className='banner '+d.kind;
+  B.textContent = d.kind==='ok' ? `CLEAR · spraying to the line — all ${NN} nozzles active`
+    : d.kind==='warn' ? `BORDER APPROACH · disabling boom nozzle(s) ${d.shut.join(' & ')} to protect organic parcel`
+    : `CRITICAL · full boom cut — position cannot prove zero drift`;
+  // kpis
+  const prec = REC==='1m' ? `${er.toFixed(2)} m` : `${er.toFixed(1)} m`;
+  document.getElementById('kPrec').textContent=prec;
+  document.getElementById('kPrec').className='v '+(REC==='1m'?'green':'amber');
+  document.getElementById('precTag').textContent=`precision: ${prec} ${REC==='1m'?'(Galileo HAS)':'(uncorrected)'}`;
+  const kc=document.getElementById('kClear');kc.textContent=`${d.minClear.toFixed(1)} m`;
+  kc.className='v '+(d.minClear<d.buf?'red':'green');
+  const kb=document.getElementById('kBoom');kb.textContent=`${d.nSpray}/${NN}`;
+  kb.className='v '+(d.nSpray===NN?'green':d.nSpray===0?'red':'amber');
+  // the flip, cumulative to current fix
+  const reclaimed=Math.max(0,(CUM['1m'][FIX]||0)-(CUM['5m'][FIX]||0));
+  document.getElementById('kArea').textContent=`${reclaimed.toFixed(0)} m²`;
+  const money=reclaimed*VALUE_M2 + (d.kind!=='crit'?0:0);
+  document.getElementById('kMoney').textContent=`€${(reclaimed*VALUE_M2).toFixed(0)} + €${FINE.toLocaleString()} risk`;
+  // reasoning
+  document.getElementById('reason').textContent=d.reason;
+  document.getElementById('inFix').textContent=`${lat.toFixed(6)}, ${lon.toFixed(6)} @ ${h.toFixed(0)}°`;
+  // business matrix (totals of full run)
+  const tot1=CUM['1m'][CUM['1m'].length-1], tot5=CUM['5m'][CUM['5m'].length-1];
+  document.getElementById('cA').textContent=`${tot1.toFixed(0)} m²`;
+  document.getElementById('cB').textContent=`${(tot1-tot5).toFixed(0)} m² lost`;
+  // footer
+  document.getElementById('clock').textContent=`fix ${FIX} / ${tr.length-1}`;
+  document.getElementById('fState').textContent=d.kind==='ok'?'SPRAYING':d.kind==='warn'?'PARTIAL CUT':'BOOM OFF';
+  document.getElementById('scrub').value=FIX;
+}
+
+// ---- controls ----
+function setRec(r){REC=r;
+  document.getElementById('b1').classList.toggle('on',r==='1m');
+  document.getElementById('b5').classList.toggle('on',r==='5m');
+  document.getElementById('scrub').max=TRACK[REC].length-1;
+  if(FIX>TRACK[REC].length-1)FIX=TRACK[REC].length-1; render();}
+document.getElementById('b1').onclick=()=>setRec('1m');
+document.getElementById('b5').onclick=()=>setRec('5m');
+document.getElementById('scrub').oninput=e=>{FIX=+e.target.value;render();};
+document.getElementById('wind').oninput=e=>{WIND=+e.target.value;
+  document.getElementById('windV').textContent=WIND.toFixed(1)+' m/s';precompute();render();};
+const playBtn=document.getElementById('play');
+playBtn.onclick=()=>{playing=!playing;playBtn.textContent=playing?'❚❚ Pause':'▶ Play';
+  if(playing)timer=setInterval(()=>{FIX=(FIX+1)%TRACK[REC].length;render();},120);
+  else clearInterval(timer);};
+</script>
+</body>
+</html>

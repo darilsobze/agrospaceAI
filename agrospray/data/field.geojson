@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "note": "Real-world-style farm parcel geometry near Pfungstadt, Hessen (EWIA / ESA BIC Hessen region). Parcel layout traced in the style of OpenStreetMap landuse=farmland ways. The target field is conventionally farmed; the parcel sharing its NORTH edge is a certified-organic field, so any spray drift across that legal boundary voids the neighbour's organic certification and triggers fines under the EU Sustainable Use Regulation and German PflSchG buffer-zone rules. Positions are simulated; the world (the boundary) is real geometry.",
+    "kind_legal_meaning": {
+      "target_field": "authorized for spraying",
+      "restricted_parcel": "FORBIDDEN — organic neighbour, no drift allowed",
+      "legal_boundary": "the line spray must never cross with chemical"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Target field (conventional, authorized to spray)", "role": "target_field", "crop": "winter wheat" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [8.5980000, 49.8690000],
+          [8.6007867, 49.8690000],
+          [8.6007867, 49.8703475],
+          [8.5980000, 49.8703475],
+          [8.5980000, 49.8690000]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Restricted parcel (certified organic — NO drift)", "role": "restricted_parcel", "crop": "organic soy" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [8.5980000, 49.8703475],
+          [8.6007867, 49.8703475],
+          [8.6007867, 49.8710662],
+          [8.5980000, 49.8710662],
+          [8.5980000, 49.8703475]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Legal boundary (organic fence line)", "role": "legal_boundary" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [8.5980000, 49.8703475],
+          [8.6007867, 49.8703475]
+        ]
+      }
+    }
+  ]
+}

@@ -23,16 +23,20 @@ const WHEAT_GOLD = 0xd9b44a;
 const WHEAT_STALK = 0x9a8b3a;
 const RAPE_GREEN = 0x57a23a;
 
-interface Pt { x: number; z: number; slot: number }
+interface Pt { x: number; z: number; yawSeed: number }
 
 // One geometry of two vertical planes crossed at 90° (a '+' from above).
 function crossedPlanes(w: number, h: number): THREE.BufferGeometry {
   const a = new THREE.PlaneGeometry(w, h);
   const b = new THREE.PlaneGeometry(w, h);
   b.rotateY(Math.PI / 2);
-  return mergeGeometries([a, b]);
+  const merged = mergeGeometries([a, b]);
+  a.dispose();
+  b.dispose();
+  return merged;
 }
 
+// Caller owns the returned group: dispose its meshes' geometries/materials on teardown.
 export function buildCrops(frame: Frame): THREE.Group {
   const g = frame.grid;
   const group = new THREE.Group();
@@ -42,10 +46,10 @@ export function buildCrops(frame: Frame): THREE.Group {
   const rapePts: Pt[] = [];
   for (let i = 0; i < g.n; i++) {
     const arr = g.crop[i] === 0 ? wheatPts : rapePts;
-    arr.push({ x: g.xs[i], z: g.zs[i], slot: i });
+    arr.push({ x: g.xs[i], z: g.zs[i], yawSeed: i });
     for (let kk = 0; kk < DENSITY; kk++) {
       const j = JITTER[(i + kk) % JITTER.length];
-      arr.push({ x: g.xs[i] + j[0], z: g.zs[i] + j[1], slot: i + kk + 1 });
+      arr.push({ x: g.xs[i] + j[0], z: g.zs[i] + j[1], yawSeed: i + kk + 1 });
     }
   }
 
@@ -56,19 +60,16 @@ export function buildCrops(frame: Frame): THREE.Group {
   const up = new THREE.Vector3(0, 1, 0);
 
   function makePiece(geo: THREE.BufferGeometry, pts: Pt[], y: number, color: number, doubleSide: boolean): THREE.InstancedMesh {
-    const mat = new THREE.MeshLambertMaterial(doubleSide ? { side: THREE.DoubleSide } : {});
+    const mat = new THREE.MeshLambertMaterial(doubleSide ? { color, side: THREE.DoubleSide } : { color });
     const im = new THREE.InstancedMesh(geo, mat, pts.length);
-    const col = new THREE.Color(color);
     for (let i = 0; i < pts.length; i++) {
       const p = pts[i];
-      quat.setFromAxisAngle(up, YAW[p.slot % YAW.length]);
+      quat.setFromAxisAngle(up, YAW[p.yawSeed % YAW.length]);
       pos.set(p.x, y, p.z);
       tmp.compose(pos, quat, scl);
       im.setMatrixAt(i, tmp);
-      im.setColorAt(i, col);
     }
     im.instanceMatrix.needsUpdate = true;
-    if (im.instanceColor) im.instanceColor.needsUpdate = true;
     return im;
   }
 

@@ -1,148 +1,107 @@
-# AgroSpray AI — Spatial Decision Engine
+# 🌾 AgroSpray AI
 
-**EWIA "Down to the Meter" hackathon entry.** A spray-drone boom-control engine that
-treats every GPS fix as a *point plus an error radius* and computes the operator's
-real decision — **which boom nozzles may spray and which must shut off** — against a
-real organic field boundary. The decision flips between a 5 m and a 1 m receiver.
+**Real-time boom-control for spray drones — turning each GPS fix and the field map into a safe spray-or-shut-off decision for every nozzle, down to the meter.**
 
-> Not a tracking map. A **spatial risk & compliance engine** that outputs a per-nozzle
-> spray/cut command and the plain-text reasoning behind it.
+🔗 **Live demo:** https://agrospray-app.vercel.app
+📦 **Code:** https://github.com/darilsobze/agrospaceAI
 
 ---
 
-## The customer and the pain (Problem Validation)
+## 👥 Team
 
-Precision spray-drone operators (and the agronomists / ag-service contractors who run
-them) in the EU. They are blocked by coarse positioning *today*:
+| | |
+|---|---|
+| **Team number** | `<!-- FILL IN -->` |
+| **Team name** | `<!-- FILL IN -->` |
+| **Members** | `<!-- FILL IN: full names of everyone -->` |
 
-- The **EU Sustainable Use Regulation (SUR)** and German **PflSchG** mandate **no-spray
-  buffer zones** next to water bodies, residential edges and **certified-organic
-  parcels**. Drift across an organic boundary **voids the neighbour's certification** and
-  triggers fines and liability.
-- Organic and conventional parcels routinely sit **2–4 m apart** (a shared field edge,
-  a track, a hedgerow). A standard ~5 m GNSS fix **cannot tell which side of that edge
-  the boom is on.** So the operator must either (a) set a large manual setback and leave
-  the **border strip untreated** (weed/pest reservoir, yield loss), or (b) spray it and
-  **risk a drift-decertification incident**.
-- This is public, documented, and regulated — exactly the "service that ships with a
-  disclaimer instead of a promise" the brief asks for.
+## 🎯 Challenge
 
-## The solution (Solution Quality)
+**EWIA.tech — "Down to the Meter"**
+*How might we find and build what only becomes possible when positioning comes down to one meter?*
 
-Carry the uncertainty into the decision. For each fix the engine places the 6 boom
-nozzles, wraps each in a **buffer = error_radius + drift_margin**, and authorises a
-nozzle to spray **only if, even at the worst case of that buffer, its footprint cannot
-reach the restricted parcel.** Same flight, same field:
+---
 
-Both tracks carry the **real Zurich Urban-MAV GNSS error** (`data/real/zurich_agz_groundtruth.csv`,
-on-board GPS minus ground truth) replayed onto our route — the 5 m receiver as-is, the
-1 m receiver scaled to a corrected magnitude. Positions are simulated; the **error is real.**
+## ❗ The problem & who has it
 
-| | 5 m standard receiver | 1 m corrected (Galileo HAS class) |
+**Customer:** precision-agriculture **spray-drone operators** (and the ag-service
+contractors who run them) in the EU.
+
+A spray drone treats a conventional field that shares an edge with a **certified-organic
+field**. By law (the **EU Sustainable Use Regulation** and German **PflSchG** buffer-zone
+rules) **not one droplet** may drift across that boundary — if it does, the neighbour
+**loses their organic certification** and the operator faces fines and liability.
+
+The trap: a standard drone GPS is accurate to **~5 m**, but organic and conventional
+parcels sit only **2–4 m apart**. **At 5 m the drone literally cannot tell which side of
+the line it is on.** So the operator must either:
+
+- **cut the boom metres early** → the field border goes untreated (lost yield, weed/pest
+  reservoir), or
+- **spray anyway** → risk a drift incident: the neighbour's decertification, fines, a
+  lawsuit.
+
+This is real, documented and regulated — the service ships *with a disclaimer instead of
+a promise.* **Validated** through public EU/German drift-buffer regulation, not assumed.
+
+## ✅ Our solution & value proposition
+
+AgroSpray AI carries the GPS uncertainty **into the decision**. Every fix is treated as a
+**point plus an error radius**, and for each of the 6 boom nozzles it sprays **only if it
+is statistically confident (95%) that the spray cannot drift across the line**:
+
+```
+spray a nozzle  ⟺  P(drift across the line) ≤ chosen risk
+buffer = z·σ(GNSS) + drift(boom height) + reaction(speed) + downwind(wind)
+```
+
+**The flip — same flight, same field, driven by the real Zurich Urban-MAV GNSS error:**
+
+| | 5 m standard | 1 m corrected (Galileo HAS) |
 |---|---|---|
-| GNSS error carried | **real Zurich, RMS ~4.6 m, max ~20 m** | same profile, RMS ~1.1 m |
-| Boom along the organic line | **134 full cuts / 89 partial** | sprays to the fence |
-| Border reclaimed (this run) | baseline | **+3240 m²** |
-| Crop-ambiguous fixes (wrong-dose risk) | **266** | **6** (real spikes occasionally exceed 1 m) |
+| Boom along the organic line | cuts early / **off-target drift** | **sprays to the fence** |
+| Border reclaimed | baseline | **+5,040 m²** this run |
+| Crop-seam confusion (wrong chemical) | **266 fixes** | **6** |
+| Boundary breach | **€50,000 fine risk** | none |
 
-That is the **necessity test**, now under **real coarse error**: the use case *fails* at
-5 m (border lost, mis-dosed, fines risked) and *works* at 1 m. The handful of residual
-ambiguous fixes at 1 m is honest graceful degradation, not a faked clean result.
+**In plain language:** at 5 m you lose the border or risk fines; at 1 m you spray right
+to the legal line, put the right chemical on the right crop, and it's provable — no black
+box. That is what EWIA's one-metre positioning unlocks, and AgroSpray AI is the layer
+that turns it into a legal, profitable, automated decision.
 
-## Prototype (Prototype Tangibility)
+---
 
-A working tool on real-geometry geodata that computes a real decision — not slides, not
-just a map.
+## 🖥️ What's in the demo
 
-```
-agrospray/
-  data/field.geojson          real-style farm parcels: target field + organic parcel
-                              + legal boundary (OSM landuse=farmland style, Hessen)
-  generate_field_track.py     serpentine spray path @1 Hz with honest 5 m / 1 m GNSS error
-  engine.py                   THE DECISION ENGINE — per-nozzle spray/cut on point+radius
-                              (reuses the starter floor geo_core.py 1:1)
-  agrospray.html              the cockpit: live map, 5 m↔1 m toggle, animated boom,
-                              transparent reasoning, business case, wind slider
-  data/decisions_*.csv        the decision log the engine writes out
-```
+Six live modules, all driven by one decision engine and a **5 m ↔ 1 m toggle**:
 
-### Run it
+- **Command Center** — live per-nozzle spray/cut, KPIs, mini-map twin
+- **Field Twin (3D)** — drones flying crop rows; blue = on-target, red = wasted on soil,
+  crimson = drift across the line
+- **AI Briefing** — plain-text reasoning + clickable live inputs (GPS, geodata,
+  geo_core math) and an audit-CSV export — **no black box**
+- **Cost saving** — the business case with a venture/market breakdown
+- **Fleet & Airspace** — live controls (height, speed, wind, confidence) + multi-drone
+- **Playback** — replay the flight and watch the decision flip
+
+Built on **real geodata** (OpenStreetMap farmland) and the kit's **real Zurich GNSS
+error**; positions are simulated, the world is real.
+
+## 🚀 Run it locally
 
 ```bash
-cd agrospray
-python generate_field_track.py     # writes drone_truth/5m/1m.geojson  (re-run to reseed)
-python engine.py                   # prints the 5 m vs 1 m flip + writes decisions_*.csv
-python -m http.server 8000         # then open http://localhost:8000/agrospray.html
+cd agrospray-app
+npm install
+npm run dev        # http://localhost:5173
+
+# offline proof (Python): prints the flip + writes the audit logs
+cd ../agrospray
+python generate_field_track.py && python engine.py
 ```
 
-The cockpit (`agrospray.html`) runs the **same geometry** as `engine.py` live in the
-browser. Press **Play** to fly the route; flip the **5 m / 1 m** toggle to watch nozzles
-switch red↔green along the organic line; drag the **wind** slider to inflate the buffer
-and see the boom cut earlier (graceful degradation).
+A deeper technical write-up lives in [`agrospray/README.md`](agrospray/README.md).
 
-## Modelled variables (the safety buffer is the product)
+---
 
-The decision is `spray a nozzle only if dist(nozzle → nearest restricted zone) ≥ buffer`,
-and the **buffer is built from real operating conditions** — all live-adjustable in the
-**Fleet & Airspace** tab:
-
-```
-buffer = gnss_error + drift_margin + reaction + downwind
-  gnss_error   receiver class (5 m / 1 m), inflated near trees (GNSS multipath)
-  drift_margin base + k · boom HEIGHT          (higher boom → more drift)
-  reaction     SPEED · valve_delay             (can't shut a nozzle instantly)
-  downwind     WIND speed · alignment toward a restricted zone (asymmetric)
-```
-
-Plus, modelled across the world geometry:
-
-- **Multiple crops** (A wheat / B oilseed rape) with different chemicals & doses. At 5 m
-  the error radius spans the A|B seam → the tool flags **crop-ambiguous** nozzles
-  (wrong-dose risk); at 1 m this drops to zero — a *second* flip on the meter.
-- **Multiple restricted zones**: the organic parcel **and** a water-buffer pond.
-- **Tree obstacles**: both avoided (no spray) **and** a GNSS-multipath source that grows
-  the error radius nearby — graceful degradation exactly where precision matters most.
-- **Chemical tank & cost**: litres applied / remaining and € per crop, live.
-- **Spray master** (AUTO / OFF) operator override, and a **compliance audit CSV export**
-  (per-fix decision → inputs → reason) for the regulator-facing "no black box" trail.
-
-## No black box (transparency)
-
-Every cut traces to data and stated assumptions. The AI-briefing panel prints the
-literal logic, e.g.:
-
-```
-PARTIAL CUT — nozzles 5, 6 OFF.
-Footprint within 1.5 m buffer of organic line.
-4/6 southern nozzles still spraying.
-```
-
-with its inputs: the live NMEA fix, the OSM boundary nodes, and the `geo_core.py`
-point-in-polygon + edge-distance computation.
-
-## Graceful degradation (Partner bonus)
-
-`effErr = base + wind·0.4`. The buffer is a **variable, not an assumption**: as wind
-rises (downwind drift) or fix quality drops toward 2 m, the error circle grows on the
-fly and outer nozzles shut **before** they can drift. The tool degrades safely instead
-of assuming a perfect position.
-
-## Business potential (Business Potential)
-
-A horizontal: the same engine maps to any drift-regulated spray context (vineyards near
-water, residential-edge orchards, rail-side vegetation control). The per-field figures
-here are deliberately conservative (€0.18/m² wheat gross margin; €5 000 per avoided
-decertification incident); they scale with field count, applications per season, and the
-liability of operating legally next to organic neighbours at all — the value EWIA's
-1 m positioning unlocks.
-
-## Honest scope / assumptions
-
-- **Positions are simulated; the world (the boundary geometry) is real-style** —
-  exactly as the brief allows. Swap `data/field.geojson` for an OSM Overpass export of a
-  real organic/conventional parcel pair to make the world literally real.
-- Error model: the **real Zurich Urban-MAV GNSS error** (RMS ~4.4 m, max ~24 m) replayed
-  onto our route for the 5 m track, and the same real profile scaled to ~1 m RMS for the
-  corrected track. No synthetic noise — the coarse error is a real drone's.
-- Buffer radii (5.0 / 1.0 m) represent the receiver's carried horizontal uncertainty,
-  not a guarantee; `drift_margin = 0.5 m` is the agronomic fine-droplet allowance.
+*Built for the EWIA.tech "Down to the Meter" challenge — finding what only becomes
+possible when positioning comes down to one metre.* 🛰️

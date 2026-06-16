@@ -12,15 +12,19 @@ import { Transport } from "./components/Transport";
 export default function App() {
   const [tab, setTab] = useState<Tab>("command");
   return (
-    <div className="mx-auto max-w-[1180px] px-5 pb-16 pt-[18px]">
-      <TopNav tab={tab} setTab={setTab} />
-      <ScenarioBanner />
-      {tab === "command" && <CommandCenter setTab={setTab} />}
-      {tab === "field" && <FieldTwin3D />}
-      {tab === "briefing" && <AIBriefing />}
-      {tab === "business" && <FollowVsIgnore />}
-      {tab === "fleet" && <FleetAirspace />}
-      {tab === "playback" && <Playback />}
+    <div className="mx-auto max-w-[1180px] px-5 pb-16">
+      <div className="sticky top-0 z-40 -mx-5 border-b border-line/60 bg-bg/90 px-5 pb-3 pt-[18px] backdrop-blur-sm">
+        <TopNav tab={tab} setTab={setTab} />
+        <ScenarioBanner />
+      </div>
+      <div className="pt-1">
+        {tab === "command" && <CommandCenter setTab={setTab} />}
+        {tab === "field" && <FieldTwin3D />}
+        {tab === "briefing" && <AIBriefing />}
+        {tab === "business" && <FollowVsIgnore />}
+        {tab === "fleet" && <FleetAirspace />}
+        {tab === "playback" && <Playback />}
+      </div>
       <Transport />
     </div>
   );

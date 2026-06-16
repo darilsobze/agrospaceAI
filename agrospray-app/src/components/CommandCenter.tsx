@@ -13,13 +13,21 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
   const is1 = receiver === "1m";
   const reclaimed = Math.max(0, (series["1m"].area[fix] ?? 0) - (series["5m"].area[fix] ?? 0));
   const liab = reclaimed * VALUE_M2;
-  const tag = d.kind === "ok" ? "● SPRAYING" : d.kind === "warn" ? "● BORDER APPROACH" : "● CRITICAL";
-  const big =
-    d.kind === "ok"
-      ? "All 6 nozzles active — spraying to the line."
+  const nearBoundary = d.mc < 10; // a nozzle is within 10 m of the organic line (top)
+  const tag = is1
+    ? d.kind === "ok"
+      ? "● SPRAYING"
       : d.kind === "warn"
-      ? `Disabling nozzle(s) ${d.shut.join(" & ")} to protect a restricted zone.`
-      : "Full boom cut — position cannot prove zero drift.";
+      ? "● BORDER APPROACH"
+      : "● CRITICAL"
+    : nearBoundary
+    ? "● OUT OF SECTION"
+    : "● ZIG-ZAG DRIFT";
+  const big = is1
+    ? "All 6 nozzles active — spraying to the line."
+    : nearBoundary
+    ? "Spraying OUT OF SECTION — drift across the organic line onto the neighbour."
+    : "Spraying ZIG-ZAG — off the crop row, wasted on bare soil.";
   const clearSeg = series[receiver].clear.slice(Math.max(0, fix - 60), fix + 1);
 
   return (
@@ -28,21 +36,28 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
 
       <div
         className={`flex items-center gap-4 rounded-xl2 border p-[18px] ${
-          d.kind === "ok" ? "border-[#cfe9da] bg-gradient-to-b from-white to-brand-bg" : "border-[#f3d6cc] bg-gradient-to-b from-white to-coral-bg"
+          is1 ? "border-[#cfe9da] bg-gradient-to-b from-white to-brand-bg" : "border-[#f3d6cc] bg-gradient-to-b from-white to-coral-bg"
         }`}
       >
         <div className="flex-1">
-          <div className={`text-[10px] font-extrabold tracking-widest ${d.kind === "ok" ? "text-brand-dark" : "text-coral-dark"}`}>{tag}</div>
+          <div className={`text-[10px] font-extrabold tracking-widest ${is1 ? "text-brand-dark" : "text-coral-dark"} ${is1 ? "" : "animate-pulse"}`}>{tag}</div>
           <div className="mt-1 text-[19px] font-bold leading-tight">{big}</div>
           <div className="mt-1 text-[12.5px] text-mut">
             Why: worst nozzle P(drift across line) {(Math.max(...d.st.map((s) => s.p)) * 100).toFixed(1)}% vs {(op.risk * 100).toFixed(0)}% risk · σ={d.err.toFixed(1)} m
             {d.amb ? ` · ${d.amb} crop-ambiguous` : ""}.
           </div>
         </div>
-        <div className="text-right">
-          <div className="upper">Liability avoided</div>
-          <div className="font-mono text-[21px] font-bold text-brand-dark">€{liab.toFixed(0)}+</div>
-        </div>
+        {is1 ? (
+          <div className="text-right">
+            <div className="upper">Liability avoided</div>
+            <div className="font-mono text-[21px] font-bold text-brand-dark">€{liab.toFixed(0)}+</div>
+          </div>
+        ) : (
+          <div className="text-right">
+            <div className="upper">Drift exposure</div>
+            <div className="font-mono text-[21px] font-bold text-coral-dark">€5,000 risk</div>
+          </div>
+        )}
         <button onClick={() => setTab("briefing")} className="rounded-full border border-line bg-white px-4 py-2 font-semibold">
           Reasoning →
         </button>

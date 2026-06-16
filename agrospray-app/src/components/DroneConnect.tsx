@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import { Modal } from "./ui/modal";
 import { Segmented } from "./ui/segmented";
 import type { Receiver } from "@/lib/types";
@@ -31,6 +32,13 @@ export function DroneConnect({ onClose, onConnect }: { onClose: () => void; onCo
   const [rec, setRec] = useState<Receiver>("1m");
   const [err, setErr] = useState<Record<string, string>>({});
   const [connecting, setConnecting] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const status =
+    progress < 25 ? `Opening link to ${ip}:${port}…` :
+    progress < 55 ? `Authenticating drone ${id}…` :
+    progress < 80 ? `Acquiring GNSS fix (${rec === "1m" ? "Galileo HAS 1 m" : "standard 5 m"})…` :
+    progress < 100 ? "Loading field geometry & zones…" : "Connected — launching.";
 
   function submit() {
     const e: Record<string, string> = {};
@@ -41,13 +49,39 @@ export function DroneConnect({ onClose, onConnect }: { onClose: () => void; onCo
     setErr(e);
     if (Object.keys(e).length > 0) return; // bad info -> do NOT open the app
 
-    // valid -> simulate a brief handshake, then enter the dashboard
+    // valid -> run the connection progress, then enter the dashboard
     setConnecting(true);
-    setTimeout(() => onConnect(rec), 650);
+    let p2 = 0;
+    const t = window.setInterval(() => {
+      p2 += 3 + Math.random() * 5;
+      if (p2 >= 100) {
+        p2 = 100;
+        window.clearInterval(t);
+        setProgress(100);
+        window.setTimeout(() => onConnect(rec), 400);
+      } else setProgress(p2);
+    }, 70);
   }
 
   return (
-    <Modal title="Connect drone telemetry" sub="Enter the drone's connection details to stream its live position into the decision engine." onClose={onClose}>
+    <Modal title="Connect drone telemetry" sub="Enter the drone's connection details to stream its live position into the decision engine." onClose={connecting ? () => {} : onClose}>
+      {connecting ? (
+        <div className="py-3">
+          <div className="flex items-center gap-2 text-[14px] font-bold text-ink">
+            <Loader2 size={18} className="animate-spin text-brand" />
+            Connecting to {id}
+          </div>
+          <div className="mt-1 font-mono text-[12px] text-mut">{ip}:{port} · {rec === "1m" ? "1 m HAS" : "5 m std"} · MAVLink/UDP</div>
+          <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-[#eef0ec]">
+            <div className="h-full rounded-full bg-gradient-to-r from-brand to-[#7fd0a0] transition-all duration-100 ease-out" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="mt-2 flex items-center justify-between text-[12px]">
+            <span className="text-mut">{status}</span>
+            <span className="font-mono font-semibold text-brand-dark">{Math.round(progress)}%</span>
+          </div>
+        </div>
+      ) : (
+        <>
       <div className="space-y-3">
         <Field label="Drone ID" hint="e.g. AGZ-001" value={id} onChange={setId} error={err.id} placeholder="AGZ-001" />
         <div className="grid grid-cols-[2fr_1fr] gap-3">
@@ -76,13 +110,14 @@ export function DroneConnect({ onClose, onConnect }: { onClose: () => void; onCo
           </button>
           <button
             onClick={submit}
-            disabled={connecting}
-            className="rounded-lg bg-slate-900 px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60"
+            className="rounded-lg bg-slate-900 px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-slate-800"
           >
-            {connecting ? "Connecting…" : "Connect & launch"}
+            Connect &amp; launch
           </button>
         </div>
       </div>
+        </>
+      )}
     </Modal>
   );
 }

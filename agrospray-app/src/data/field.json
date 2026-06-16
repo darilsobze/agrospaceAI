@@ -1,10 +1,10 @@
 {
   "type": "FeatureCollection",
   "metadata": {
-    "note": "Real-world-style farm parcel geometry near Pfungstadt, Hessen (EWIA / ESA BIC Hessen region), traced in the style of OpenStreetMap landuse=farmland. Expanded block ~420 m (E-W) x 320 m (N-S): two crop parcels (different chemicals/doses) sharing an internal seam, bordered to the north by a certified-organic parcel (no drift) and containing a water buffer (no spray) and two trees (obstacles + GNSS multipath). Positions are simulated; the world (the boundaries) is real geometry.",
+    "note": "Field geometry placed on real green agricultural land in Oostelijk Flevoland, Netherlands (OSM landuse=grass/farmland polder), so the basemap shows green fields with roads only at the parcel edges. Same parcel structure as before: two crop parcels sharing a seam, a certified-organic parcel to the north (no drift), a water buffer and two trees. Positions are simulated; the world geometry is real green-space.",
     "frame": {
-      "LON_W": 8.5980000, "LON_E": 8.6038524, "MID": 8.6009262,
-      "LAT_S": 49.8690000, "LAT_N": 49.8718745, "LAT_ORG_N": 49.8729524
+      "LON_W": 5.5170000, "LON_E": 5.5228524, "MID": 5.5199262,
+      "LAT_S": 52.4530000, "LAT_N": 52.4558745, "LAT_ORG_N": 52.4569524
     }
   },
   "features": [
@@ -13,53 +13,53 @@
       "properties": { "name": "Crop A — winter wheat", "role": "target_field", "crop": "winter wheat",
         "chemical": "Herbicide-W", "dose_l_per_ha": 1.5, "price_eur_per_l": 12 },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [8.5980000, 49.8690000], [8.6009262, 49.8690000],
-        [8.6009262, 49.8718745], [8.5980000, 49.8718745], [8.5980000, 49.8690000] ]] }
+        [5.5170000, 52.4530000], [5.5199262, 52.4530000],
+        [5.5199262, 52.4558745], [5.5170000, 52.4558745], [5.5170000, 52.4530000] ]] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Crop B — oilseed rape", "role": "target_field", "crop": "oilseed rape",
         "chemical": "Fungicide-R", "dose_l_per_ha": 2.0, "price_eur_per_l": 15 },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [8.6009262, 49.8690000], [8.6038524, 49.8690000],
-        [8.6038524, 49.8718745], [8.6009262, 49.8718745], [8.6009262, 49.8690000] ]] }
+        [5.5199262, 52.4530000], [5.5228524, 52.4530000],
+        [5.5228524, 52.4558745], [5.5199262, 52.4558745], [5.5199262, 52.4530000] ]] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Restricted parcel — certified organic (NO drift)", "role": "restricted",
         "subtype": "organic", "crop": "organic soy" },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [8.5980000, 49.8718745], [8.6038524, 49.8718745],
-        [8.6038524, 49.8729524], [8.5980000, 49.8729524], [8.5980000, 49.8718745] ]] }
+        [5.5170000, 52.4558745], [5.5228524, 52.4558745],
+        [5.5228524, 52.4569524], [5.5170000, 52.4569524], [5.5170000, 52.4558745] ]] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Water buffer — drainage pond (NO spray)", "role": "restricted", "subtype": "water" },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [8.5983000, 49.8693000], [8.5995000, 49.8693000],
-        [8.5995000, 49.8699000], [8.5983000, 49.8699000], [8.5983000, 49.8693000] ]] }
+        [5.5173000, 52.4533000], [5.5185000, 52.4533000],
+        [5.5185000, 52.4539000], [5.5173000, 52.4539000], [5.5173000, 52.4533000] ]] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Legal boundary (organic fence line)", "role": "legal_boundary" },
-      "geometry": { "type": "LineString", "coordinates": [ [8.5980000, 49.8718745], [8.6038524, 49.8718745] ] }
+      "geometry": { "type": "LineString", "coordinates": [ [5.5170000, 52.4558745], [5.5228524, 52.4558745] ] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Crop seam (A | B)", "role": "crop_seam" },
-      "geometry": { "type": "LineString", "coordinates": [ [8.6009262, 49.8690000], [8.6009262, 49.8718745] ] }
+      "geometry": { "type": "LineString", "coordinates": [ [5.5199262, 52.4530000], [5.5199262, 52.4558745] ] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Oak — NE corner", "role": "obstacle", "kind": "tree",
         "r_avoid_m": 4.0, "r_gps_m": 18 },
-      "geometry": { "type": "Point", "coordinates": [8.6030000, 49.8714000] }
+      "geometry": { "type": "Point", "coordinates": [5.5220000, 52.4554000] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Hedgerow oak — mid field", "role": "obstacle", "kind": "tree",
         "r_avoid_m": 3.5, "r_gps_m": 16 },
-      "geometry": { "type": "Point", "coordinates": [8.6004000, 49.8701000] }
+      "geometry": { "type": "Point", "coordinates": [5.5194000, 52.4541000] }
     }
   ]
 }

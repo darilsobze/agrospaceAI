@@ -31,9 +31,9 @@ REAL_CSV = os.path.join(HERE, "data", "real", "zurich_agz_groundtruth.csv")
 # target RMS (m) we want each receiver class to carry; 5 m uses the real error as-is
 TARGET_RMS = {"5m": None, "1m": 1.0}
 
-# --- field geometry (must match data/field.geojson) ---
-LON_W, LON_E = 8.5980000, 8.6038524          # ~420 m East-West
-LAT_S, LAT_N = 49.8690000, 49.8718745        # ~320 m North-South; LAT_N = organic boundary
+# --- field geometry (must match data/field.geojson) — Oostelijk Flevoland farmland ---
+LON_W, LON_E = 5.5170000, 5.5228524          # ~400 m East-West
+LAT_S, LAT_N = 52.4530000, 52.4558745        # ~320 m North-South; LAT_N = organic boundary
 
 SWATH_M   = 12.0     # boom width -> pass spacing
 SPEED_MS  = 6.0      # spray speed

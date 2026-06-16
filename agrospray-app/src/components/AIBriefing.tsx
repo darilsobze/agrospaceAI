@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useSim, total } from "@/state/sim";
 import { decide } from "@/lib/engine";
 import { TRACKS } from "@/lib/world";
 import { PageHead } from "./PageHead";
 import { Card } from "./ui/card";
-import { Activity, Cpu, Download, MapPinned, Satellite, ShieldAlert, ShieldCheck } from "lucide-react";
+import { InputDetail } from "./InputDetail";
+import { Activity, Cpu, Download, Maximize2, MapPinned, Satellite, ShieldAlert, ShieldCheck } from "lucide-react";
 
 export function AIBriefing() {
   const { world, op, receiver, fix, decision: d, series } = useSim();
+  const [openInput, setOpenInput] = useState<number | null>(null);
   const t = TRACKS[receiver];
   const [lon, lat] = t.coords[fix];
   const is1 = receiver === "1m";
@@ -139,26 +142,29 @@ CRITICAL: spray off-target — wasted on soil and drifting outside our section.
       </div>
 
       {/* live data inputs */}
-      <div className="upper mx-0.5 mb-2 mt-3.5">Reasoning evidence · live inputs</div>
+      <div className="upper mx-0.5 mb-2 mt-3.5">Reasoning evidence · live inputs · <span className="text-sky">click to inspect</span></div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[
           { icon: <Satellite size={16} />, k: "INPUT_01", t: "Real Zurich GNSS fix", v: `${lat.toFixed(5)}, ${lon.toFixed(5)} @ ${t.headings[fix].toFixed(0)}°` },
-          { icon: <MapPinned size={16} />, k: "INPUT_02", t: "OSM zone boundaries", v: "nodes #883921" },
+          { icon: <MapPinned size={16} />, k: "INPUT_02", t: "OSM zone boundaries", v: `${world.crops.length} crops · ${world.restricted.length} zones` },
           { icon: <Cpu size={16} />, k: "INPUT_03", t: "geo_core + P(drift) N(0,σ)", v: "point-in-polygon · normCdf" },
-        ].map((c) => (
-          <Card key={c.k} className="flex items-start gap-3">
+        ].map((c, i) => (
+          <button key={c.k} onClick={() => setOpenInput(i)} className="group flex items-start gap-3 rounded-xl2 border border-line bg-card p-4 text-left transition-colors hover:border-sky">
             <div className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#eef3ff] text-sky">{c.icon}</div>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 text-[12px] font-bold text-sky">
                 {c.k}
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand" />
+                <Maximize2 size={12} className="ml-auto text-mut opacity-0 transition-opacity group-hover:opacity-100" />
               </div>
               <div className="text-[13px]">{c.t}</div>
               <div className="mt-0.5 truncate font-mono text-[11px] text-mut">{c.v}</div>
             </div>
-          </Card>
+          </button>
         ))}
       </div>
+
+      {openInput !== null && <InputDetail index={openInput} onClose={() => setOpenInput(null)} />}
 
       <div className="mt-3.5 flex items-center justify-between">
         <span className="text-[11.5px] text-mut">Compliance audit · per-fix decision log traceable to inputs (no black box).</span>

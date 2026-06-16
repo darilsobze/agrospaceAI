@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
@@ -7,7 +7,33 @@ import { BASE, gnssError } from "@/lib/engine";
 import { CROP_HALF, fieldColumns, MAX_DRONES } from "@/lib/flightSim";
 import { PageHead } from "./PageHead";
 import { KpiCard } from "./ui/card";
-import { ShieldAlert, ShieldCheck } from "lucide-react";
+import { ChevronDown, ChevronUp, ShieldAlert, ShieldCheck } from "lucide-react";
+
+const LEGEND: { group: string; items: { c: string; l: string; line?: boolean }[] }[] = [
+  {
+    group: "Terrain",
+    items: [
+      { c: "#4e9c34", l: "Crop rows (your field)" },
+      { c: "#d9b44a", l: "Neighbour wheat — no-spray" },
+      { c: "#e8654f", l: "Organic boundary line" },
+    ],
+  },
+  {
+    group: "Spray coverage",
+    items: [
+      { c: "#3b82f6", l: "On-target (correct)" },
+      { c: "#ff4d4d", l: "Wasted on bare soil" },
+      { c: "#dc143c", l: "Across the line — €50k fine" },
+    ],
+  },
+  {
+    group: "Drone",
+    items: [
+      { c: "#ef8a3c", l: "Heading / next path", line: true },
+      { c: "#2f9e63", l: "GPS signal beam (green→red)" },
+    ],
+  },
+];
 
 const ALT = 11;
 const PAINT_RES = 4;
@@ -29,6 +55,7 @@ const wob = (i: number) => Math.sin(i * 1.7) * 1.2;
 export function FieldTwin3D() {
   const host = useRef<HTMLDivElement>(null);
   const S = useRef<any>(null);
+  const [legendOpen, setLegendOpen] = useState(true);
   const { frame, world, receiver, fix, dronePaths, classify, drones, droneColor } = useSim();
 
   // build scene + a pool of drone rigs + paint grid once
@@ -346,12 +373,29 @@ export function FieldTwin3D() {
 
       <div className="relative">
         <div ref={host} style={{ height: 540 }} className="overflow-hidden rounded-xl2 border border-line bg-[#cfe3d6]" />
-        <div className="absolute left-3 top-3 rounded-[10px] border border-line bg-white/90 px-2.5 py-2 text-[12px] leading-relaxed text-mut">
-          drag to orbit · scroll to zoom at cursor · right-drag to pan
-          <br />
-          <b className="text-[#3f7a2c]">green</b> = crop · <b className="text-[#b58a1f]">gold</b> = neighbour wheat · vertical beam = each drone's GPS signal
-          <br />
-          <b className="text-[#3b82f6]">blue</b> = on-target · <b className="text-[#ff4d4d]">red</b> = wasted on soil · <b className="text-[#dc143c]">crimson</b> = across the line
+        <div className="absolute left-3 top-3 w-[214px] overflow-hidden rounded-xl border border-line bg-white/95 shadow-soft">
+          <button onClick={() => setLegendOpen((o) => !o)} className="flex w-full items-center justify-between px-3 py-2 text-[12px] font-bold">
+            Legend
+            {legendOpen ? <ChevronUp size={14} className="text-mut" /> : <ChevronDown size={14} className="text-mut" />}
+          </button>
+          {legendOpen && (
+            <div className="space-y-2.5 px-3 pb-3">
+              {LEGEND.map((g) => (
+                <div key={g.group}>
+                  <div className="mb-1 text-[9.5px] font-semibold uppercase tracking-wider text-mut">{g.group}</div>
+                  <div className="space-y-1">
+                    {g.items.map((it) => (
+                      <div key={it.l} className="flex items-center gap-2">
+                        <span className={it.line ? "h-[3px] w-3.5 shrink-0 rounded-full" : "h-3 w-3 shrink-0 rounded-[3px]"} style={{ background: it.c }} />
+                        <span className="text-[11.5px] leading-tight text-ink">{it.l}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div className="border-t border-line pt-2 text-[10.5px] leading-snug text-mut">drag orbit · scroll zoom-at-cursor · right-drag pan</div>
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-3.5 grid grid-cols-4 gap-3.5">

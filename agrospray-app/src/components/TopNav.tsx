@@ -6,7 +6,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "command", label: "Command" },
   { id: "field", label: "Field Twin" },
   { id: "briefing", label: "AI Briefing" },
-  { id: "business", label: "Follow vs Ignore" },
+  { id: "business", label: "Cost saving" },
   { id: "fleet", label: "Fleet & Airspace" },
   { id: "playback", label: "Playback" },
 ];

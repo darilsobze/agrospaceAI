@@ -45,7 +45,7 @@ export function FollowVsIgnore() {
 
   return (
     <section>
-      <PageHead module="Module 04 · Business case" title="Follow vs Ignore" sub="What 1 m precision unlocks against running on coarse 5 m positioning. Click any card for the breakdown." />
+      <PageHead module="Module 04 · Business case" title="Cost saving" sub="What 1 m precision unlocks against running on coarse 5 m positioning. Click any card for the breakdown." />
 
       {/* value preserved hero — clickable */}
       <button onClick={() => setOpen("value")} className="group w-full rounded-xl2 border border-line bg-card p-4 text-left transition-colors hover:border-brand">

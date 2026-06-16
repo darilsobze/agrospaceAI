@@ -1,5 +1,5 @@
 import { useSim } from "@/state/sim";
-import { BASE, VALUE_M2 } from "@/lib/engine";
+import { BASE, TANK, VALUE_M2 } from "@/lib/engine";
 import { PageHead } from "./PageHead";
 import { KpiCard } from "./ui/card";
 import { Sparkline } from "./ui/sparkline";
@@ -29,6 +29,7 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
     ? "Spraying OUT OF SECTION — drift onto the neighbour's parcel. €50,000 fine incurred."
     : "Spraying ZIG-ZAG — off the crop row, wasted on bare soil.";
   const clearSeg = series[receiver].clear.slice(Math.max(0, fix - 60), fix + 1);
+  const remaining = Math.max(0, TANK - (series[receiver].lit[fix] ?? 0));
 
   return (
     <section>
@@ -68,7 +69,7 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
         </button>
       </div>
 
-      <div className="mt-3.5 grid grid-cols-4 gap-3.5">
+      <div className="mt-3.5 grid grid-cols-5 gap-3.5">
         <KpiCard
           label="Live precision"
           value={is1 ? `${d.err.toFixed(2)} m` : `${d.err.toFixed(1)} m`}
@@ -84,7 +85,8 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
           right={<Sparkline data={clearSeg} color="#2f9e63" />}
         />
         <KpiCard label="Boom state" value={`${d.ns}/6`} tone={d.ns === 6 ? "green" : d.ns === 0 ? "coral" : "orange"} foot="nozzles spraying" />
-        <KpiCard label="Border reclaimed" value={`${reclaimed.toFixed(0)} m²`} tone="green" foot="vs 5 m baseline, this run" />
+        <KpiCard label="Wind speed" value={`${op.wind.toFixed(1)} m/s`} tone={op.wind > 0 ? "orange" : "green"} foot="downwind inflates the buffer" />
+        <KpiCard label="Tank chemical" value={`${remaining.toFixed(2)} L`} tone={remaining < TANK * 0.15 ? "coral" : "green"} foot={`remaining of ${TANK} L`} />
       </div>
 
       <BoomStrip />

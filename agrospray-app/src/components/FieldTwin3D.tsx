@@ -7,6 +7,7 @@ import { BASE, gnssError } from "@/lib/engine";
 import { CROP_HALF, fieldColumns, MAX_DRONES } from "@/lib/flightSim";
 import { PageHead } from "./PageHead";
 import { KpiCard } from "./ui/card";
+import { ShieldAlert, ShieldCheck } from "lucide-react";
 
 const ALT = 11;
 const PAINT_RES = 4;
@@ -301,6 +302,26 @@ export function FieldTwin3D() {
   const wastePct = Math.round((soil / tot) * 100);
   const is1 = receiver === "1m";
 
+  // live verdict from the fleet's CURRENT positions (matches the Command/Briefing message)
+  let nowBreach = false,
+    nowSoil = false;
+  for (let i = 0; i < drones.length; i++) {
+    const path = dronePaths[i];
+    if (!path) continue;
+    const p = path[Math.min(fix, path.length - 1)];
+    const c = classify(p.x, p.z);
+    if (c === 2) nowBreach = true;
+    else if (c === 1) nowSoil = true;
+  }
+  const vTag = is1 ? "● ON TARGET" : nowBreach ? "● OUT OF SECTION" : "● ZIG-ZAG DRIFT";
+  const vMsg = is1
+    ? "Spraying to the line — pesticide on the crop row."
+    : nowBreach
+    ? "Spraying OUT OF SECTION — drift across the organic line onto the neighbour."
+    : nowSoil
+    ? "Spraying ZIG-ZAG — off the crop row, wasted on bare soil."
+    : "Spraying ZIG-ZAG — GPS drift, not aligned to the crop row.";
+
   return (
     <section>
       <PageHead
@@ -308,6 +329,21 @@ export function FieldTwin3D() {
         title="Field Twin · 3D"
         sub="Each drone flies its own band of crop columns. At 1 m the spray stays on the row (blue); at 5 m GPS drift wastes it on bare soil (red) or across the organic line (crimson)."
       />
+
+      {/* AI verdict banner — same message as Command / AI Briefing */}
+      <div className={`mb-3.5 flex items-center gap-3 rounded-xl2 border p-3 ${is1 ? "border-[#cfe9da] bg-gradient-to-r from-brand-bg to-white" : "border-[#f3d6cc] bg-gradient-to-r from-coral-bg to-white"}`}>
+        <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${is1 ? "bg-brand text-white" : "animate-pulse bg-coral text-white"}`}>
+          {is1 ? <ShieldCheck size={18} /> : <ShieldAlert size={18} />}
+        </div>
+        <div className="flex-1">
+          <div className={`text-[10px] font-extrabold tracking-widest ${is1 ? "text-brand-dark" : "text-coral-dark"} ${is1 ? "" : "animate-pulse"}`}>{vTag}</div>
+          <div className="text-[15px] font-bold leading-tight">{vMsg}</div>
+        </div>
+        <span className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-[11px] font-bold ${is1 ? "border-[#bfe6d0] bg-brand-bg text-brand-dark" : "border-[#f1cdc2] bg-coral-bg text-coral-dark"}`}>
+          {is1 ? `${onTarget}% on-target` : `${wastePct}% wasted${breach ? " · breach" : ""}`}
+        </span>
+      </div>
+
       <div className="relative">
         <div ref={host} style={{ height: 540 }} className="overflow-hidden rounded-xl2 border border-line bg-[#cfe3d6]" />
         <div className="absolute left-3 top-3 rounded-[10px] border border-line bg-white/90 px-2.5 py-2 text-[12px] leading-relaxed text-mut">

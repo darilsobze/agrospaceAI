@@ -28,7 +28,7 @@ Path deviates ±5.5 m across the column: pesticide landing on bare soil, not on 
 Buffer ${d.buf.toFixed(1)} m = ${zSigma.toFixed(1)} (95% σ, gnss ${d.err.toFixed(1)}) + drift ${d.drift.toFixed(1)} (height ${op.height} m) + react ${d.react.toFixed(1)} (speed ${op.speed}).
 CRITICAL: spray off-target — wasted on soil and drifting outside our section.
 [${amb5} nozzle(s) crop-ambiguous: error radius spans the A|B seam -> wrong-dose risk]
-[LEGAL ALERT: Boundary overlap detected with adjacent forbidden section]`;
+[LEGAL ALERT: Boundary overlap with neighbour's forbidden section -> €250 fine per incident]`;
 
   function exportCSV() {
     const rows = [["fix", "active_nozzles", "shut", "min_clear_m", "gnss_err_m", "buffer_m", "litres", "crop_ambiguous", "reason"]];

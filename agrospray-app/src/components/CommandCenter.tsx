@@ -26,7 +26,7 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
   const big = is1
     ? "All 6 nozzles active — spraying to the line."
     : nearBoundary
-    ? "Spraying OUT OF SECTION — drift across the organic line onto the neighbour."
+    ? "Spraying OUT OF SECTION — drift onto the neighbour's parcel. €250 fine incurred."
     : "Spraying ZIG-ZAG — off the crop row, wasted on bare soil.";
   const clearSeg = series[receiver].clear.slice(Math.max(0, fix - 60), fix + 1);
 
@@ -51,6 +51,11 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
           <div className="text-right">
             <div className="upper">Liability avoided</div>
             <div className="font-mono text-[21px] font-bold text-brand-dark">€{liab.toFixed(0)}+</div>
+          </div>
+        ) : nearBoundary ? (
+          <div className="text-right">
+            <div className="upper">Boundary fine</div>
+            <div className="font-mono text-[21px] font-bold text-coral-dark">€250</div>
           </div>
         ) : (
           <div className="text-right">

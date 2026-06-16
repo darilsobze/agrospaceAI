@@ -317,7 +317,7 @@ export function FieldTwin3D() {
   const vMsg = is1
     ? "Spraying to the line — pesticide on the crop row."
     : nowBreach
-    ? "Spraying OUT OF SECTION — drift across the organic line onto the neighbour."
+    ? "Spraying OUT OF SECTION — drift onto the neighbour's parcel. €250 fine incurred."
     : nowSoil
     ? "Spraying ZIG-ZAG — off the crop row, wasted on bare soil."
     : "Spraying ZIG-ZAG — GPS drift, not aligned to the crop row.";
@@ -340,7 +340,7 @@ export function FieldTwin3D() {
           <div className="text-[15px] font-bold leading-tight">{vMsg}</div>
         </div>
         <span className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-[11px] font-bold ${is1 ? "border-[#bfe6d0] bg-brand-bg text-brand-dark" : "border-[#f1cdc2] bg-coral-bg text-coral-dark"}`}>
-          {is1 ? `${onTarget}% on-target` : `${wastePct}% wasted${breach ? " · breach" : ""}`}
+          {is1 ? `${onTarget}% on-target` : nowBreach ? "€250 fine · breach" : `${wastePct}% wasted`}
         </span>
       </div>
 

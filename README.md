@@ -12,8 +12,8 @@
 | | |
 |---|---|
 | **Team number** | 10 |
-| **Team name** | `<!-- FILL IN -->` |
-| **Members** | `<!-- FILL IN: full names of everyone -->` |
+| **Team name** | Locked-In|
+| **Members** | Daril Vergesse Sobze Soffack, Dinh Hoan Nguyen, Sai Raghavendra Balusa |
 
 ## 🎯 Challenge
 

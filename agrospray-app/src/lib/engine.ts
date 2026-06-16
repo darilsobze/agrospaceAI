@@ -17,6 +17,25 @@ const DRIFT_BASE = 0.5,
 export const OFFS = Array.from({ length: NN }, (_, i) => -BOOM / 2 + (BOOM * (i + 0.5)) / NN);
 export const naFix = (op: OperatorSettings) => (BOOM / NN) * op.speed;
 
+// --- uncertainty as a probability (partner bonus) ---
+// Model the horizontal error toward the line as N(0, sigma=error_radius). A nozzle
+// sprays only if P(true position drifts across the line) <= the chosen risk.
+function erf(x: number): number {
+  const s = x < 0 ? -1 : 1;
+  x = Math.abs(x);
+  const t = 1 / (1 + 0.3275911 * x);
+  const y = 1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+  return s * y;
+}
+export const normCdf = (x: number) => 0.5 * (1 + erf(x / Math.SQRT2));
+// z-score for a one-sided confidence (risk in the tail). Table for the offered options.
+export function zForRisk(risk: number): number {
+  if (risk <= 0.01) return 2.3263;
+  if (risk <= 0.025) return 1.96;
+  if (risk <= 0.05) return 1.6449;
+  return 1.2816; // 0.10
+}
+
 export function nozzlePositions(lon: number, lat: number, h: number): [number, number][] {
   const th = (h * Math.PI) / 180,
     pe = -Math.cos(th),
@@ -60,6 +79,7 @@ export function decide(
   const err = gnssErr(lon, lat, rec, world);
   const drift = DRIFT_BASE + K_HEIGHT * Math.max(0, op.height - 2);
   const react = op.speed * op.valve;
+  const z = zForRisk(op.risk ?? 0.05);
   const wth = (op.wbear * Math.PI) / 180,
     we = Math.sin(wth),
     wn = Math.cos(wth);
@@ -85,7 +105,10 @@ export function decide(
       const al = Math.max(0, (we * de + wn * dn) / n);
       dw = op.wind * K_WIND * al;
     }
-    const buf = err + drift + react + dw;
+    // clearance margin after deterministic allowances; the rest is uncertainty (sigma=err)
+    const margin = dR - drift - react - dw;
+    const p = normCdf(-margin / err); // P(error pushes the spray across the line)
+    const buf = z * err + drift + react + dw; // spray iff dR >= buf  <=>  p <= risk
     const tree = world.obstacles.some((o) => distM(nl, nb, o.lon, o.lat) < o.rAvoid);
     const inside = world.crops.filter((c) => pointInPolygon(nl, nb, c.ring));
     const crop = inside[0] || null;
@@ -100,10 +123,12 @@ export function decide(
       if (ambN) amb++;
     } else shut.push(i + 1);
     mc = Math.min(mc, dR);
-    st.push({ spray, clear: dR, crop: crop?.crop ?? null, cropId: crop?.id ?? "—", amb: ambN, tree, buf });
+    st.push({ spray, clear: dR, crop: crop?.crop ?? null, cropId: crop?.id ?? "—", amb: ambN, tree, buf, p });
   }
 
   const buf0 = st[0].buf;
+  const maxP = Math.max(...st.map((s) => s.p));
+  const conf = (100 * (1 - (op.risk ?? 0.05))).toFixed(0);
   let reason: string,
     kind: Decision["kind"];
   if (master === "off" && live) {
@@ -111,14 +136,14 @@ export function decide(
     reason = "MASTER OFF — operator override. All nozzles held closed regardless of geometry.";
   } else if (ns === NN) {
     kind = "ok";
-    reason = `All ${NN} nozzles SPRAY.\nNearest nozzle ${mc.toFixed(1)} m from the nearest restricted zone.\nBuffer ${buf0.toFixed(1)} m = gnss ${err.toFixed(1)} + drift ${drift.toFixed(1)} (height ${op.height} m) + react ${react.toFixed(1)} (speed ${op.speed}).\nMargin verified -> spray authorised.`;
+    reason = `All ${NN} nozzles SPRAY.\nNearest nozzle ${mc.toFixed(1)} m from the nearest restricted zone.\nP(drift across line) ${(maxP * 100).toFixed(1)}% < ${(op.risk ?? 0.05) * 100}% risk (sigma=gnss ${err.toFixed(1)} m, drift ${drift.toFixed(1)}, react ${react.toFixed(1)}).\n${conf}% confidence margin verified -> spray authorised.`;
   } else if (ns === 0) {
     kind = "crit";
-    reason = `FULL BOOM CUT.\nNearest nozzle ${mc.toFixed(1)} m < buffer ${buf0.toFixed(1)} m.\nCannot prove zero drift -> all nozzles OFF.`;
+    reason = `FULL BOOM CUT.\nWorst nozzle P(drift) ${(maxP * 100).toFixed(0)}% > ${(op.risk ?? 0.05) * 100}% risk.\nCannot meet ${conf}% confidence -> all nozzles OFF.`;
   } else {
-    const why = st.some((s) => s.tree) ? "tree / zone avoidance" : "buffer breach near a restricted zone";
+    const why = st.some((s) => s.tree) ? "tree / zone avoidance" : `P(drift) exceeds ${(op.risk ?? 0.05) * 100}% risk near the line`;
     kind = "warn";
-    reason = `PARTIAL CUT — nozzles ${shut.join(", ")} OFF (${why}).\n${ns}/${NN} nozzles still spraying.`;
+    reason = `PARTIAL CUT — nozzles ${shut.join(", ")} OFF (${why}).\n${ns}/${NN} nozzles still within ${conf}% confidence.`;
   }
   if (amb) reason += `\n[${amb} nozzle(s) crop-ambiguous: error radius spans the A|B seam -> wrong-dose risk]`;
 

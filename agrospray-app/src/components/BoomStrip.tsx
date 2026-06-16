@@ -39,7 +39,10 @@ export function BoomStrip() {
               {s.spray ? "SPRAY" : s.tree ? "TREE" : "OFF"}
             </div>
             <div className="mt-0.5 text-[10.5px] text-mut">{s.clear.toFixed(1)} m</div>
-            <div className="mt-px text-[9px] uppercase tracking-wide text-mut">
+            <div className="mt-px text-[9.5px] font-mono" style={{ color: s.p > 0.05 ? "#c84a35" : "#1f7a4d" }}>
+              P {(s.p * 100).toFixed(s.p < 0.1 ? 1 : 0)}%
+            </div>
+            <div className="text-[9px] uppercase tracking-wide text-mut">
               crop {s.cropId}
               {s.amb ? "?" : ""}
             </div>

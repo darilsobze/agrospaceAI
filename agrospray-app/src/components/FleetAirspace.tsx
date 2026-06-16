@@ -40,6 +40,22 @@ export function FleetAirspace() {
               />
             </div>
             <div className="text-[11.5px] text-mut">Only nozzles downwind toward a restricted zone get the extra margin — asymmetric, graceful degradation.</div>
+            <div className="mt-3 flex items-center gap-2.5">
+              <span className="whitespace-nowrap text-[11.5px] text-mut">Spray confidence</span>
+              <Segmented
+                options={[
+                  { value: "0.1", label: "90%" },
+                  { value: "0.05", label: "95%" },
+                  { value: "0.01", label: "99%" },
+                ]}
+                value={String(op.risk)}
+                onChange={(v) => setOp("risk", parseFloat(v))}
+                activeClass="bg-brand text-white"
+              />
+            </div>
+            <div className="text-[11.5px] text-mut">
+              Uncertainty as a probability: a nozzle sprays only if P(drift across the line) is below the chosen risk. Higher confidence → wider buffer → cuts earlier.
+            </div>
           </div>
         </Card>
 

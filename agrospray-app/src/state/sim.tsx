@@ -60,7 +60,7 @@ export function SimProvider({ children }: { children: ReactNode }) {
   const [fix, setFix] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [master, setMaster] = useState<Master>("auto");
-  const [op, setOpState] = useState<OperatorSettings>({ height: 3, speed: 6, valve: 0.3, wind: 0, wbear: 0 });
+  const [op, setOpState] = useState<OperatorSettings>({ height: 3, speed: 6, valve: 0.3, wind: 0, wbear: 0, risk: 0.05 });
   const [drones, setDrones] = useState<Drone[]>([{ id: 1, edge: "S" }]);
 
   const maxFix = TRACKS[receiver].coords.length - 1;

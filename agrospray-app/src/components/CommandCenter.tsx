@@ -9,7 +9,7 @@ import { FleetDashboard } from "./FleetDashboard";
 import type { Tab } from "./TopNav";
 
 export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
-  const { decision: d, receiver, fix, series } = useSim();
+  const { decision: d, receiver, fix, series, op } = useSim();
   const is1 = receiver === "1m";
   const reclaimed = Math.max(0, (series["1m"].area[fix] ?? 0) - (series["5m"].area[fix] ?? 0));
   const liab = reclaimed * VALUE_M2;
@@ -35,8 +35,8 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
           <div className={`text-[10px] font-extrabold tracking-widest ${d.kind === "ok" ? "text-brand-dark" : "text-coral-dark"}`}>{tag}</div>
           <div className="mt-1 text-[19px] font-bold leading-tight">{big}</div>
           <div className="mt-1 text-[12.5px] text-mut">
-            Why: nearest nozzle {d.mc.toFixed(1)} m vs {d.buf.toFixed(1)} m buffer (gnss {d.err.toFixed(1)} + drift {d.drift.toFixed(1)} + react{" "}
-            {d.react.toFixed(1)}){d.amb ? ` · ${d.amb} crop-ambiguous` : ""}.
+            Why: worst nozzle P(drift across line) {(Math.max(...d.st.map((s) => s.p)) * 100).toFixed(1)}% vs {(op.risk * 100).toFixed(0)}% risk · σ={d.err.toFixed(1)} m
+            {d.amb ? ` · ${d.amb} crop-ambiguous` : ""}.
           </div>
         </div>
         <div className="text-right">

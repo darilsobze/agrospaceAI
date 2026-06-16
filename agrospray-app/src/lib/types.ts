@@ -40,6 +40,7 @@ export interface OperatorSettings {
   valve: number; // s
   wind: number; // m/s
   wbear: number; // deg, direction wind blows TOWARD
+  risk: number; // max accepted P(drift across the line), e.g. 0.05 = 95% confidence
 }
 
 export interface NozzleState {
@@ -50,6 +51,7 @@ export interface NozzleState {
   amb: boolean;
   tree: boolean;
   buf: number;
+  p: number; // P(spray drifts across the restricted line) given the error distribution
 }
 export interface Decision {
   ns: number;

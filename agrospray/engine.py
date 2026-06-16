@@ -48,6 +48,12 @@ DRIFT_BASE_M = 0.5
 K_HEIGHT = 0.30             # extra drift margin per metre of height above 2 m
 K_WIND_DRIFT = 0.18        # extra downwind margin per m/s, scaled by alignment
 TANK_L = 28.0               # feature 7 — chemical tank capacity (sized to the expanded field)
+RISK = 0.05                 # max accepted P(drift across the line) -> 95% confidence
+Z_RISK = 1.6449             # one-sided z-score for RISK
+
+
+def norm_cdf(x):
+    return 0.5 * (1 + math.erf(x / math.sqrt(2)))
 
 
 # ---- load geometry ----
@@ -136,7 +142,10 @@ def decide_fix(lon, lat, heading, crops, restricted, obstacles, receiver, op=OP)
             n = math.hypot(de, dn) or 1.0
             align = max(0.0, (wind_e * de + wind_n * dn) / n)
             downwind = op["wind_ms"] * K_WIND_DRIFT * align
-        buffer_m = err + drift + reaction + downwind
+        # uncertainty as a probability: margin after deterministic allowances vs sigma=err
+        margin = dR - drift - reaction - downwind
+        p_drift = norm_cdf(-margin / err)               # P(error pushes spray over the line)
+        buffer_m = Z_RISK * err + drift + reaction + downwind   # dR >= buffer <=> p_drift <= RISK
         # tree avoidance
         over_tree = any(_dist_m(nlon, nlat, o["lon"], o["lat"]) < o["r_avoid"] for o in obstacles)
         # crop membership
@@ -156,11 +165,13 @@ def decide_fix(lon, lat, heading, crops, restricted, obstacles, receiver, op=OP)
             shut.append(idx + 1)
         min_clear = min(min_clear, dR)
         states.append({"spray": spray, "clear": dR, "crop": crop["crop"] if crop else None,
-                       "amb": amb, "tree": over_tree, "buffer": buffer_m})
+                       "amb": amb, "tree": over_tree, "buffer": buffer_m, "p": p_drift})
     buf0 = states[0]["buffer"]
+    max_p = max(s["p"] for s in states)
+    conf = 100 * (1 - RISK)
     if n_spray == N_NOZZLES:
-        reason = (f"All {N_NOZZLES} nozzles spray. Nearest nozzle {min_clear:.1f} m from a restricted "
-                  f"zone; buffer {buf0:.1f} m (gnss {err:.1f} + drift {drift:.1f} + react {reaction:.1f}). OK.")
+        reason = (f"All {N_NOZZLES} nozzles spray. Nearest nozzle {min_clear:.1f} m; worst "
+                  f"P(drift) {max_p*100:.1f}% < {RISK*100:.0f}% risk -> {conf:.0f}% confidence OK.")
     elif n_spray == 0:
         reason = f"FULL BOOM CUT. Nearest nozzle {min_clear:.1f} m < buffer {buf0:.1f} m. All nozzles off."
     else:

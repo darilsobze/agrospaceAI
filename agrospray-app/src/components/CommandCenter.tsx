@@ -5,6 +5,7 @@ import { KpiCard } from "./ui/card";
 import { Sparkline } from "./ui/sparkline";
 import { BoomStrip } from "./BoomStrip";
 import { MiniMap } from "./MiniMap";
+import { FleetDashboard } from "./FleetDashboard";
 import type { Tab } from "./TopNav";
 
 export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
@@ -67,6 +68,8 @@ export function CommandCenter({ setTab }: { setTab: (t: Tab) => void }) {
       </div>
 
       <BoomStrip />
+
+      <FleetDashboard />
 
       <div className="mx-0.5 mb-0 mt-[22px]">
         <div className="upper">Field digital twin · live position + error radius</div>

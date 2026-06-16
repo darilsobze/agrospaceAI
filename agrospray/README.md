@@ -34,14 +34,20 @@ nozzles, wraps each in a **buffer = error_radius + drift_margin**, and authorise
 nozzle to spray **only if, even at the worst case of that buffer, its footprint cannot
 reach the restricted parcel.** Same flight, same field:
 
+Both tracks carry the **real Zurich Urban-MAV GNSS error** (`data/real/zurich_agz_groundtruth.csv`,
+on-board GPS minus ground truth) replayed onto our route — the 5 m receiver as-is, the
+1 m receiver scaled to a corrected magnitude. Positions are simulated; the **error is real.**
+
 | | 5 m standard receiver | 1 m corrected (Galileo HAS class) |
 |---|---|---|
-| Safety buffer carried | 5.5 m | 1.5 m |
-| Northern boom along the line | **nozzles cut / full-boom cuts** | sprays to the fence |
-| Border reclaimed (this 1-field run) | baseline | **+552 m²** |
+| GNSS error carried | **real Zurich, RMS ~4.6 m, max ~20 m** | same profile, RMS ~1.1 m |
+| Boom along the organic line | **134 full cuts / 89 partial** | sprays to the fence |
+| Border reclaimed (this run) | baseline | **+3240 m²** |
+| Crop-ambiguous fixes (wrong-dose risk) | **266** | **6** (real spikes occasionally exceed 1 m) |
 
-That is the **necessity test**: the use case *fails* at 5 m (border lost or fines
-risked) and *works* at 1 m. If 5 m were good enough, it would be the wrong use case.
+That is the **necessity test**, now under **real coarse error**: the use case *fails* at
+5 m (border lost, mis-dosed, fines risked) and *works* at 1 m. The handful of residual
+ambiguous fixes at 1 m is honest graceful degradation, not a faked clean result.
 
 ## Prototype (Prototype Tangibility)
 
@@ -135,7 +141,8 @@ liability of operating legally next to organic neighbours at all — the value E
 - **Positions are simulated; the world (the boundary geometry) is real-style** —
   exactly as the brief allows. Swap `data/field.geojson` for an OSM Overpass export of a
   real organic/conventional parcel pair to make the world literally real.
-- Error model: open-sky farmland (Gauss-Markov drift + rare multipath), RMS ~3.3 m
-  (5 m) / ~0.7 m (1 m), validated against the kit's real Zurich GNSS set (~4.4 m RMS).
+- Error model: the **real Zurich Urban-MAV GNSS error** (RMS ~4.4 m, max ~24 m) replayed
+  onto our route for the 5 m track, and the same real profile scaled to ~1 m RMS for the
+  corrected track. No synthetic noise — the coarse error is a real drone's.
 - Buffer radii (5.0 / 1.0 m) represent the receiver's carried horizontal uncertainty,
   not a guarantee; `drift_margin = 0.5 m` is the agronomic fine-droplet allowance.

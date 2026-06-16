@@ -8,7 +8,7 @@ export const BOOM = 12;
 export const NN = 6;
 export const VALUE_M2 = 0.18;
 export const FINE = 5000;
-export const TANK = 8.0;
+export const TANK = 28.0;
 export const BASE: Record<Receiver, number> = { "5m": 5.0, "1m": 1.0 };
 const DRIFT_BASE = 0.5,
   K_HEIGHT = 0.3,
@@ -24,7 +24,7 @@ export function nozzlePositions(lon: number, lat: number, h: number): [number, n
   return OFFS.map((o) => [lon + (pe * o) / mlon(lat), lat + (pn * o) / M_LAT]);
 }
 
-function gnssErr(lon: number, lat: number, rec: Receiver, world: World): number {
+export function gnssError(lon: number, lat: number, rec: Receiver, world: World): number {
   let e = BASE[rec];
   for (const o of world.obstacles) {
     const d = distM(lon, lat, o.lon, o.lat);
@@ -32,6 +32,7 @@ function gnssErr(lon: number, lat: number, rec: Receiver, world: World): number 
   }
   return e;
 }
+const gnssErr = gnssError;
 
 function distRestricted(lon: number, lat: number, world: World) {
   let best = Infinity,

@@ -1,11 +1,27 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { computeSeries, decide, naFix, type Series } from "@/lib/engine";
 import { buildFrame, computeTreated, type Frame } from "@/lib/frame";
+import {
+  buildDronePath,
+  DRONE_HEX,
+  fieldColumns,
+  makeClassify,
+  MAX_DRONES,
+  partitionColumns,
+  type Edge,
+  type PaintClass,
+  type PathPoint,
+} from "@/lib/flightSim";
 import { loadWorld, TRACKS } from "@/lib/world";
 import type { Decision, Master, OperatorSettings, Receiver, World } from "@/lib/types";
 
 const world: World = loadWorld();
 const frame: Frame = buildFrame(world);
+
+export interface Drone {
+  id: number;
+  edge: Edge;
+}
 
 interface SimState {
   world: World;
@@ -19,6 +35,16 @@ interface SimState {
   decision: Decision;
   series: Record<Receiver, Series>;
   treated: Float64Array;
+  // fleet
+  drones: Drone[];
+  maxDrones: number;
+  canEditFleet: boolean;
+  dronePaths: PathPoint[][];
+  classify: (x: number, z: number) => PaintClass;
+  droneColor: (i: number) => string;
+  addDrone: () => void;
+  removeDrone: (id: number) => void;
+  setDroneEdge: (id: number, edge: Edge) => void;
   setReceiver: (r: Receiver) => void;
   setFix: (f: number) => void;
   togglePlay: () => void;
@@ -27,6 +53,7 @@ interface SimState {
 }
 
 const Ctx = createContext<SimState | null>(null);
+const EDGES: Edge[] = ["S", "N", "W", "E"];
 
 export function SimProvider({ children }: { children: ReactNode }) {
   const [receiver, setReceiver] = useState<Receiver>("1m");
@@ -34,10 +61,11 @@ export function SimProvider({ children }: { children: ReactNode }) {
   const [playing, setPlaying] = useState(false);
   const [master, setMaster] = useState<Master>("auto");
   const [op, setOpState] = useState<OperatorSettings>({ height: 3, speed: 6, valve: 0.3, wind: 0, wbear: 0 });
+  const [drones, setDrones] = useState<Drone[]>([{ id: 1, edge: "S" }]);
 
   const maxFix = TRACKS[receiver].coords.length - 1;
+  const canEditFleet = fix === 0 && !playing;
 
-  // series recompute only when the physics inputs change (not on every fix tick)
   const series = useMemo(() => {
     const out = {} as Record<Receiver, Series>;
     (["5m", "1m"] as Receiver[]).forEach((r) => {
@@ -57,6 +85,15 @@ export function SimProvider({ children }: { children: ReactNode }) {
     const [lon, lat] = t.coords[fix];
     return decide(world, op, master, lon, lat, t.headings[fix], receiver, true);
   }, [receiver, fix, op, master]);
+
+  // one flight path per drone, over its own non-overlapping band of crop columns
+  const dronePaths = useMemo(() => {
+    const cols = fieldColumns(frame).columns;
+    const bands = partitionColumns(cols, drones.length);
+    return drones.map((d, i) => buildDronePath(frame, receiver, maxFix + 1, bands[i], d.edge, i + 1));
+  }, [receiver, drones, maxFix]);
+
+  const classify = useMemo(() => makeClassify(frame, fieldColumns(frame).columns), []);
 
   // playback loop
   const timer = useRef<number | null>(null);
@@ -83,6 +120,20 @@ export function SimProvider({ children }: { children: ReactNode }) {
     decision,
     series,
     treated,
+    drones,
+    maxDrones: MAX_DRONES,
+    canEditFleet,
+    dronePaths,
+    classify,
+    droneColor: (i) => DRONE_HEX[i % DRONE_HEX.length],
+    addDrone: () =>
+      setDrones((d) =>
+        !canEditFleet || d.length >= MAX_DRONES
+          ? d
+          : [...d, { id: (d[d.length - 1]?.id ?? 0) + 1, edge: EDGES[d.length % EDGES.length] }]
+      ),
+    removeDrone: (id) => setDrones((d) => (!canEditFleet || d.length <= 1 ? d : d.filter((x) => x.id !== id))),
+    setDroneEdge: (id, edge) => setDrones((d) => (!canEditFleet ? d : d.map((x) => (x.id === id ? { ...x, edge } : x)))),
     setReceiver: (r) => {
       setReceiver(r);
       setFix((f) => Math.min(f, TRACKS[r].coords.length - 1));

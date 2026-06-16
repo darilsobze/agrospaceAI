@@ -47,7 +47,7 @@ OP = {
 DRIFT_BASE_M = 0.5
 K_HEIGHT = 0.30             # extra drift margin per metre of height above 2 m
 K_WIND_DRIFT = 0.18        # extra downwind margin per m/s, scaled by alignment
-TANK_L = 8.0                # feature 7 — chemical tank capacity
+TANK_L = 28.0               # feature 7 — chemical tank capacity (sized to the expanded field)
 
 
 # ---- load geometry ----

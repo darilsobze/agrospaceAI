@@ -9,11 +9,11 @@ export function ScenarioBanner() {
       <Badge tone={is1 ? "green" : "orange"}>{is1 ? "1 M CORRECTED" : "5 M STANDARD"}</Badge>
       <span>
         {is1
-          ? "Spraying to the line at Galileo HAS precision — error radius carried into every nozzle."
-          : "Coarse uncorrected GNSS — the boom cuts early, over-buffers near trees, and can't resolve the crop seam."}
+          ? "Galileo HAS precision (~1 m) — real Zurich error profile, corrected magnitude."
+          : "Real Zurich GNSS error replayed (RMS ~4.4 m, max ~24 m urban multipath)."}
       </span>
       <span className="flex-1" />
-      <span className="text-[12px] text-[#a9b2a6]">All modules share this run</span>
+      <Badge tone="grey">REAL GNSS · Zurich Urban MAV</Badge>
     </div>
   );
 }

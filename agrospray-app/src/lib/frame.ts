@@ -14,6 +14,8 @@ export interface Frame {
   water: [number, number][] | null;
   loX: (lon: number) => number;
   loZ: (lat: number) => number;
+  unX: (x: number) => number; // local east-metres -> lon
+  unZ: (z: number) => number; // local z-metres -> lat
   grid: { n: number; xs: number[]; zs: number[]; crop: number[] };
 }
 
@@ -34,6 +36,8 @@ export function buildFrame(world: World): Frame {
   const seamX = world.seam ? (world.seam[0][0] - LW) * k : Wx / 2;
   const loX = (lon: number) => (lon - LW) * k;
   const loZ = (lat: number) => -(lat - LS) * M_LAT;
+  const unX = (x: number) => LW + x / k;
+  const unZ = (z: number) => LS - z / M_LAT;
 
   const xs: number[] = [],
     zs: number[] = [],
@@ -48,7 +52,7 @@ export function buildFrame(world: World): Frame {
       zs.push(-n);
       crop.push(x < seamX ? 0 : 1);
     }
-  return { LW, LS, k, Wx, Df, Dall, seamX, water, loX, loZ, grid: { n: xs.length, xs, zs, crop } };
+  return { LW, LS, k, Wx, Df, Dall, seamX, water, loX, loZ, unX, unZ, grid: { n: xs.length, xs, zs, crop } };
 }
 
 // earliest fix index at which each crop cell gets treated, for a given receiver/settings

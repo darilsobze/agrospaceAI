@@ -1,65 +1,63 @@
 {
   "type": "FeatureCollection",
   "metadata": {
-    "note": "Field geometry placed on real arable farmland in Saxony-Anhalt, Germany (OSM landuse=farmland, confirmed via Overpass at 51.8500N 11.4500E) — open agricultural land, no city, no roads crossing the field. Same parcel structure as before: two crop parcels sharing a seam, a certified-organic parcel to the north (no drift), a water buffer and two trees. Positions are simulated; the world geometry is real farmland.",
+    "note": "Field geometry on real arable farmland in Saxony-Anhalt, Germany (OSM landuse=farmland) - open agricultural land, no city. Shifted ~200 m west to clear a road. Same parcel structure: two crop parcels sharing a seam, a certified-organic parcel to the north (no drift), a water buffer and two trees. Positions are simulated; the world geometry is real farmland.",
     "frame": {
-      "LON_W": 11.4471000, "LON_E": 11.4529000, "MID": 11.4500000,
+      "LON_W": 11.4441000, "LON_E": 11.4499000, "MID": 11.4470000,
       "LAT_S": 51.8481000, "LAT_N": 51.8510000, "LAT_ORG_N": 51.8519000
     }
   },
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "Crop A — winter wheat", "role": "target_field", "crop": "winter wheat",
+      "properties": { "name": "Crop A - winter wheat", "role": "target_field", "crop": "winter wheat",
         "chemical": "Herbicide-W", "dose_l_per_ha": 1.5, "price_eur_per_l": 12 },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [11.4471000, 51.8481000], [11.4500000, 51.8481000],
-        [11.4500000, 51.8510000], [11.4471000, 51.8510000], [11.4471000, 51.8481000] ]] }
+        [11.4441000, 51.8481000], [11.4470000, 51.8481000],
+        [11.4470000, 51.8510000], [11.4441000, 51.8510000], [11.4441000, 51.8481000] ]] }
     },
     {
       "type": "Feature",
-      "properties": { "name": "Crop B — oilseed rape", "role": "target_field", "crop": "oilseed rape",
+      "properties": { "name": "Crop B - oilseed rape", "role": "target_field", "crop": "oilseed rape",
         "chemical": "Fungicide-R", "dose_l_per_ha": 2.0, "price_eur_per_l": 15 },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [11.4500000, 51.8481000], [11.4529000, 51.8481000],
-        [11.4529000, 51.8510000], [11.4500000, 51.8510000], [11.4500000, 51.8481000] ]] }
+        [11.4470000, 51.8481000], [11.4499000, 51.8481000],
+        [11.4499000, 51.8510000], [11.4470000, 51.8510000], [11.4470000, 51.8481000] ]] }
     },
     {
       "type": "Feature",
-      "properties": { "name": "Restricted parcel — certified organic (NO drift)", "role": "restricted",
+      "properties": { "name": "Restricted parcel - certified organic (NO drift)", "role": "restricted",
         "subtype": "organic", "crop": "organic soy" },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [11.4471000, 51.8510000], [11.4529000, 51.8510000],
-        [11.4529000, 51.8519000], [11.4471000, 51.8519000], [11.4471000, 51.8510000] ]] }
+        [11.4441000, 51.8510000], [11.4499000, 51.8510000],
+        [11.4499000, 51.8519000], [11.4441000, 51.8519000], [11.4441000, 51.8510000] ]] }
     },
     {
       "type": "Feature",
-      "properties": { "name": "Water buffer — drainage pond (NO spray)", "role": "restricted", "subtype": "water" },
+      "properties": { "name": "Water buffer - drainage pond (NO spray)", "role": "restricted", "subtype": "water" },
       "geometry": { "type": "Polygon", "coordinates": [[
-        [11.4474000, 51.8484000], [11.4486000, 51.8484000],
-        [11.4486000, 51.8490000], [11.4474000, 51.8490000], [11.4474000, 51.8484000] ]] }
+        [11.4444000, 51.8484000], [11.4456000, 51.8484000],
+        [11.4456000, 51.8490000], [11.4444000, 51.8490000], [11.4444000, 51.8484000] ]] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Legal boundary (organic fence line)", "role": "legal_boundary" },
-      "geometry": { "type": "LineString", "coordinates": [ [11.4471000, 51.8510000], [11.4529000, 51.8510000] ] }
+      "geometry": { "type": "LineString", "coordinates": [ [11.4441000, 51.8510000], [11.4499000, 51.8510000] ] }
     },
     {
       "type": "Feature",
       "properties": { "name": "Crop seam (A | B)", "role": "crop_seam" },
-      "geometry": { "type": "LineString", "coordinates": [ [11.4500000, 51.8481000], [11.4500000, 51.8510000] ] }
+      "geometry": { "type": "LineString", "coordinates": [ [11.4470000, 51.8481000], [11.4470000, 51.8510000] ] }
     },
     {
       "type": "Feature",
-      "properties": { "name": "Oak — NE corner", "role": "obstacle", "kind": "tree",
-        "r_avoid_m": 4.0, "r_gps_m": 18 },
-      "geometry": { "type": "Point", "coordinates": [11.4521000, 51.8505000] }
+      "properties": { "name": "Oak - NE corner", "role": "obstacle", "kind": "tree", "r_avoid_m": 4.0, "r_gps_m": 18 },
+      "geometry": { "type": "Point", "coordinates": [11.4491000, 51.8505000] }
     },
     {
       "type": "Feature",
-      "properties": { "name": "Hedgerow oak — mid field", "role": "obstacle", "kind": "tree",
-        "r_avoid_m": 3.5, "r_gps_m": 16 },
-      "geometry": { "type": "Point", "coordinates": [11.4495000, 51.8492000] }
+      "properties": { "name": "Hedgerow oak - mid field", "role": "obstacle", "kind": "tree", "r_avoid_m": 3.5, "r_gps_m": 16 },
+      "geometry": { "type": "Point", "coordinates": [11.4465000, 51.8492000] }
     }
   ]
 }

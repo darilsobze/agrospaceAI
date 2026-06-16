@@ -14,7 +14,7 @@ export function MiniMap({ height = 320 }: { height?: number }) {
   // build the map + static geometry + a pool of drone layers once
   useEffect(() => {
     if (!ref.current || map.current) return;
-    const m = L.map(ref.current, { zoomControl: true, scrollWheelZoom: false }).setView([51.85, 11.45], 16);
+    const m = L.map(ref.current, { zoomControl: true, scrollWheelZoom: false }).setView([51.85, 11.447], 16);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, attribution: "© OpenStreetMap" }).addTo(m);
     const cropCol = ["#2f9e63", "#3fae9a"];
     world.crops.forEach((c, i) =>

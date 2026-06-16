@@ -32,7 +32,7 @@ REAL_CSV = os.path.join(HERE, "data", "real", "zurich_agz_groundtruth.csv")
 TARGET_RMS = {"5m": None, "1m": 1.0}
 
 # --- field geometry (must match data/field.geojson) — Saxony-Anhalt arable farmland ---
-LON_W, LON_E = 11.4471000, 11.4529000        # ~400 m East-West
+LON_W, LON_E = 11.4441000, 11.4499000        # ~400 m East-West (shifted ~200 m west)
 LAT_S, LAT_N = 51.8481000, 51.8510000        # ~320 m North-South; LAT_N = organic boundary
 
 SWATH_M   = 12.0     # boom width -> pass spacing

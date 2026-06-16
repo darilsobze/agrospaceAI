@@ -15,7 +15,7 @@ function DetailMap() {
 
   useEffect(() => {
     if (!ref.current || M.current) return;
-    const m = L.map(ref.current, { zoomControl: true, scrollWheelZoom: true }).setView([52.455, 5.52], 16);
+    const m = L.map(ref.current, { zoomControl: true, scrollWheelZoom: true }).setView([51.85, 11.45], 16);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, attribution: "© OpenStreetMap" }).addTo(m);
     const cropCol = ["#2f9e63", "#3fae9a"];
     world.crops.forEach((c, i) => L.polygon(c.ring.map(ll), { color: cropCol[i % 2], weight: 2, fillColor: cropCol[i % 2], fillOpacity: 0.1 }).addTo(m).bindPopup(`${c.name} (crop ${c.id})`));

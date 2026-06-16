@@ -44,6 +44,12 @@ the line it is on.** So the operator must either:
 This is real, documented and regulated — the service ships *with a disclaimer instead of
 a promise.* **Validated** through public EU/German drift-buffer regulation, not assumed.
 
+**A second problem — wasted chemical & money.** Even away from the boundary, at 5 m the
+drone cannot track the narrow crop rows precisely. Instead of spraying the plants it
+zig-zags and sprays the **bare soil between the rows** — pesticide (and money) wasted on
+dirt, while the crop itself is under-treated. At 1 m it follows the row and every drop
+lands on the crop.
+
 ## ✅ Our solution & value proposition
 
 AgroSpray AI carries the GPS uncertainty **into the decision**. Every fix is treated as a
@@ -61,13 +67,13 @@ buffer = z·σ(GNSS) + drift(boom height) + reaction(speed) + downwind(wind)
 |---|---|---|
 | Boom along the organic line | cuts early / **off-target drift** | **sprays to the fence** |
 | Border reclaimed | baseline | **+5,040 m²** this run |
-| Crop-seam confusion (wrong chemical) | **266 fixes** | **6** |
+| Chemical on the crop vs bare soil | **wasted on soil (zig-zag)** | **on-row, no waste** |
 | Boundary breach | **€50,000 fine risk** | none |
 
-**In plain language:** at 5 m you lose the border or risk fines; at 1 m you spray right
-to the legal line, put the right chemical on the right crop, and it's provable — no black
-box. That is what EWIA's one-metre positioning unlocks, and AgroSpray AI is the layer
-that turns it into a legal, profitable, automated decision.
+**In plain language:** at 5 m you lose the border, risk fines, and waste chemical on bare
+soil; at 1 m you spray right to the legal line, every drop lands on the crop, and it's
+provable — no black box. That is what EWIA's one-metre positioning unlocks, and AgroSpray
+AI is the layer that turns it into a legal, profitable, automated decision.
 
 ---
 

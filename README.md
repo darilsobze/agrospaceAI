@@ -3,7 +3,7 @@
 **Real-time boom-control for spray drones — turning each GPS fix and the field map into a safe spray-or-shut-off decision for every nozzle, down to the meter.**
 
 🔗 **Live demo:** https://agrospray-app.vercel.app
-📦 **Code:** https://github.com/darilsobze/agrospaceAI
+📦 **Code:** https://github.com/darilsobze/team-10-agrospaceAI
 
 ---
 
@@ -11,7 +11,7 @@
 
 | | |
 |---|---|
-| **Team number** | `<!-- FILL IN -->` |
+| **Team number** | 10 |
 | **Team name** | `<!-- FILL IN -->` |
 | **Members** | `<!-- FILL IN: full names of everyone -->` |
 
